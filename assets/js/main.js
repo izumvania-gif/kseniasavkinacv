@@ -429,6 +429,7 @@
       // Пробка вылетает вверх и чуть вбок, крутясь.
       const scale = bottle.getBoundingClientRect().height / 640 || 1;
       const flight = clamp((p - POP) / 0.14);
+      cork.classList.toggle('is-flying', flight > 0);
       if (flight > 0) {
         const up = (H / scale) * 1.3 * easeOut(flight);
         cork.style.transform = `translate(${(up * 0.22).toFixed(1)}px, ${(-up).toFixed(1)}px) rotate(${(flight * 540).toFixed(1)}deg)`;
