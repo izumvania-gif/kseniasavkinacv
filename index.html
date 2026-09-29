@@ -495,15 +495,22 @@
         </header>
         <ul class="glasses">
           <li class="glass-item glass-item--mail">
-            <svg class="glass" viewBox="0 -90 240 490" data-bottom="292" data-level="160">
+            <svg class="glass" viewBox="0 -90 240 500" data-bottom="292" data-level="160">
               <defs>
                 <clipPath id="bowl-mail" clipPathUnits="userSpaceOnUse"><path d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/></clipPath>
                 <clipPath id="wine-mail" clipPathUnits="userSpaceOnUse"><path class="glass__wine-clip" d="M0,160 L240,160 L240,296 L0,296 Z"/></clipPath>
               </defs>
               <rect class="glass__stream" x="118.6" y="-90" width="2.8" height="0" aria-hidden="true"/>
-              <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <ellipse class="glass__foot" cx="120" cy="396" rx="58" ry="7.5"/>
+                <path class="glass__foot-shine" d="M76,399.5 Q120,406.5 164,399.5"/>
+                <path class="glass__stem" d="M106,289 C112.5,295 115.6,303 115.8,314 L116.2,377 C116.4,385 110.5,390 101,392.6 L139,392.6 C129.5,390 123.6,385 123.8,377 L124.2,314 C124.4,303 127.5,295 134,289 Z"/>
+                <path class="glass__stem-shine" d="M118,314 L118.3,378"/>
+                <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+              </g>
               <g clip-path="url(#bowl-mail)" aria-hidden="true">
                 <path class="glass__wine" d="M0,160 L240,160 L240,296 L0,296 Z"/>
+                <ellipse class="glass__surface" cx="120" cy="160" rx="99.7" ry="6.78"/>
               </g>
               <a class="glass__link" href="mailto:kseniia.savkina@mail.ru">
                 <rect class="glass__hit" x="30" y="180" width="180" height="56"/>
@@ -512,23 +519,34 @@
                   <text class="glass__value" x="120" y="222" text-anchor="middle" style="font-size: 13.2px">kseniia.savkina@mail.ru</text>
                 </g></g>
               </a>
-              <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
-              <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="3.2" aria-hidden="true"/>
-              <path class="glass__stem" d="M109,289.4 C115,294 118,301 118.4,312 L118.8,390 L121.2,390 L121.6,312 C122,301 125,294 131,289.4 Z" aria-hidden="true"/>
-              <path class="glass__foot" d="M64,395 C82,392 104,390.8 120,390.6 C136,390.8 158,392 176,395 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <g clip-path="url(#bowl-mail)" class="glass__shine">
+                  <path d="M42,62 C31,104 28,166 40,226"/>
+                  <path class="glass__shine-thin" d="M201,118 C207,148 207,190 199,224"/>
+                </g>
+                <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+                <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="4.5"/>
+              </g>
             </svg>
             <button class="copy" type="button" data-copy="kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button>
           </li>
           <li class="glass-item glass-item--phone">
-            <svg class="glass" viewBox="0 -90 240 490" data-bottom="292" data-level="160">
+            <svg class="glass" viewBox="0 -90 240 500" data-bottom="292" data-level="160">
               <defs>
                 <clipPath id="bowl-phone" clipPathUnits="userSpaceOnUse"><path d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/></clipPath>
                 <clipPath id="wine-phone" clipPathUnits="userSpaceOnUse"><path class="glass__wine-clip" d="M0,160 L240,160 L240,296 L0,296 Z"/></clipPath>
               </defs>
               <rect class="glass__stream" x="118.6" y="-90" width="2.8" height="0" aria-hidden="true"/>
-              <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <ellipse class="glass__foot" cx="120" cy="396" rx="58" ry="7.5"/>
+                <path class="glass__foot-shine" d="M76,399.5 Q120,406.5 164,399.5"/>
+                <path class="glass__stem" d="M106,289 C112.5,295 115.6,303 115.8,314 L116.2,377 C116.4,385 110.5,390 101,392.6 L139,392.6 C129.5,390 123.6,385 123.8,377 L124.2,314 C124.4,303 127.5,295 134,289 Z"/>
+                <path class="glass__stem-shine" d="M118,314 L118.3,378"/>
+                <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+              </g>
               <g clip-path="url(#bowl-phone)" aria-hidden="true">
                 <path class="glass__wine" d="M0,160 L240,160 L240,296 L0,296 Z"/>
+                <ellipse class="glass__surface" cx="120" cy="160" rx="99.7" ry="6.78"/>
               </g>
               <a class="glass__link" href="tel:+79269913803">
                 <rect class="glass__hit" x="30" y="180" width="180" height="56"/>
@@ -537,23 +555,34 @@
                   <text class="glass__value" x="120" y="222" text-anchor="middle" style="font-size: 16px">+7 926 991-38-03</text>
                 </g></g>
               </a>
-              <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
-              <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="3.2" aria-hidden="true"/>
-              <path class="glass__stem" d="M109,289.4 C115,294 118,301 118.4,312 L118.8,390 L121.2,390 L121.6,312 C122,301 125,294 131,289.4 Z" aria-hidden="true"/>
-              <path class="glass__foot" d="M64,395 C82,392 104,390.8 120,390.6 C136,390.8 158,392 176,395 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <g clip-path="url(#bowl-phone)" class="glass__shine">
+                  <path d="M42,62 C31,104 28,166 40,226"/>
+                  <path class="glass__shine-thin" d="M201,118 C207,148 207,190 199,224"/>
+                </g>
+                <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+                <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="4.5"/>
+              </g>
             </svg>
             <button class="copy" type="button" data-copy="+79269913803"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button>
           </li>
           <li class="glass-item glass-item--insta">
-            <svg class="glass" viewBox="0 -90 240 490" data-bottom="292" data-level="160">
+            <svg class="glass" viewBox="0 -90 240 500" data-bottom="292" data-level="160">
               <defs>
                 <clipPath id="bowl-insta" clipPathUnits="userSpaceOnUse"><path d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/></clipPath>
                 <clipPath id="wine-insta" clipPathUnits="userSpaceOnUse"><path class="glass__wine-clip" d="M0,160 L240,160 L240,296 L0,296 Z"/></clipPath>
               </defs>
               <rect class="glass__stream" x="118.6" y="-90" width="2.8" height="0" aria-hidden="true"/>
-              <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <ellipse class="glass__foot" cx="120" cy="396" rx="58" ry="7.5"/>
+                <path class="glass__foot-shine" d="M76,399.5 Q120,406.5 164,399.5"/>
+                <path class="glass__stem" d="M106,289 C112.5,295 115.6,303 115.8,314 L116.2,377 C116.4,385 110.5,390 101,392.6 L139,392.6 C129.5,390 123.6,385 123.8,377 L124.2,314 C124.4,303 127.5,295 134,289 Z"/>
+                <path class="glass__stem-shine" d="M118,314 L118.3,378"/>
+                <path class="glass__back" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+              </g>
               <g clip-path="url(#bowl-insta)" aria-hidden="true">
                 <path class="glass__wine" d="M0,160 L240,160 L240,296 L0,296 Z"/>
+                <ellipse class="glass__surface" cx="120" cy="160" rx="99.7" ry="6.78"/>
               </g>
               <a class="glass__link" href="https://www.instagram.com/ksusha_zavr/" target="_blank" rel="noopener">
                 <rect class="glass__hit" x="30" y="180" width="180" height="56"/>
@@ -562,10 +591,14 @@
                   <text class="glass__value" x="120" y="222" text-anchor="middle" style="font-size: 17px">@ksusha_zavr</text>
                 </g></g>
               </a>
-              <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z" aria-hidden="true"/>
-              <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="3.2" aria-hidden="true"/>
-              <path class="glass__stem" d="M109,289.4 C115,294 118,301 118.4,312 L118.8,390 L121.2,390 L121.6,312 C122,301 125,294 131,289.4 Z" aria-hidden="true"/>
-              <path class="glass__foot" d="M64,395 C82,392 104,390.8 120,390.6 C136,390.8 158,392 176,395 Z" aria-hidden="true"/>
+              <g aria-hidden="true">
+                <g clip-path="url(#bowl-insta)" class="glass__shine">
+                  <path d="M42,62 C31,104 28,166 40,226"/>
+                  <path class="glass__shine-thin" d="M201,118 C207,148 207,190 199,224"/>
+                </g>
+                <path class="glass__outline" d="M54,0 C41,46 20,106 20,175 C20,245 64,292 120,292 C176,292 220,245 220,175 C220,106 199,46 186,0 Z"/>
+                <ellipse class="glass__rim" cx="120" cy="0" rx="66" ry="4.5"/>
+              </g>
             </svg>
             <a class="copy" href="https://www.instagram.com/ksusha_zavr/" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg><span>Открыть профиль</span></a>
           </li>

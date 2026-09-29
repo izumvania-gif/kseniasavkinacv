@@ -556,11 +556,38 @@
   // --- Контакты: вино наливается в бокал, и контакт проступает прямо в вине ---
   // Струя тонкая, как на Cumulus. Каждый бокал начинает наливаться, когда появляется на экране.
   (() => {
+    // Половина ширины чаши на разной высоте: по ней поверхность вина растёт вместе с чашей.
+    function bowlWidths(path) {
+      const points = [];
+      if (!path || !path.getTotalLength) return points;
+      const length = path.getTotalLength();
+      for (let i = 0; i <= 240; i++) {
+        const pt = path.getPointAtLength((length * i) / 240);
+        if (pt.x <= 120) points.push([pt.y, 120 - pt.x]);
+      }
+      return points.sort((a, b) => a[0] - b[0]);
+    }
+
+    function halfWidth(g, y) {
+      const w = g.widths;
+      if (!w.length || y <= w[0][0]) return w.length ? w[0][1] : 0;
+      for (let i = 1; i < w.length; i++) {
+        if (w[i][0] >= y) {
+          const [y0, x0] = w[i - 1];
+          const [y1, x1] = w[i];
+          return y1 === y0 ? x1 : x0 + ((x1 - x0) * (y - y0)) / (y1 - y0);
+        }
+      }
+      return 0;
+    }
+
     const glasses = Array.from(document.querySelectorAll('.glass')).map((svg, i) => ({
       svg,
       wine: svg.querySelector('.glass__wine'),
       clip: svg.querySelector('.glass__wine-clip'),
       stream: svg.querySelector('.glass__stream'),
+      surfaceEl: svg.querySelector('.glass__surface'),
+      widths: bowlWidths(svg.querySelector('.glass__outline')),
       bottom: Number(svg.dataset.bottom),
       level: Number(svg.dataset.level),
       duration: [2.6, 2.9, 2.4][i] || 2.6,
@@ -594,6 +621,12 @@
       const d = shape(g, surface, amp, t);
       g.wine.setAttribute('d', d);
       g.clip.setAttribute('d', d);
+      if (g.surfaceEl) {
+        const rx = f > 0 ? halfWidth(g, surface) : 0;
+        g.surfaceEl.setAttribute('cy', surface.toFixed(2));
+        g.surfaceEl.setAttribute('rx', rx.toFixed(2));
+        g.surfaceEl.setAttribute('ry', (rx * 0.068).toFixed(2));
+      }
       return settle >= 1;
     }
 
