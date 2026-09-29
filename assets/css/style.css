@@ -1,5 +1,5 @@
-/* Ксения Савкина. Строгая версия в цветах розового шампанского: почти чёрный, тёплый белый
-   с розовым оттенком, розе и глубокое красное вино. Заголовки тонкой антиквой Cormorant Garamond,
+/* Ксения Савкина. Строгая версия в цветах шампанского: почти чёрный, тёплый белый,
+   бежевый и глубокое красное вино. Заголовки тонкой антиквой Cormorant Garamond,
    текст лёгким Onest. Тонкие линии, без градиентов. */
 
 @font-face {
@@ -45,16 +45,16 @@
 :root {
   --ink: #141212;
   --ink-2: #1f1b1b;
-  --paper: #f4efeb;
-  --stone: #ebe3de;
+  --paper: #f4f0e9;
+  --stone: #eae4d9;
   --text: #141212;
   --muted: #5e5652;
-  --on-ink: #f3ece8;
+  --on-ink: #f3eee6;
   --on-ink-muted: #a8a09b;
-  --rose: #e7b8ab;
-  --rose-mid: #d99c8e;
-  --rose-pale: #f4dcd4;
-  --rose-deep: #9a5243;
+  --accent: #d8c3a0;
+  --accent-mid: #c8ae86;
+  --accent-pale: #efe3cf;
+  --accent-deep: #7a6344;
   --wine: #5a1320;
   --wine-2: #6b1b2a;
   --wine-3: #7d2433;
@@ -90,7 +90,7 @@ body {
   font-family: var(--font);
   font-size: 17px;
   font-weight: 350;
-  line-height: 1.6;
+  line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -135,14 +135,14 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--rose-deep);
+  outline: 2px solid var(--accent-deep);
   outline-offset: 3px;
 }
 
 [data-dark] :focus-visible,
 .vblock :focus-visible,
 .site-header.is-dark :focus-visible {
-  outline-color: var(--rose);
+  outline-color: var(--accent);
 }
 
 .defs {
@@ -238,8 +238,8 @@ button {
 }
 
 .btn--light:hover {
-  border-color: var(--rose);
-  background: var(--rose);
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
 .btn--ghost {
@@ -557,8 +557,8 @@ button {
 }
 
 .bottle__foil {
-  fill: #d9a595;
-  stroke: #d9a595;
+  fill: #cdb48e;
+  stroke: #cdb48e;
   stroke-width: 1.6;
 }
 
@@ -576,42 +576,42 @@ button {
 }
 
 .bottle__collar {
-  fill: #f3e6e0;
-  stroke: #a86f60;
+  fill: #f3ece0;
+  stroke: #9c7f58;
   stroke-width: 0.8;
 }
 
 .bottle__collar-line {
   fill: none;
-  stroke: #c9978a;
+  stroke: #c2a980;
   stroke-width: 0.6;
 }
 
 .bottle__collar-text {
-  fill: var(--rose-deep);
+  fill: var(--accent-deep);
   font-family: var(--serif);
   font-size: 10px;
   font-weight: 600;
 }
 
 .bottle__foil-shade {
-  fill: #c48d7e;
+  fill: #b99d74;
 }
 
 .bottle__band {
-  fill: #a86f60;
+  fill: #9c7f58;
 }
 
 .bottle__foil-shine {
   fill: none;
-  stroke: #efc6b8;
+  stroke: #e6d6ba;
   stroke-width: 2.4;
   stroke-linecap: round;
 }
 
 .bottle__crinkle {
   fill: none;
-  stroke: #bd8677;
+  stroke: #ae936b;
   stroke-width: 0.9;
   stroke-linecap: round;
 }
@@ -688,12 +688,12 @@ button {
 }
 
 .bottle__label {
-  fill: #f3e6e0;
+  fill: #f3ece0;
 }
 
 .bottle__label-rule {
   fill: none;
-  stroke: var(--rose-deep);
+  stroke: var(--accent-deep);
   stroke-width: 0.8;
 }
 
@@ -713,7 +713,7 @@ button {
 }
 
 .bottle__label-small {
-  fill: var(--rose-deep);
+  fill: var(--accent-deep);
   font-family: var(--font);
   font-size: 8px;
   letter-spacing: 0.08em;
@@ -791,11 +791,11 @@ button {
   z-index: 40;
   overflow: hidden;
   pointer-events: none;
-  --bubble: #c9938a;
+  --bubble: #b9a384;
 }
 
 .bubbles.is-dark {
-  --bubble: var(--rose);
+  --bubble: var(--accent);
 }
 
 .bubble {
@@ -847,7 +847,7 @@ button {
 }
 
 .about__media :focus-visible {
-  outline-color: var(--rose);
+  outline-color: var(--accent);
 }
 
 .about__text > * + * {
@@ -869,7 +869,7 @@ button {
   font-family: var(--serif);
   font-size: clamp(24px, 2.3vw, 32px);
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.15;
 }
 
 .facts {
@@ -903,7 +903,7 @@ button {
 }
 
 .fact__value small {
-  color: var(--rose-deep);
+  color: var(--accent-deep);
   font-family: var(--font);
   font-size: clamp(15px, 1.3vw, 19px);
   font-weight: 400;
@@ -1000,7 +1000,7 @@ button {
 
 .card__front {
   border: 1px solid var(--line);
-  background: #faf6f3;
+  background: #faf7f1;
 }
 
 .card__back {
@@ -1019,7 +1019,7 @@ button {
 }
 
 .card__num {
-  color: var(--rose-deep);
+  color: var(--accent-deep);
   font-family: var(--serif);
   font-size: 64px;
   font-weight: 300;
@@ -1043,7 +1043,7 @@ button {
   padding-right: 48px;
   color: var(--muted);
   font-size: 15px;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .card__turn {
@@ -1071,19 +1071,19 @@ button {
 }
 
 .card__result {
-  color: var(--rose);
+  color: var(--accent);
   font-family: var(--serif);
   font-size: clamp(24px, 2vw, 30px);
   font-weight: 400;
-  line-height: 1.12;
+  line-height: 1.05;
   text-wrap: balance;
 }
 
 .card__story {
-  margin-top: 16px;
+  margin-top: 14px;
   color: var(--on-ink-muted);
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.38;
   text-wrap: pretty;
 }
 
@@ -1108,7 +1108,7 @@ button {
 }
 
 .card__btn:focus-visible {
-  outline: 2px solid var(--rose-deep);
+  outline: 2px solid var(--accent-deep);
   outline-offset: 4px;
 }
 
@@ -1195,7 +1195,7 @@ html:not(.js) .card__turn {
 
 .step__num {
   margin-bottom: clamp(28px, 4vw, 64px);
-  color: var(--rose-deep);
+  color: var(--accent-deep);
   font-family: var(--serif);
   font-size: clamp(48px, 4.6vw, 72px);
   font-weight: 300;
@@ -1272,7 +1272,7 @@ html:not(.js) .card__turn {
 
 .job__when,
 .school__when {
-  color: var(--rose-deep);
+  color: var(--accent-deep);
   font-size: 15px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1303,7 +1303,7 @@ html:not(.js) .card__turn {
   top: 0.75em;
   width: 8px;
   height: 1px;
-  background: var(--rose-deep);
+  background: var(--accent-deep);
 }
 
 .school {
@@ -1376,7 +1376,7 @@ html:not(.js) .card__turn {
   font-family: var(--serif);
   font-size: clamp(26px, 2.4vw, 36px);
   font-weight: 400;
-  line-height: 1.2;
+  line-height: 1.1;
   text-wrap: pretty;
 }
 
@@ -1417,7 +1417,7 @@ html:not(.js) .card__turn {
 }
 
 .vblock :focus-visible {
-  outline-color: var(--rose);
+  outline-color: var(--accent);
 }
 
 .vblock__title {
@@ -1488,7 +1488,7 @@ html:not(.js) .card__turn {
 }
 
 .vbtn:hover {
-  background: var(--rose);
+  background: var(--accent);
 }
 
 .vbtn span {
@@ -1620,7 +1620,7 @@ html:not(.js) .card__turn {
 }
 
 .glass__label {
-  fill: var(--rose);
+  fill: var(--accent);
   font-family: var(--font);
   font-size: 11.5px;
   font-weight: 400;

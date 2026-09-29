@@ -203,7 +203,7 @@
   });
 })();
 
-// Моушен: сабраж и брызги из бутылки, редкие пузырьки, вино наливается в бокалы с контактами.
+// Моушен: пробка вылетает и брызги из бутылки, редкие пузырьки, вино наливается в бокалы с контактами.
 // При prefers-reduced-motion ничего из этого не запускается: бутылка стоит закрытой,
 // бокалы налиты, контакты видны сразу.
 (() => {
@@ -219,9 +219,9 @@
   const css = getComputedStyle(root);
   const color = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
   const C = {
-    paper: color('--paper', '#f4efeb'),
-    rose: color('--rose', '#e7b8ab'),
-    pale: color('--rose-pale', '#f4dcd4'),
+    paper: color('--paper', '#f4f0e9'),
+    accent: color('--accent', '#d8c3a0'),
+    pale: color('--accent-pale', '#efe3cf'),
   };
 
   // Детерминированный генератор: брызги одинаковые при прокрутке вперёд и назад.
@@ -241,7 +241,7 @@
     if (!layer || !layer.animate) return { burst() {} };
     const NS = 'http://www.w3.org/2000/svg';
     const pool = [];
-    const size = phone ? 4 : 7;
+    const size = phone ? 5 : 9;
     for (let i = 0; i < size; i++) {
       const el = document.createElement('div');
       el.className = 'bubble';
@@ -290,7 +290,7 @@
     let last = performance.now();
     let acc = 0;
     let burstUntil = 0;
-    const interval = phone ? 4.5 : 2.8;
+    const interval = phone ? 3.6 : 2.2;
 
     function tick(now) {
       const dt = Math.min(0.1, (now - last) / 1000);
@@ -330,7 +330,7 @@
     };
   })();
 
-  // --- Бутылка: сабля сносит верх, брызги заполняют экран ---
+  // --- Бутылка: пробка вылетает, брызги заполняют экран ---
   // Переход по мотивам Cumulus: тёмная сцена, всплеск растёт, пока не закроет весь экран светлым,
   // а следующий блок уже того же цвета.
   (() => {
@@ -339,12 +339,11 @@
     const canvas = hero && hero.querySelector('.splash');
     const bottle = hero && hero.querySelector('.bottle');
     const cork = hero && hero.querySelector('.bottle__cork');
-    const sabre = hero && hero.querySelector('.bottle__sabre');
     const mouth = hero && hero.querySelector('.bottle__mouth');
     if (!canvas || !canvas.getContext || !bottle) return;
     const ctx = canvas.getContext('2d');
 
-    const POP = 0.1; // сабля сносит верх бутылки
+    const POP = 0.1; // хлопок пробки
     const CLOUD = 0.15; // всплеск начинает расти
     const COVER = 0.9; // экран закрыт
     let W = 0;
@@ -352,7 +351,7 @@
     let lastP = -1;
 
     const rnd = random(20260929);
-    const palette = [C.rose, C.pale, C.rose, C.paper];
+    const palette = [C.accent, C.pale, C.accent, C.paper];
     const jet = Array.from({ length: phone ? 46 : 80 }, () => ({
       birth: POP + rnd() * 0.22,
       life: 0.14 + rnd() * 0.2,
@@ -372,7 +371,7 @@
       reach: 1.15 + rnd() * 0.8,
       size: 0.005 + rnd() * 0.018,
       stretch: 1.6 + rnd() * 2,
-      color: rnd() < 0.6 ? C.rose : C.pale,
+      color: rnd() < 0.6 ? C.accent : C.pale,
     }));
 
     function resize() {
@@ -420,42 +419,19 @@
     let popped = false;
     let lightHeader = false;
 
-    // Сабраж. Координаты в системе бутылки (viewBox 200×640): остриё сабли лежит у плеча,
-    // отходит назад для замаха, скользит по горлышку до венчика и уходит дальше по инерции.
-    const REST = [134, 214];
-    const BACK = [135.5, 232];
-    const HIT = [120, 49];
-    const PAST = [110, -71];
-    const placeSabre = (x, y) => sabre.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(-15) scale(1.5)`);
-
-    function draw(p) {
-      // Бутылка чуть наклоняется под удар и после удара возвращается.
+    function draw(p, now) {
+      // Чем ближе хлопок, тем сильнее дрожит бутылка; после хлопка отдача.
       const before = clamp(p / POP);
-      const tilt = p < POP ? -6 - 4 * before : -10 + 2 * easeOut(clamp((p - POP) / 0.08));
-      bottle.style.transform = `rotate(${tilt.toFixed(2)}deg)`;
+      const shake = p < POP ? Math.sin(now * 0.05) * 2.4 * before * before : 0;
+      const tilt = p < POP ? -6 - 6 * before : -12 + 3 * easeOut(clamp((p - POP) / 0.08));
+      bottle.style.transform = `rotate(${(tilt + shake).toFixed(2)}deg)`;
 
-      if (sabre) {
-        let at;
-        if (p < 0.02) at = REST;
-        else if (p < 0.05) {
-          const t = easeOut((p - 0.02) / 0.03);
-          at = [lerp(REST[0], BACK[0], t), lerp(REST[1], BACK[1], t)];
-        } else if (p < POP) {
-          const t = easeIn((p - 0.05) / (POP - 0.05));
-          at = [lerp(BACK[0], HIT[0], t), lerp(BACK[1], HIT[1], t)];
-        } else {
-          const t = easeOut(clamp((p - POP) / 0.06));
-          at = [lerp(HIT[0], PAST[0], t), lerp(HIT[1], PAST[1], t)];
-        }
-        placeSabre(at[0], at[1]);
-      }
-
-      // Верх бутылки с пробкой отлетает вперёд по ходу сабли и крутится.
+      // Пробка вылетает вверх и чуть вбок, крутясь.
       const scale = bottle.getBoundingClientRect().height / 640 || 1;
       const flight = clamp((p - POP) / 0.14);
       if (flight > 0) {
         const up = (H / scale) * 1.3 * easeOut(flight);
-        cork.style.transform = `translate(${(-up * 0.42).toFixed(1)}px, ${(-up).toFixed(1)}px) rotate(${(-flight * 620).toFixed(1)}deg)`;
+        cork.style.transform = `translate(${(up * 0.22).toFixed(1)}px, ${(-up).toFixed(1)}px) rotate(${(flight * 540).toFixed(1)}deg)`;
       } else {
         cork.style.transform = '';
       }
@@ -490,12 +466,12 @@
       const axis = ((tilt - 90) * Math.PI) / 180;
       const unit = Math.min(W, H);
 
-      // Кольцо в момент удара.
+      // Кольцо в момент хлопка.
       const ring = clamp((p - POP) / 0.09);
       if (ring > 0 && ring < 1) {
         ctx.beginPath();
         ctx.arc(mx, my, 12 + ring * Math.max(W, H) * 0.32, 0, Math.PI * 2);
-        ctx.strokeStyle = C.rose;
+        ctx.strokeStyle = C.accent;
         ctx.globalAlpha = 1 - ring;
         ctx.lineWidth = 1 + 2 * (1 - ring);
         ctx.stroke();
@@ -538,7 +514,7 @@
         ctx.fill();
       });
 
-      ctx.fillStyle = C.rose;
+      ctx.fillStyle = C.accent;
       splat(cx, cy, R, axis, bias, turn);
       ctx.fillStyle = C.pale;
       splat(cx, cy, R * 0.88, axis, bias, turn + 0.13);
@@ -547,11 +523,12 @@
     }
 
     let running = false;
-    function frame() {
+    function frame(now) {
       if (!running) return;
       const p = progress();
-      if (p !== lastP) {
-        draw(p);
+      const shaking = p > 0.004 && p < POP;
+      if (p !== lastP || shaking) {
+        draw(p, now);
         lastP = p;
       }
       requestAnimationFrame(frame);
