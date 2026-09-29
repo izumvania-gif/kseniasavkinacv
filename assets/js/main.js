@@ -204,30 +204,19 @@
     });
   });
 
-  // Видео на фоне блока: достаточно вписать путь к файлу в data-src у <article class="vblock">.
-  // Видео идёт без звука по кругу, пока блок на экране. Кнопки включают звук и ставят паузу.
+  // Видео играет без звука по кругу, пока блок на экране. Кнопки включают звук и ставят паузу.
+  // Звук может быть включён только у одного видео. При «Уменьшить движение» видео само не запускается.
   const videos = [];
-  document.querySelectorAll('.vblock').forEach((block) => {
-    const src = (block.dataset.src || '').trim();
-    if (!src) return;
-    const video = document.createElement('video');
+  function wire(box, video) {
+    const controls = box.querySelector('.vblock__controls');
+    const soundBtn = box.querySelector('[data-v-sound]');
+    const pauseBtn = box.querySelector('[data-v-pause]');
+    video.controls = false;
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
-    video.preload = 'metadata';
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
-    const poster = (block.dataset.poster || '').trim();
-    if (poster) video.poster = poster;
-    const title = block.querySelector('.vblock__title');
-    if (title) video.setAttribute('aria-label', title.textContent.trim());
-    video.src = src;
-    block.querySelector('.vblock__media').prepend(video);
-    block.classList.add('has-video');
-
-    const controls = block.querySelector('.vblock__controls');
-    const soundBtn = block.querySelector('[data-v-sound]');
-    const pauseBtn = block.querySelector('[data-v-pause]');
     controls.hidden = false;
     const item = { video, soundBtn, visible: false, paused: !motion };
     pauseBtn.setAttribute('aria-pressed', String(item.paused));
@@ -269,15 +258,35 @@
           item.visible = entry.isIntersecting;
           sync();
         });
-      }, { threshold: 0.25 }).observe(block);
+      }, { threshold: 0.25 }).observe(box);
     } else {
       item.visible = true;
       sync();
     }
+  }
+
+  // Видео в «Обо мне» уже стоит в разметке, без JS у него обычные кнопки плеера.
+  const aboutVideo = document.querySelector('.about__video');
+  if (aboutVideo) wire(aboutVideo.closest('.about__media'), aboutVideo);
+
+  // Видео на фоне блока «Вино»: достаточно вписать путь к файлу в data-src у <article class="vblock">.
+  document.querySelectorAll('.vblock').forEach((block) => {
+    const src = (block.dataset.src || '').trim();
+    if (!src) return;
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    const poster = (block.dataset.poster || '').trim();
+    if (poster) video.poster = poster;
+    const title = block.querySelector('.vblock__title');
+    if (title) video.setAttribute('aria-label', title.textContent.trim());
+    video.src = src;
+    block.querySelector('.vblock__media').prepend(video);
+    block.classList.add('has-video');
+    wire(block, video);
   });
 })();
 
-// Моушен: бутылка взрывается брызгами, редкие пузырьки, вино наливается в бокалы с контактами.
+// Моушен: сабраж и брызги из бутылки, редкие пузырьки, вино наливается в бокалы с контактами.
 // При prefers-reduced-motion ничего из этого не запускается: бутылка стоит закрытой,
 // бокалы налиты, контакты видны сразу.
 (() => {
@@ -404,7 +413,7 @@
     };
   })();
 
-  // --- Бутылка: пробка вылетает, брызги заполняют экран ---
+  // --- Бутылка: сабля сносит верх, брызги заполняют экран ---
   // Переход по мотивам Cumulus: тёмная сцена, всплеск растёт, пока не закроет весь экран светлым,
   // а следующий блок уже того же цвета.
   (() => {
@@ -413,11 +422,12 @@
     const canvas = hero && hero.querySelector('.splash');
     const bottle = hero && hero.querySelector('.bottle');
     const cork = hero && hero.querySelector('.bottle__cork');
+    const sabre = hero && hero.querySelector('.bottle__sabre');
     const mouth = hero && hero.querySelector('.bottle__mouth');
     if (!canvas || !canvas.getContext || !bottle) return;
     const ctx = canvas.getContext('2d');
 
-    const POP = 0.1; // хлопок
+    const POP = 0.1; // сабля сносит верх бутылки
     const CLOUD = 0.15; // всплеск начинает расти
     const COVER = 0.9; // экран закрыт
     let W = 0;
@@ -493,19 +503,42 @@
     let popped = false;
     let lightHeader = false;
 
-    function draw(p, now) {
-      // Бутылка: чем ближе хлопок, тем сильнее дрожит; после хлопка отдача.
-      const before = clamp(p / POP);
-      const shake = p < POP ? Math.sin(now * 0.05) * 3 * before * before : 0;
-      const tilt = p < POP ? -6 - 8 * before : -14 + 4 * easeOut(clamp((p - POP) / 0.08));
-      bottle.style.transform = `rotate(${(tilt + shake).toFixed(2)}deg)`;
+    // Сабраж. Координаты в системе бутылки (viewBox 200×640): остриё сабли лежит у плеча,
+    // отходит назад для замаха, скользит по горлышку до венчика и уходит дальше по инерции.
+    const REST = [124, 214];
+    const BACK = [124.4, 232];
+    const HIT = [120, 49];
+    const PAST = [117, -71];
+    const placeSabre = (x, y) => sabre.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(-28) scale(1.5)`);
 
+    function draw(p) {
+      // Бутылка чуть наклоняется под удар и после удара возвращается.
+      const before = clamp(p / POP);
+      const tilt = p < POP ? -6 - 4 * before : -10 + 2 * easeOut(clamp((p - POP) / 0.08));
+      bottle.style.transform = `rotate(${tilt.toFixed(2)}deg)`;
+
+      if (sabre) {
+        let at;
+        if (p < 0.02) at = REST;
+        else if (p < 0.05) {
+          const t = easeOut((p - 0.02) / 0.03);
+          at = [lerp(REST[0], BACK[0], t), lerp(REST[1], BACK[1], t)];
+        } else if (p < POP) {
+          const t = easeIn((p - 0.05) / (POP - 0.05));
+          at = [lerp(BACK[0], HIT[0], t), lerp(BACK[1], HIT[1], t)];
+        } else {
+          const t = easeOut(clamp((p - POP) / 0.06));
+          at = [lerp(HIT[0], PAST[0], t), lerp(HIT[1], PAST[1], t)];
+        }
+        placeSabre(at[0], at[1]);
+      }
+
+      // Верх бутылки с пробкой отлетает вперёд по ходу сабли и крутится.
       const scale = bottle.getBoundingClientRect().height / 640 || 1;
       const flight = clamp((p - POP) / 0.14);
       if (flight > 0) {
-        const up = (H / scale) * 1.4 * easeOut(flight);
-        const side = (W / scale) * 0.18 * flight;
-        cork.style.transform = `translate(${side.toFixed(1)}px, ${(-up).toFixed(1)}px) rotate(${(flight * 560).toFixed(1)}deg)`;
+        const up = (H / scale) * 1.3 * easeOut(flight);
+        cork.style.transform = `translate(${(-up * 0.42).toFixed(1)}px, ${(-up).toFixed(1)}px) rotate(${(-flight * 620).toFixed(1)}deg)`;
       } else {
         cork.style.transform = '';
       }
@@ -540,7 +573,7 @@
       const axis = ((tilt - 90) * Math.PI) / 180;
       const unit = Math.min(W, H);
 
-      // Кольцо в момент хлопка.
+      // Кольцо в момент удара.
       const ring = clamp((p - POP) / 0.09);
       if (ring > 0 && ring < 1) {
         ctx.beginPath();
@@ -597,12 +630,11 @@
     }
 
     let running = false;
-    function frame(now) {
+    function frame() {
       if (!running) return;
       const p = progress();
-      const shaking = p > 0.004 && p < POP;
-      if (p !== lastP || shaking) {
-        draw(p, now);
+      if (p !== lastP) {
+        draw(p);
         lastP = p;
       }
       requestAnimationFrame(frame);
