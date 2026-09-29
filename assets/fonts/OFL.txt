@@ -1,8 +1,8 @@
 Шрифты сайта распространяются по лицензии SIL Open Font License 1.1
 (https://openfontlicense.org):
 
-- Playfair Display, Claus Eggers Sørensen
-- Rubik, Hubert & Fischer
-- Caveat, Impallari Type
+- Onest, The Onest Project Authors
+- Cormorant, Christian Thalmann (Catharsis Fonts)
+- Forum, Denis Masharov
 
-Файлы взяты из пакетов Fontsource и урезаны до нужных символов.
+Файлы взяты из пакетов Fontsource, знак рубля вынесен в отдельный файл.

@@ -6,26 +6,36 @@
   <title>Ксения Савкина, менеджер по развитию бизнеса</title>
   <meta name="description" content="Ксения Савкина, менеджер по развитию бизнеса. Продаю дорогие и нестандартные услуги крупному бизнесу. Проекты, опыт и вино.">
   <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#b0152f">
+  <meta name="theme-color" content="#fbf7ee">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:title" content="Ксения Савкина, менеджер по развитию бизнеса">
   <meta property="og:description" content="Продаю дорогие и нестандартные услуги крупному бизнесу. Вином занимаюсь всерьёз.">
   <meta property="og:image" content="assets/img/og.jpg">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="preload" href="assets/fonts/playfair-display-cyrillic-italic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/rubik-cyrillic-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <script>(function(d){d.classList.add('js');if(window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion')})(document.documentElement)</script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
-  <svg class="defs" aria-hidden="true" focusable="false"><defs><clipPath id="bowl" clipPathUnits="userSpaceOnUse"><path d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/></clipPath></defs></svg>
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="bubble" viewBox="0 0 66 66">
+        <circle class="bubble__ring" cx="33" cy="33" r="32"/>
+        <ellipse class="bubble__glint" cx="21.22" cy="14.55" rx="14.18" ry="6.35" transform="translate(-4.5 13.8) rotate(-32.78)"/>
+      </symbol>
+      <filter id="bubble-wobble" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="8" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
   <a class="skip" href="#main">Перейти к содержанию</a>
 
   <header class="site-header">
     <div class="wrap site-header__inner">
-      <a class="brand" href="#top"><svg class="brand__glass" viewBox="0 0 120 210" aria-hidden="true" focusable="false"><g clip-path="url(#bowl)"><rect class="brand__wine" x="0" y="14" width="120" height="116"/></g><path class="brand__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/><path class="brand__stem" d="M57.5,128 L57.5,196 L62.5,196 L62.5,128 Z"/><ellipse class="brand__foot" cx="60" cy="199" rx="30" ry="6"/></svg>Ксения Савкина</a>
+      <a class="brand" href="#top"><svg class="brand__bottle" viewBox="0 0 16 32" aria-hidden="true" focusable="false"><path d="M6,1 h4 v8 c0,2.6 4.5,3.6 4.5,7.2 V30 a1.5,1.5 0 0 1 -1.5,1.5 H3 A1.5,1.5 0 0 1 1.5,30 V16.2 C1.5,12.6 6,11.6 6,9 Z" fill="currentColor"/><path d="M5.6,0.5 h4.8 v9 c0,1 1,1.9 2.2,2.8 l-4.6,2.4 l-4.6,-2.4 c1.2,-0.9 2.2,-1.8 2.2,-2.8 Z" class="brand__foil"/></svg>Ксения Савкина</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
       <nav class="nav" id="site-nav" aria-label="Разделы">
         <a href="#projects">Проекты</a>
@@ -34,473 +44,232 @@
         <a href="#wine">Вино</a>
         <a class="nav__contacts" href="#contacts">Контакты</a>
       </nav>
-      <a class="btn btn--small btn--cream" href="#contacts">Написать</a>
+      <a class="btn btn--ink btn--small" href="#contacts">Написать</a>
     </div>
   </header>
 
+  <div class="bubbles" aria-hidden="true"></div>
+
   <main id="main">
 
-    <section class="hero" id="top">
-      <div class="wrap hero__stage">
-        <h1 class="hero__name"><span class="hero__line hero__line--first"><span>Ксения</span></span><span class="hero__line hero__line--last"><span>Савкина</span></span></h1>
-        <div class="hero__glass" aria-hidden="true">
-          <div class="hero__float">
-            <svg class="big-glass" viewBox="0 0 120 214" focusable="false">
-              <g clip-path="url(#bowl)">
-                <path class="big-glass__wine" d="M-5,90 C20,86 40,94 60,90 C80,86 100,94 125,90 L125,140 L-5,140 Z"/>
-                <path class="big-glass__surface" d="M-5,90 C20,86 40,94 60,90 C80,86 100,94 125,90"/>
-              </g>
-              <path class="big-glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-              <path class="big-glass__shine" d="M30,48 C25.5,62 25.5,78 30,92"/>
-              <path class="big-glass__stem" d="M58.4,128 C59.1,140 58.8,160 58.8,196 L61.2,196 C61.2,160 60.9,140 61.6,128 Z"/>
-              <ellipse class="big-glass__foot" cx="60" cy="199" rx="30" ry="5"/>
-            </svg>
+    <section class="hero" id="top" aria-labelledby="hero-title" data-bubbles="gold">
+      <div class="hero__sticky">
+        <div class="wrap hero__grid">
+          <div class="hero__text">
+            <p class="hero__role">Менеджер по развитию бизнеса в агентстве «Восход»</p>
+            <h1 class="hero__title" id="hero-title"><span>Ксения</span> <span>Савкина</span></h1>
+            <p class="hero__lead">Продаю крупным компаниям дорогие и нестандартные услуги агентства. Клиентов нахожу сама, выхожу на тех, кто принимает решения, и защищаю цену без скидок.</p>
+            <div class="hero__actions">
+              <a class="btn btn--ink" href="mailto:kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>Написать</a>
+              <a class="btn btn--line" href="files/Kseniia_Savkina_CV.pdf" download><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg>Резюме, PDF</a>
+            </div>
           </div>
-          <svg class="star star--1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z"/></svg><svg class="star star--2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z"/></svg><svg class="star star--3" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C12.9 7.6 16.4 11.1 24 12C16.4 12.9 12.9 16.4 12 24C11.1 16.4 7.6 12.9 0 12C7.6 11.1 11.1 7.6 12 0Z"/></svg>
-        </div>
-        <p class="ribbon hero__ribbon"><span>Менеджер по развитию бизнеса</span></p>
-        <p class="hand hero__hand">здесь 12 проектов<svg class="hand-arrow hand-arrow--down" viewBox="0 0 80 60" aria-hidden="true" focusable="false"><path d="M4 8C24 4 52 10 62 44"/><path d="M50 38L62 46L68 32"/></svg></p>
-        <div class="hero__bottom">
-          <p class="hero__lead">Продаю крупным компаниям дорогие и нестандартные услуги агентства «Восход». Клиентов нахожу сама, выхожу на тех, кто принимает решения, и защищаю цену без скидок.</p>
-          <div class="hero__actions">
-            <a class="btn btn--cream" href="mailto:kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>Написать</a>
-            <a class="btn btn--line-cream" href="files/Kseniia_Savkina_CV.pdf" download><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg>Резюме, PDF</a>
+          <div class="hero__bottle">
+          <svg class="bottle" viewBox="0 0 200 640" aria-hidden="true" focusable="false">
+            <ellipse class="bottle__shadow" cx="100" cy="628" rx="96" ry="9"/>
+            <g class="bottle__glass">
+              <path class="bottle__body" d="M81,58 L81,206 C81,262 25,282 25,344 L25,604 Q25,624 45,624 L155,624 Q175,624 175,604 L175,344 C175,282 119,262 119,206 L119,58 Z"/>
+              <path class="bottle__shine" d="M46,372 L46,588"/>
+              <path class="bottle__shine bottle__shine--thin" d="M60,366 L60,540"/>
+              <path class="bottle__foil" d="M76,40 L124,40 L124,206 C124,232 142,252 156,266 L140,282 L120,264 L100,290 L80,264 L60,282 L44,266 C58,252 76,232 76,206 Z"/>
+              <rect class="bottle__band" x="76" y="150" width="48" height="16"/>
+              <ellipse class="bottle__mouth" cx="100" cy="42" rx="20" ry="3.5"/>
+              <circle class="bottle__medal" cx="100" cy="228" r="16"/>
+              <text class="bottle__medal-text" x="100" y="233" text-anchor="middle">КС</text>
+              <rect class="bottle__label" x="38" y="384" width="124" height="156" rx="3"/>
+              <rect class="bottle__label-line" x="45" y="391" width="110" height="142" rx="2"/>
+              <text class="bottle__label-small" x="100" y="418" text-anchor="middle">КСЕНИЯ САВКИНА</text>
+              <text class="bottle__label-mono" x="100" y="472" text-anchor="middle">К. С.</text>
+              <path class="bottle__label-rule" d="M84,488 L116,488"/>
+              <text class="bottle__label-brut" x="100" y="508" text-anchor="middle">BRUT</text>
+              <text class="bottle__label-small" x="100" y="524" text-anchor="middle">МОСКВА</text>
+            </g>
+            <g class="bottle__cork">
+              <path class="bottle__hood" d="M77,48 L77,24 C77,10 88,2 100,2 C112,2 123,10 123,24 L123,48 Z"/>
+              <path class="bottle__wire" d="M87,7 L87,46 M113,7 L113,46 M77,38 L123,38"/>
+              <ellipse class="bottle__cap" cx="100" cy="6" rx="11" ry="3"/>
+            </g>
+          </svg>
           </div>
         </div>
+        <canvas class="splash" aria-hidden="true"></canvas>
       </div>
     </section>
 
-    <section class="chapter chapter--cream about" id="about" aria-labelledby="about-title">
+    <section class="section section--champ about" id="about" aria-labelledby="about-title" data-bubbles="gold">
       <div class="wrap about__grid">
-        <header class="chapter__head">
-          <p class="hand chapter__label">глава первая</p>
-          <h2 class="chapter__title" id="about-title">Привет, я Ксения.</h2>
-        </header>
         <figure class="about__photo">
           <picture>
-            <source srcset="assets/img/ksenia-duotone.webp" type="image/webp">
-            <img src="assets/img/ksenia-duotone.jpg" width="720" height="785" alt="Ксения Савкина с бокалом белого вина в винном баре" loading="lazy">
+            <source srcset="assets/img/ksenia-champagne.webp" type="image/webp">
+            <img src="assets/img/ksenia-champagne.jpg" width="720" height="785" alt="Ксения Савкина с бокалом белого вина в винном баре" loading="lazy">
           </picture>
-          <figcaption class="hand about__hand"><svg class="hand-arrow hand-arrow--up" viewBox="0 0 80 60" aria-hidden="true" focusable="false"><path d="M4 8C24 4 52 10 62 44"/><path d="M50 38L62 46L68 32"/></svg>это я в винном баре</figcaption>
         </figure>
         <div class="about__text">
+          <h2 class="h2" id="about-title">Привет, я Ксения</h2>
           <p class="about__lead">С ноября 2024 года продаю крупным компаниям услуги агентства «Восход»: стратегию, креатив, дизайн, digital.</p>
           <p>До этого работала в SLAVA и BBDO White. Окончила ВШЭ с отличием, учусь в магистратуре EU Business School.</p>
           <p>Работаю со страхованием и банками, девелопментом, энергетикой, FMCG, IT и электроникой. После первой сделки клиенты остаются: обычно подписываются на следующую услугу сразу после сдачи первой.</p>
-          <p>Вином занимаюсь всерьёз: курс Astra Wine, поездки на винодельни, переговоры с Simple, «Моё вино» и другими винными компаниями.</p>
+          <p>Вином занимаюсь всерьёз: курс Astra Wine, поездки на винодельни, переговоры с Simple, «Моё вино» и другими винными компаниями. С коллегами легко нахожу общий язык, в офисе проводила для них винные дегустации.</p>
         </div>
-        <ul class="stamps" aria-label="Цифры">
-          <li class="stamp stamp--1"><span class="stamp__value">~90<small>млн ₽</small></span><span class="stamp__label">сделки с медиабюджетами</span></li>
-          <li class="stamp stamp--2"><span class="stamp__value">~40<small>млн ₽</small></span><span class="stamp__label">из них гонорар агентства</span></li>
-          <li class="stamp stamp--3"><span class="stamp__value"><small>до</small>50+<small>млн ₽</small></span><span class="stamp__label">чек одной сделки</span></li>
+        <ul class="facts" aria-label="Цифры">
+          <li class="fact"><span class="fact__value">~90<small>млн ₽</small></span><span class="fact__label">сделки с медиабюджетами</span></li>
+          <li class="fact"><span class="fact__value">~40<small>млн ₽</small></span><span class="fact__label">из них гонорар агентства</span></li>
+          <li class="fact"><span class="fact__value"><small>до</small>50+<small>млн ₽</small></span><span class="fact__label">чек одной сделки</span></li>
         </ul>
-        <div class="clients">
-          <h3 class="clients__title">С кем я работала</h3>
-          <ul class="clients__list"><li>АльфаСтрахование</li><li>СберСити</li><li>«Звук»</li><li>AV Development</li><li>Т Плюс</li><li>Orimi</li><li>Hochland</li><li>Plan B</li><li>Tangl</li><li>«Мистраль»</li><li>Альфа-Банк Беларусь</li><li>Transsion</li><li>LUWO</li></ul>
-        </div>
       </div>
     </section>
 
-    <section class="pour" aria-labelledby="pour-title">
-      <div class="pour__sticky">
-        <div class="wrap pour__grid">
-          <div class="pour__text">
-            <p class="hand chapter__label">глава вторая</p>
-            <h2 class="pour__title" id="pour-title"><span class="pour__line">Двенадцать проектов.</span> <span class="pour__line">Имена клиентов открываются в&nbsp;конце, как на слепой дегустации.</span></h2>
-          </div>
-          <div class="pour__stage" aria-hidden="true">
-            <svg class="pour__glass" viewBox="-30 -130 180 365" focusable="false">
-              <ellipse class="pour__spot" cx="60" cy="203" rx="62" ry="12"/>
-              <path class="pour__stream" d="M60,-130 L60,-130"/>
-              <g clip-path="url(#bowl)">
-                <path class="pour__wine" d="M0,128 L120,128 L120,140 L0,140 Z"/>
-                <path class="pour__surface" d="M0,128 L120,128"/>
-              </g>
-              <g class="pour__drops"><circle r="1.6"/><circle r="1.2"/><circle r="1.8"/><circle r="1.1"/><circle r="1.4"/><circle r="1"/></g>
-              <path class="pour__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-              <path class="pour__shine" d="M30,50 C25.5,63 25.5,80 30,94"/>
-              <path class="pour__stem" d="M58.8,128 C59.3,140 59.1,160 59.1,196 L60.9,196 C60.9,160 60.7,140 61.2,128 Z"/>
-              <ellipse class="pour__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="chapter chapter--cream projects" id="projects" aria-labelledby="projects-title">
+    <section class="section projects" id="projects" aria-labelledby="projects-title" data-bubbles="gold">
       <div class="wrap">
         <header class="projects__head">
-          <h2 class="chapter__title" id="projects-title">Проекты вслепую</h2>
-          <p class="hand projects__hand"><span class="hint hint--hover">наведите на бокал</span><span class="hint hint--tap">нажмите на бокал</span><svg class="hand-arrow hand-arrow--down" viewBox="0 0 80 60" aria-hidden="true" focusable="false"><path d="M4 8C24 4 52 10 62 44"/><path d="M50 38L62 46L68 32"/></svg></p>
+          <h2 class="h2" id="projects-title">Проекты</h2>
+          <p class="projects__note">На каждой плашке клиент. Нажмите, чтобы открыть, что было в проекте.</p>
         </header>
-
-        <div class="tasting">
-          <div class="mat">
-            <div class="flight">
-              <h3 class="flight__title">Сделки <span>9 образцов</span></h3>
-              <ol class="glasses">
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">1</text>
-                  </svg>
-                  <span class="sample__title">Интерфейс для каждого пятого смартфона</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Международный производитель смартфонов: около пятой части продаж в России.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Закупки пришли за видеопродакшеном, а это не наш профиль.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Рассказала, что умеет «Восход». Нас запомнили и порекомендовали на разработку цифрового интерфейса. Работали на русском, английском и китайском, с разницей во времени и между уральской и китайской деловой культурой.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Transsion</b> (Tecno, Infinix, itel). Когда проект выйдет полностью, интерфейс каждого пятого телефона в России будет сделан «Восходом».</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">2</text>
-                  </svg>
-                  <span class="sample__title">Кампания, которая дождалась бюджета</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>FMCG-бренд.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Встречались по креативу за полгода до сделки, не сошлись по бюджету, потом обсуждали упаковку.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>После отказа поддерживала контакт.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Plan B</b>. Вернулись с большим бюджетом. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал. Послевкусие долгое.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">3</text>
-                  </svg>
-                  <span class="sample__title">Бюджета не было, симпатия осталась</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>FMCG-бренд.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Познакомились на проекте, где не хватило бюджета на агентство.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Сделки не случилось, но мы понравились команде клиента.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">«Мистраль»</b>. Через несколько месяцев пришли с проектом под нас и подтвердили его день в день.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">4</text>
-                  </svg>
-                  <span class="sample__title">Проект без бесплатного тендера</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Девелопмент.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Клиент планировал тендер с бесплатным творческим заданием.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Отговорила от тендера, и «Восход» сразу зашёл в комплексный проект.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">СберСити</b>. Моя первая сделка в агентстве.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">5</text>
-                  </svg>
-                  <span class="sample__title">Подпись поздно вечером</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Музыкальный стриминг.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Креативная кампания через продакшен, без прямого контакта с клиентом.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Горящие сроки и связь через посредника. Документ подписывали поздно вечером, когда все, кто мог утвердить проект в агентстве, ушли домой.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">«Звук»</b>. Кампания вышла.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">6</text>
-                  </svg>
-                  <span class="sample__title">Год переговоров</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Производитель чая и кофе.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Проект то начинался, то отменялся.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Переговоры с несколькими командами клиента.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Orimi, бренд Jardin</b>. Сделка подписана, проект в работе.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">7</text>
-                  </svg>
-                  <span class="sample__title">Авторский состав работ</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Страхование.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Нестандартная услуга без типового пакета.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Собрала авторский состав работ и согласовала необычный подход и с клиентом, и с коллегами.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">АльфаСтрахование</b>. Сделка закрыта.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">8</text>
-                  </svg>
-                  <span class="sample__title">Этапы под процессы клиента</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Зарубежный банк.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Разовая услуга.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Подстроили состав и этапы работ под процессы банка.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Альфа-Банк Беларусь</b>. После сдачи сразу вернулись в переговоры.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">9</text>
-                  </svg>
-                  <span class="sample__title">Спринт вместо типового пакета</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>IT-компания.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Пришли за услугой, которая им не была нужна.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Сжала этапы агентской работы в спринт под MVP, как привыкли в IT, и согласовала это со всем руководством агентства. Добавила новый продукт digital first, тогда ещё в разработке.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Tangl</b>. Купили другой состав работ. На проекте тестировали digital first и обучали команду. Проект в работе.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              </ol>
+        <ol class="plates">
+          <li class="plate">
+            <div class="plate__inside" id="plate-1">
+              <h3 class="plate__title">Интерфейс для каждого пятого смартфона</h3>
+              <p class="plate__text">Закупки пришли за видеопродакшеном, это не наш профиль. Я рассказала, что умеет «Восход», и нас порекомендовали на разработку интерфейса. Переговоры шли на трёх языках. Когда проект выйдет, интерфейс каждого пятого телефона в России будет сделан «Восходом».</p>
             </div>
-            <div class="flight">
-              <h3 class="flight__title">Вино <span>3 образца</span></h3>
-              <ol class="glasses" start="10">
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">10</text>
-                  </svg>
-                  <span class="sample__title">Винный бренд с нуля</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Федеральная розничная сеть.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Запуск собственного винного бренда.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Прорабатываю маркетинг запуска.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">Этикетка закрыта</b>: NDA. Идут переговоры.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">11</text>
-                  </svg>
-                  <span class="sample__title">Вино, пиво и ритейл</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Винные, пивные и напиточные бренды, федеральные сети.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Маркетинговые задачи и аналитика рынка.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Готовила предложения и вела переговоры. Писала для винных клиентов записки по исследованиям Plan B: выводы и рекомендации из рыночных данных.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">«Моё вино», Московская пивоваренная компания, «Трёхсосенский»</b>, производитель энергетиков. Ритейл: X5 Group, «ВкусВилл», «Магнит», «Белая Дача», Lucky Group, ресторанные сети Беларуси.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              <li class="sample">
-                <button class="sample__btn" type="button">
-                  <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
-                    <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
-                    <g class="glass__body">
-                      <path class="glass__stream" d="M60,-18 L60,104"/>
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
-                      <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
-                      <path class="glass__stem" d="M58.6,128 C59.2,140 58.9,160 58.9,196 L61.1,196 C61.1,160 60.8,140 61.4,128 Z"/>
-                      <ellipse class="glass__foot" cx="60" cy="199" rx="28" ry="4.5"/>
-                    </g>
-                    <text class="glass__num" x="60" y="226" text-anchor="middle">12</text>
-                  </svg>
-                  <span class="sample__title">Дегустации для коллег</span>
-                </button>
-                <div class="note">
-                  <dl>
-                    <div class="note__row"><dt>Внешний вид</dt><dd>Корпоративы агентства.</dd></div>
-                    <div class="note__row"><dt>Аромат</dt><dd>Любовь к вину.</dd></div>
-                    <div class="note__row"><dt>Вкус</dt><dd>Веду дегустации.</dd></div>
-                    <div class="note__row note__row--verdict"><dt>Вывод</dt><dd><b class="label">«Восход»</b>. Тёплая атмосфера в команде.</dd></div>
-                  </dl>
-                </div>
-              </li>
-              </ol>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-1" aria-label="Transsion. Смартфоны Tecno, Infinix, itel">
+              <span class="plate__top"><span class="plate__num">01</span><span class="plate__field">Смартфоны Tecno, Infinix, itel</span></span>
+              <span class="plate__bottom"><span class="plate__client">Transsion</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-2">
+              <h3 class="plate__title">Кампания, которая дождалась бюджета</h3>
+              <p class="plate__text">За полгода до сделки мы не сошлись по бюджету. Я поддерживала контакт, и клиент вернулся с большим бюджетом. Кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
             </div>
-            <p class="portfolio-more">Ещё в портфеле: AV Development, Т&nbsp;Плюс, Hochland, LUWO (Кыргызстан).</p>
-          </div>
-
-          <aside class="sheet" aria-hidden="true" aria-labelledby="sheet-title">
-            <div class="sheet__card">
-              <button class="sheet__close" type="button" aria-label="Закрыть заметку"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg></button>
-              <div class="sheet__head">
-                <span class="sheet__num" data-sheet-num>?</span>
-                <div>
-                  <p class="sheet__kicker" data-sheet-color>Лист дегустации</p>
-                  <p class="sheet__title" id="sheet-title" data-sheet-title>Выберите бокал</p>
-                </div>
-              </div>
-              <dl class="sheet__fields">
-                <div class="sheet__field"><dt>Внешний вид <span>клиент</span></dt><dd data-sheet-field="0"></dd></div>
-                <div class="sheet__field"><dt>Аромат <span>с чем пришли</span></dt><dd data-sheet-field="1"></dd></div>
-                <div class="sheet__field"><dt>Вкус <span>что я сделала</span></dt><dd data-sheet-field="2"></dd></div>
-                <div class="sheet__field sheet__field--verdict"><dt>Вывод <span>кто это и итог</span></dt><dd data-sheet-field="3"></dd></div>
-              </dl>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-2" aria-label="Plan B. FMCG">
+              <span class="plate__top"><span class="plate__num">02</span><span class="plate__field">FMCG</span></span>
+              <span class="plate__bottom"><span class="plate__client">Plan B</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-3">
+              <h3 class="plate__title">Бюджета не было, симпатия осталась</h3>
+              <p class="plate__text">На первом проекте клиенту не хватило бюджета на агентство, но мы понравились команде. Через несколько месяцев они пришли с проектом под нас и подтвердили его день в день.</p>
             </div>
-          </aside>
-          <div class="sheet-backdrop" data-sheet-backdrop hidden></div>
-        </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-3" aria-label="«Мистраль». FMCG">
+              <span class="plate__top"><span class="plate__num">03</span><span class="plate__field">FMCG</span></span>
+              <span class="plate__bottom"><span class="plate__client">«Мистраль»</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-4">
+              <h3 class="plate__title">Проект без бесплатного тендера</h3>
+              <p class="plate__text">Клиент планировал тендер с бесплатным творческим заданием. Я отговорила от тендера, и «Восход» сразу зашёл в комплексный проект. Это моя первая сделка в агентстве.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-4" aria-label="СберСити. Девелопмент">
+              <span class="plate__top"><span class="plate__num">04</span><span class="plate__field">Девелопмент</span></span>
+              <span class="plate__bottom"><span class="plate__client">СберСити</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-5">
+              <h3 class="plate__title">Подпись поздно вечером</h3>
+              <p class="plate__text">Кампания через продакшен, без прямого контакта с клиентом и с горящими сроками. Документ подписали поздно вечером, когда все, кто мог утвердить проект в агентстве, ушли домой.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-5" aria-label="«Звук». Музыкальный стриминг">
+              <span class="plate__top"><span class="plate__num">05</span><span class="plate__field">Музыкальный стриминг</span></span>
+              <span class="plate__bottom"><span class="plate__client">«Звук»</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-6">
+              <h3 class="plate__title">Год переговоров</h3>
+              <p class="plate__text">Проект то начинался, то отменялся. Я вела переговоры с несколькими командами клиента, и сделку подписали. Проект в работе.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-6" aria-label="Orimi. Чай и кофе, бренд Jardin">
+              <span class="plate__top"><span class="plate__num">06</span><span class="plate__field">Чай и кофе, бренд Jardin</span></span>
+              <span class="plate__bottom"><span class="plate__client">Orimi</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-7">
+              <h3 class="plate__title">Авторский состав работ</h3>
+              <p class="plate__text">Клиенту нужна была нестандартная услуга без типового пакета. Я собрала авторский состав работ и согласовала необычный подход и с клиентом, и с коллегами.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-7" aria-label="АльфаСтрахование. Страхование">
+              <span class="plate__top"><span class="plate__num">07</span><span class="plate__field">Страхование</span></span>
+              <span class="plate__bottom"><span class="plate__client">Альфа­Страхование</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-8">
+              <h3 class="plate__title">Этапы под процессы банка</h3>
+              <p class="plate__text">Разовая услуга. Мы подстроили состав и этапы работ под процессы банка, и после сдачи клиент сразу вернулся в переговоры.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-8" aria-label="Альфа-Банк Беларусь. Зарубежный банк">
+              <span class="plate__top"><span class="plate__num">08</span><span class="plate__field">Зарубежный банк</span></span>
+              <span class="plate__bottom"><span class="plate__client">Альфа-Банк Беларусь</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-9">
+              <h3 class="plate__title">Спринт вместо типового пакета</h3>
+              <p class="plate__text">Клиент пришёл за услугой, которая ему не была нужна. Я сжала этапы работы в спринт под MVP, как привыкли в IT, и добавила digital first, тогда ещё в разработке. Клиент купил другой состав работ.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-9" aria-label="Tangl. IT">
+              <span class="plate__top"><span class="plate__num">09</span><span class="plate__field">IT</span></span>
+              <span class="plate__bottom"><span class="plate__client">Tangl</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-10">
+              <h3 class="plate__title">Винный бренд с нуля</h3>
+              <p class="plate__text">Сеть запускает собственный винный бренд. Я прорабатываю маркетинг запуска, идут переговоры.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-10" aria-label="Федеральная сеть. Ритейл, название под NDA">
+              <span class="plate__top"><span class="plate__num">10</span><span class="plate__field">Ритейл, название под NDA</span></span>
+              <span class="plate__bottom"><span class="plate__client">Федеральная сеть</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate">
+            <div class="plate__inside" id="plate-11">
+              <h3 class="plate__title">Напитки и федеральные сети</h3>
+              <p class="plate__text">Вела переговоры с напиточными брендами и сетями: «Моё вино», Московская пивоваренная компания, «Трёхсосенский», X5 Group, «ВкусВилл», «Магнит». Для винных клиентов писала записки по исследованиям Plan B.</p>
+            </div>
+            <button class="plate__cover" type="button" aria-expanded="false" aria-controls="plate-11" aria-label="«Моё вино». Вино, пиво и ритейл">
+              <span class="plate__top"><span class="plate__num">11</span><span class="plate__field">Вино, пиво и ритейл</span></span>
+              <span class="plate__bottom"><span class="plate__client">«Моё вино»</span><span class="plate__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span></span>
+            </button>
+          </li>
+          <li class="plate plate--more">
+            <p class="plate__more-title">Ещё в портфеле</p>
+            <p class="plate__more-list">AV Development, Т&nbsp;Плюс, Hochland, LUWO (Кыргызстан)</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <section class="chapter chapter--red method" id="method" aria-labelledby="method-title">
+    <section class="section section--bottle method" id="method" aria-labelledby="method-title" data-bubbles="cream">
       <div class="wrap">
-        <header class="chapter__head">
-          <p class="hand chapter__label">глава третья</p>
-          <h2 class="chapter__title" id="method-title">Как я продаю</h2>
-        </header>
+        <h2 class="h2" id="method-title">Как я продаю</h2>
         <ol class="steps">
-          <li class="step" style="--i: 0">
-            <p class="step__num">1</p>
+          <li class="step">
+            <p class="step__num" aria-hidden="true">01</p>
             <h3>Воронку строю сама</h3>
             <p>Холодные письма и звонки, рекомендации, тендеры, поводы из новостей компаний, отраслевые форумы. Сделки веду в Bitrix24.</p>
           </li>
-          <li class="step" style="--i: 1">
-            <p class="step__num">2</p>
+          <li class="step">
+            <p class="step__num" aria-hidden="true">02</p>
             <h3>Ищу настоящую задачу</h3>
             <p>Собираю состав работ под задачу клиента. Цену обосновываю объёмом работ и не демпингую.</p>
           </li>
-          <li class="step" style="--i: 2">
-            <p class="step__num">3</p>
+          <li class="step">
+            <p class="step__num" aria-hidden="true">03</p>
             <h3>Собираю команду под сделку</h3>
             <p>Ставлю задачи аккаунт-менеджерам, стратегам и креативщикам, защищаю бюджет перед руководителями направлений.</p>
           </li>
-          <li class="step" style="--i: 3">
-            <p class="step__num">4</p>
+          <li class="step">
+            <p class="step__num" aria-hidden="true">04</p>
             <h3>Держу принципы, не портя отношений</h3>
             <p>Работаю с возражениями и отказываюсь от бесплатных тендеров.</p>
           </li>
-          <li class="step" style="--i: 4">
-            <p class="step__num">5</p>
+          <li class="step">
+            <p class="step__num" aria-hidden="true">05</p>
             <h3>Прихожу с новым предложением</h3>
             <p>Довожу сделку до запуска. После сдачи вместе со стратегией и аккаунтингом находим следующий шаг для клиента.</p>
           </li>
@@ -508,47 +277,38 @@
       </div>
     </section>
 
-    <section class="chapter chapter--cream experience" id="experience" aria-labelledby="experience-title">
+    <section class="section experience" id="experience" aria-labelledby="experience-title" data-bubbles="gold">
       <div class="wrap experience__grid">
-        <header class="chapter__head">
-          <p class="hand chapter__label">глава четвёртая</p>
-          <h2 class="chapter__title" id="experience-title">Где я работала</h2>
-        </header>
-        <ol class="winelist">
-          <li class="wine-item">
-            <div class="wine-item__line">
+        <h2 class="h2" id="experience-title">Где я работала</h2>
+        <ol class="jobs">
+          <li class="job">
+            <div class="job__line">
               <h3>Агентство «Восход»</h3>
-              <span class="wine-item__dots" aria-hidden="true"></span>
-              <p class="wine-item__vintage">2024</p>
+              <p class="job__when">с 11.2024</p>
             </div>
-            <p class="wine-item__role">Менеджер по развитию бизнеса</p>
-            <p class="wine-item__meta">с 11.2024</p>
+            <p class="job__role">Менеджер по развитию бизнеса</p>
             <ul>
               <li>Участвовала в создании продуктов агентства: digital first, «образ сайта», новый формат спецпроектов.</li>
               <li>Провела для менеджеров лекцию о работе с ИИ, помогала собрать общие шаблоны.</li>
             </ul>
           </li>
-          <li class="wine-item">
-            <div class="wine-item__line">
+          <li class="job">
+            <div class="job__line">
               <h3>Агентство SLAVA</h3>
-              <span class="wine-item__dots" aria-hidden="true"></span>
-              <p class="wine-item__vintage">2023</p>
+              <p class="job__when">11.2023-10.2024</p>
             </div>
-            <p class="wine-item__role">SMM-менеджер, контент-креатор</p>
-            <p class="wine-item__meta">11.2023-10.2024</p>
+            <p class="job__role">SMM-менеджер, контент-креатор</p>
             <ul>
               <li>Вела Telegram и Instagram агентства: контент-планы, тексты, дизайн, Reels.</li>
               <li>Писала статьи, упаковывала кейсы, делала презентации для new business.</li>
             </ul>
           </li>
-          <li class="wine-item">
-            <div class="wine-item__line">
+          <li class="job">
+            <div class="job__line">
               <h3>BBDO White</h3>
-              <span class="wine-item__dots" aria-hidden="true"></span>
-              <p class="wine-item__vintage">2022</p>
+              <p class="job__when">06.2022-08.2022</p>
             </div>
-            <p class="wine-item__role">Стажёр: арт-директор и копирайтер</p>
-            <p class="wine-item__meta">06.2022-08.2022</p>
+            <p class="job__role">Стажёр: арт-директор и копирайтер</p>
             <ul>
               <li>В креативной паре придумали новое направление коммуникации «Жигули» и защищали идеи перед клиентом.</li>
               <li>Ребрендинг МТС: баннеры, активации, мемы. Сценарии и шутки для роликов Ozon и МТС.</li>
@@ -558,54 +318,54 @@
       </div>
     </section>
 
-    <section class="chapter chapter--red wine" id="wine" aria-labelledby="wine-title">
-      <div class="wrap wine__grid">
-        <div class="wine__text">
-          <header class="chapter__head">
-            <p class="hand chapter__label">глава пятая</p>
-            <h2 class="chapter__title" id="wine-title">Вино и интересы</h2>
-          </header>
+    <section class="section section--champ wine" id="wine" aria-labelledby="wine-title" data-bubbles="gold">
+      <div class="wrap">
+        <div class="wine__head">
+          <h2 class="h2" id="wine-title">Вино</h2>
           <ol class="route">
-            <li><p class="route__place">Astra Wine</p><p>Окончила курс: регионы, сорта, стили, дегустационный анализ.</p></li>
-            <li><p class="route__place">Эльзас</p><p>Проехала Винную дорогу.</p></li>
-            <li><p class="route__place">Испания</p><p>Была на многих винодельнях.</p></li>
-            <li><p class="route__place">Приорат</p><p>Говорила с виноделами о терруаре.</p></li>
-            <li><p class="route__place">Дегустации</p><p>Хожу на тематические и провожу для коллег.</p></li>
+            <li><h3>Astra Wine</h3><p>Окончила курс: регионы, сорта, стили, дегустационный анализ.</p></li>
+            <li><h3>Эльзас</h3><p>Проехала Винную дорогу.</p></li>
+            <li><h3>Испания</h3><p>Была на многих винодельнях.</p></li>
+            <li><h3>Приорат</h3><p>Говорила с виноделами о терруаре.</p></li>
+            <li><h3>Дегустации</h3><p>Хожу на тематические.</p></li>
           </ol>
         </div>
-        <figure class="video" data-src="" data-poster="">
-          <div class="video__frame">
-            <div class="video__empty">
-              <svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></svg>
-              <span>Видео скоро появится</span>
-            </div>
+        <div class="vblocks">
+        <article class="vblock vblock--wide" data-src="" data-poster="" aria-labelledby="video-grapes">
+          <div class="vblock__media">
+            <div class="vblock__fizz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
           </div>
-          <figcaption>
-            <strong>Про сорта винограда</strong>
-            <span>Чем отличаются сорта</span>
-          </figcaption>
-        </figure>
-        <figure class="video video--offset" data-src="" data-poster="">
-          <div class="video__frame">
-            <div class="video__empty">
-              <svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></svg>
-              <span>Видео скоро появится</span>
-            </div>
+          <div class="vblock__content">
+            <h3 class="vblock__title" id="video-grapes">Сорта винограда</h3>
+            <p class="vblock__text">Рассказываю, чем отличаются сорта.</p>
+            <p class="vblock__soon">Видео скоро появится</p>
           </div>
-          <figcaption>
-            <strong>Про Приорат</strong>
-            <span>Терруар и виноделы</span>
-          </figcaption>
-        </figure>
+          <div class="vblock__controls" hidden>
+            <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
+            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
+          </div>
+        </article>
+        <article class="vblock vblock--tall" data-src="" data-poster="" aria-labelledby="video-priorat">
+          <div class="vblock__media">
+            <div class="vblock__fizz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="vblock__content">
+            <h3 class="vblock__title" id="video-priorat">Приорат</h3>
+            <p class="vblock__text">Терруар и виноделы.</p>
+            <p class="vblock__soon">Видео скоро появится</p>
+          </div>
+          <div class="vblock__controls" hidden>
+            <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
+            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
+          </div>
+        </article>
+        </div>
       </div>
     </section>
 
-    <section class="chapter chapter--cream education" aria-labelledby="education-title">
+    <section class="section education" aria-labelledby="education-title" data-bubbles="gold">
       <div class="wrap education__grid">
-        <header class="chapter__head">
-          <p class="hand chapter__label">глава шестая</p>
-          <h2 class="chapter__title" id="education-title">Где я училась</h2>
-        </header>
+        <h2 class="h2" id="education-title">Где я училась</h2>
         <ol class="schools">
           <li class="school">
             <p class="school__when">2025-2027</p>
@@ -631,60 +391,79 @@
       </div>
     </section>
 
-    <section class="chapter chapter--red contacts" id="contacts" aria-labelledby="contacts-title">
-      <div class="wrap contacts__grid">
-        <div class="contacts__intro">
-          <header class="chapter__head">
-            <p class="hand chapter__label">эпилог</p>
-            <h2 class="chapter__title" id="contacts-title">Напишите мне</h2>
-          </header>
-          <fieldset class="reason">
-            <legend>Повод для письма</legend>
-            <label class="reason__chip"><input type="radio" name="reason" id="reason-project" value="Обсудить проект" checked><span>Обсудить проект</span></label>
-            <label class="reason__chip"><input type="radio" name="reason" id="reason-meeting" value="Встреча"><span>Позвать на встречу</span></label>
-            <label class="reason__chip"><input type="radio" name="reason" id="reason-wine" value="Поговорить о вине"><span>Поговорить о вине</span></label>
-          </fieldset>
-          <a class="contacts__mail" href="mailto:kseniia.savkina@mail.ru?subject=%D0%9E%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82" data-mail>
-            <span class="contacts__mail-label">Написать письмо <span data-mail-subject>«Обсудить проект»</span></span>
-            <span class="contacts__mail-address">kseniia.savkina@mail.ru</span>
-            <svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></svg>
-          </a>
+    <section class="section section--champ contacts" id="contacts" aria-labelledby="contacts-title" data-bubbles="gold">
+      <div class="wrap">
+        <div class="contacts__head">
+          <h2 class="h2" id="contacts-title">Контакты</h2>
+          <p class="contacts__note">Пишите про проекты, встречи и вино. Я в&nbsp;Москве.</p>
         </div>
-
-        <article class="backlabel" aria-label="Контрэтикетка с контактами">
-          <p class="backlabel__kicker">Контрэтикетка</p>
-          <p class="backlabel__name">Ксения Савкина</p>
-          <p class="backlabel__desc">Сухое, выдержанное, с долгим послевкусием.</p>
-          <dl class="backlabel__rows">
-            <div class="backlabel__row">
-              <dt>Почта</dt>
-              <dd><a href="mailto:kseniia.savkina@mail.ru" data-copy-text>kseniia.savkina@mail.ru</a><button class="copy" type="button" data-copy="kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button></dd>
-            </div>
-            <div class="backlabel__row">
-              <dt>Телефон</dt>
-              <dd><a href="tel:+79269913803" data-copy-text>+7 926 991-38-03</a><button class="copy" type="button" data-copy="+79269913803"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button></dd>
-            </div>
-            <div class="backlabel__row">
-              <dt>Instagram</dt>
-              <dd><a href="https://www.instagram.com/ksusha_zavr/" target="_blank" rel="noopener">@ksusha_zavr</a></dd>
-            </div>
-            <div class="backlabel__row">
-              <dt>Резюме</dt>
-              <dd><a href="files/Kseniia_Savkina_CV.pdf" download>Скачать PDF</a></dd>
-            </div>
-            <div class="backlabel__row">
-              <dt>Город</dt>
-              <dd>Москва</dd>
-            </div>
-          </dl>
-          <p class="backlabel__serve">Подавать к переговорам. Хранить в долгих рабочих отношениях.</p>
-        </article>
+        <div class="pour">
+          <div class="pour__glasses" aria-hidden="true">
+          <svg class="glass glass--red" viewBox="0 -110 200 410" data-bottom="198" data-level="116" focusable="false">
+            <defs><clipPath id="bowl-red" clipPathUnits="userSpaceOnUse"><path d="M68,10 C64,60 48,96 48,140 C48,176 72,198 100,198 C128,198 152,176 152,140 C152,96 136,60 132,10 Z"/></clipPath></defs>
+            <rect class="glass__stream" x="98.8" y="-110" width="2.4" height="0"/>
+            <path class="glass__back" d="M68,10 C64,60 48,96 48,140 C48,176 72,198 100,198 C128,198 152,176 152,140 C152,96 136,60 132,10 Z"/>
+            <g clip-path="url(#bowl-red)">
+              <path class="glass__wine" d="M0,116 L200,116 L200,202 L0,202 Z"/>
+            </g>
+            <path class="glass__outline" d="M68,10 C64,60 48,96 48,140 C48,176 72,198 100,198 C128,198 152,176 152,140 C152,96 136,60 132,10 Z"/>
+            <ellipse class="glass__rim" cx="100" cy="10" rx="32" ry="3"/>
+            <path class="glass__stem" d="M98.6,198 C99.2,228 98.9,258 98.9,292 L101.1,292 C101.1,258 100.8,228 101.4,198 Z"/>
+            <ellipse class="glass__foot" cx="100" cy="294" rx="40" ry="5"/>
+          </svg>
+          <svg class="glass glass--rose" viewBox="0 -110 200 410" data-bottom="226" data-level="150" focusable="false">
+            <defs><clipPath id="bowl-rose" clipPathUnits="userSpaceOnUse"><path d="M64,50 C54,84 32,116 32,160 C32,200 64,226 100,226 C136,226 168,200 168,160 C168,116 146,84 136,50 Z"/></clipPath></defs>
+            <rect class="glass__stream" x="98.8" y="-110" width="2.4" height="0"/>
+            <path class="glass__back" d="M64,50 C54,84 32,116 32,160 C32,200 64,226 100,226 C136,226 168,200 168,160 C168,116 146,84 136,50 Z"/>
+            <g clip-path="url(#bowl-rose)">
+              <path class="glass__wine" d="M0,150 L200,150 L200,230 L0,230 Z"/>
+            </g>
+            <path class="glass__outline" d="M64,50 C54,84 32,116 32,160 C32,200 64,226 100,226 C136,226 168,200 168,160 C168,116 146,84 136,50 Z"/>
+            <ellipse class="glass__rim" cx="100" cy="50" rx="36" ry="3"/>
+            <path class="glass__stem" d="M98.6,226 C99.2,256 98.9,286 98.9,292 L101.1,292 C101.1,286 100.8,256 101.4,226 Z"/>
+            <ellipse class="glass__foot" cx="100" cy="294" rx="40" ry="5"/>
+          </svg>
+          <svg class="glass glass--white" viewBox="0 -110 200 410" data-bottom="218" data-level="134" focusable="false">
+            <defs><clipPath id="bowl-white" clipPathUnits="userSpaceOnUse"><path d="M72,86 C68,122 58,146 58,172 C58,200 78,218 100,218 C122,218 142,200 142,172 C142,146 132,122 128,86 Z"/></clipPath></defs>
+            <rect class="glass__stream" x="98.8" y="-110" width="2.4" height="0"/>
+            <path class="glass__back" d="M72,86 C68,122 58,146 58,172 C58,200 78,218 100,218 C122,218 142,200 142,172 C142,146 132,122 128,86 Z"/>
+            <g clip-path="url(#bowl-white)">
+              <path class="glass__wine" d="M0,134 L200,134 L200,222 L0,222 Z"/>
+            </g>
+            <path class="glass__outline" d="M72,86 C68,122 58,146 58,172 C58,200 78,218 100,218 C122,218 142,200 142,172 C142,146 132,122 128,86 Z"/>
+            <ellipse class="glass__rim" cx="100" cy="86" rx="28" ry="3"/>
+            <path class="glass__stem" d="M98.6,218 C99.2,248 98.9,278 98.9,292 L101.1,292 C101.1,278 100.8,248 101.4,218 Z"/>
+            <ellipse class="glass__foot" cx="100" cy="294" rx="40" ry="5"/>
+          </svg>
+          </div>
+          <ul class="pour__contacts">
+          <li class="contact contact--red">
+            <p class="contact__label">Почта</p>
+            <p class="contact__value"><span class="contact__ghost" aria-hidden="true">kseniia.savkina@mail.ru</span><a class="contact__link" href="mailto:kseniia.savkina@mail.ru" data-copy-text>kseniia.savkina@mail.ru</a></p>
+            <button class="copy" type="button" data-copy="kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button>
+          </li>
+          <li class="contact contact--rose">
+            <p class="contact__label">Телефон</p>
+            <p class="contact__value"><span class="contact__ghost" aria-hidden="true">+7 926 991-38-03</span><a class="contact__link" href="tel:+79269913803" data-copy-text>+7 926 991-38-03</a></p>
+            <button class="copy" type="button" data-copy="+79269913803"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><span>Копировать</span></button>
+          </li>
+          <li class="contact contact--white">
+            <p class="contact__label">Instagram</p>
+            <p class="contact__value"><span class="contact__ghost" aria-hidden="true">@ksusha_zavr</span><a class="contact__link" href="https://www.instagram.com/ksusha_zavr/" target="_blank" rel="noopener" data-copy-text>@ksusha_zavr</a></p>
+            
+          </li>
+          </ul>
+        </div>
+        <div class="contacts__actions">
+          <a class="btn btn--ink" href="mailto:kseniia.savkina@mail.ru"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>Написать письмо</a>
+          <a class="btn btn--line" href="files/Kseniia_Savkina_CV.pdf" download><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg>Резюме, PDF</a>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" data-bubbles="cream">
     <div class="wrap site-footer__inner">
       <p>Ксения Савкина, Москва</p>
       <a href="#top">Наверх</a>
