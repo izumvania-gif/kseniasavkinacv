@@ -17,16 +17,16 @@
   <link rel="preload" href="assets/fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-cyrillic-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.classList.add('js')</script>
+  <script>(function(d){d.classList.add('js');if(window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('motion')})(document.documentElement)</script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
-  <svg class="defs" aria-hidden="true" focusable="false"><defs><clipPath id="bowl" clipPathUnits="userSpaceOnUse"><path d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/></clipPath></defs></svg>
+  <svg class="defs" aria-hidden="true" focusable="false"><defs><clipPath id="bowl" clipPathUnits="userSpaceOnUse"><path d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/></clipPath><filter id="stain-edge" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7"/></filter></defs></svg>
   <a class="skip" href="#main">Перейти к содержанию</a>
 
   <header class="site-header">
     <div class="wrap site-header__inner">
-      <a class="brand" href="#top">Ксения Савкина</a>
+      <a class="brand" href="#top"><svg class="brand__glass" viewBox="0 0 120 210" aria-hidden="true" focusable="false"><g clip-path="url(#bowl)"><rect class="brand__wine" x="0" y="14" width="120" height="116"/></g><path class="brand__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/><path class="brand__stem" d="M57.5,128 L57.5,196 L62.5,196 L62.5,128 Z"/><ellipse class="brand__foot" cx="60" cy="199" rx="30" ry="6"/></svg>Ксения Савкина</a>
       <nav class="nav" aria-label="Разделы">
         <a href="#projects">Проекты</a>
         <a href="#method">Как продаю</a>
@@ -41,7 +41,7 @@
 
     <section class="hero" id="top">
       <div class="wrap hero__grid">
-        <h1 class="hero__name"><span class="hero__first">Ксения</span> <span class="hero__last">Савкина</span></h1>
+        <h1 class="hero__name"><span class="hero__first"><span class="hero__line">Ксения</span></span> <span class="hero__last"><span class="hero__line">Савкина</span></span></h1>
         <figure class="hero__photo">
           <picture>
             <source srcset="assets/img/ksenia.webp" type="image/webp">
@@ -86,20 +86,82 @@
           <p>Вином занимаюсь всерьёз: окончила курс Astra Wine, езжу на винодельни, вела переговоры с Simple, «Моё вино» и другими винными и напиточными компаниями.</p>
         </div>
         <div class="tile tile--wine figure">
-          <p class="figure__value">≈&nbsp;90<span>&nbsp;млн&nbsp;₽</span></p>
+          <svg class="liquid" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <defs>
+              <filter id="liquid-flow" x="-15%" y="-15%" width="130%" height="130%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.007 0.013" numOctaves="2" seed="11" result="noise">
+                  <animate attributeName="baseFrequency" dur="24s" values="0.007 0.013;0.010 0.018;0.007 0.013" repeatCount="indefinite"/>
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="90" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+              <radialGradient id="liquid-light" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#c2465e" stop-opacity=".85"/>
+                <stop offset="1" stop-color="#c2465e" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="liquid-deep" cx="50%" cy="50%" r="50%">
+                <stop offset="0" stop-color="#2c0610" stop-opacity=".9"/>
+                <stop offset="1" stop-color="#2c0610" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <g filter="url(#liquid-flow)">
+              <rect class="liquid__base" x="-40" y="-40" width="480" height="380"/>
+              <ellipse cx="110" cy="70" rx="190" ry="95" fill="url(#liquid-light)"/>
+              <ellipse cx="330" cy="250" rx="200" ry="120" fill="url(#liquid-deep)"/>
+              <ellipse cx="300" cy="60" rx="90" ry="40" fill="url(#liquid-light)" opacity=".55"/>
+            </g>
+          </svg>
+          <p class="figure__value">≈&nbsp;<span data-count="90">90</span><span class="unit">&nbsp;млн&nbsp;₽</span></p>
           <p class="figure__label">сделки под ключ, с медиабюджетами</p>
         </div>
         <div class="tile figure">
-          <p class="figure__value">≈&nbsp;40<span>&nbsp;млн&nbsp;₽</span></p>
+          <p class="figure__value">≈&nbsp;<span data-count="40">40</span><span class="unit">&nbsp;млн&nbsp;₽</span></p>
           <p class="figure__label">из них гонорар агентства</p>
         </div>
         <div class="tile figure">
-          <p class="figure__value">1–50+<span>&nbsp;млн&nbsp;₽</span></p>
+          <p class="figure__value">1–50+<span class="unit">&nbsp;млн&nbsp;₽</span></p>
           <p class="figure__label">чек одной сделки</p>
         </div>
         <blockquote class="tile tile--quote">
           <p>План продаж выполняю наравне с коллегами, которые работают в агентстве больше 10&nbsp;лет.</p>
         </blockquote>
+      </div>
+    </section>
+
+    <section class="pour" aria-labelledby="pour-title">
+      <div class="pour__sticky">
+        <div class="wrap pour__grid">
+          <div class="pour__text">
+            <p class="pour__kicker">Прежде чем открыть этикетки</p>
+            <h2 class="pour__title" id="pour-title"><span class="pour__line">Сначала налить.</span> <span class="pour__line">Потом попробовать вслепую.</span> <span class="pour__line">В&nbsp;конце открыть этикетку.</span></h2>
+          </div>
+          <div class="pour__stage" aria-hidden="true">
+            <svg class="pour__glass" viewBox="-30 -130 180 365" focusable="false">
+              <defs>
+                <linearGradient id="pour-wine" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#a8283f"/>
+                  <stop offset="1" stop-color="#4a0d1c"/>
+                </linearGradient>
+                <radialGradient id="pour-glow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0" stop-color="#8b1e32" stop-opacity=".22"/>
+                  <stop offset="1" stop-color="#8b1e32" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <ellipse class="pour__glow" cx="60" cy="80" rx="110" ry="130"/>
+              <ellipse class="pour__spot" cx="60" cy="203" rx="62" ry="12"/>
+              <path class="pour__stream" d="M60,-130 L60,-130"/>
+              <g clip-path="url(#bowl)">
+                <path class="pour__wine" d="M0,128 L120,128 L120,140 L0,140 Z"/>
+                <path class="pour__surface" d="M0,128 L120,128"/>
+              </g>
+              <g class="pour__drops"><circle r="1.6"/><circle r="1.2"/><circle r="1.8"/><circle r="1.1"/><circle r="1.4"/><circle r="1"/></g>
+              <path class="pour__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
+              <ellipse class="pour__rim" cx="60" cy="14" rx="24" ry="2.2"/>
+              <path class="pour__shine" d="M30,50 C25.5,63 25.5,80 30,94"/>
+              <path class="pour__stem" d="M58.8,128 C59.3,140 59.1,160 59.1,196 L60.9,196 C60.9,160 60.7,140 61.2,128 Z"/>
+              <ellipse class="pour__foot" cx="60" cy="199" rx="28" ry="4.5"/>
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -118,6 +180,7 @@
 
         <div class="tasting">
           <div class="mat">
+            <svg class="stain stain--mat" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#stain-edge)"><circle class="stain__ring" cx="100" cy="100" r="72" pathLength="1"/><circle class="stain__ring stain__ring--inner" cx="104" cy="97" r="66" pathLength="1"/></g></svg>
             <div class="flight">
               <h3 class="flight__title">Сет I <span>Сделки · 9 образцов</span></h3>
               <ol class="glasses">
@@ -126,7 +189,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -152,7 +216,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -178,7 +243,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -204,7 +270,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -230,7 +297,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -256,7 +324,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -282,7 +351,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -308,7 +378,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -334,7 +405,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -365,7 +437,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -391,7 +464,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -417,7 +491,8 @@
                   <svg class="glass" viewBox="0 0 120 230" aria-hidden="true" focusable="false">
                     <ellipse class="glass__spot" cx="60" cy="202" rx="52" ry="11"/>
                     <g class="glass__body">
-                      <g clip-path="url(#bowl)"><g class="glass__wine"><rect x="0" y="92" width="120" height="40"/><ellipse class="glass__surface" cx="60" cy="92" rx="41" ry="3.2"/></g></g>
+                      <path class="glass__stream" d="M60,-18 L60,104"/>
+                      <g clip-path="url(#bowl)"><g class="glass__wine"><g class="glass__slosh"><rect x="-10" y="92" width="140" height="44"/><ellipse class="glass__surface" cx="60" cy="92" rx="42" ry="3.2"/></g></g></g>
                       <path class="glass__tint" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <path class="glass__outline" d="M36,14 C33,34 18,56 20,80 C22,108 40,128 60,128 C80,128 98,108 100,80 C102,56 87,34 84,14 Z"/>
                       <ellipse class="glass__rim" cx="60" cy="14" rx="24" ry="2.2"/>
@@ -472,7 +547,9 @@
           <h2 id="method-title">Как продаю</h2>
           <p class="method__sub"><em>от лозы до бокала</em></p>
         </header>
-        <ol class="steps">
+        <div class="steps-wrap">
+          <svg class="cascade" aria-hidden="true" focusable="false"><path class="cascade__path" d=""/></svg>
+          <ol class="steps">
           <li class="step" style="--i: 0">
             <p class="step__stage">Сбор урожая</p>
             <h3>Воронку строю сама</h3>
@@ -498,7 +575,8 @@
             <h3>Прихожу с новым предложением</h3>
             <p>Довожу сделку до договора и запуска. После сдачи проекта собираю new business, стратегию и аккаунтинг, вместе находим следующий шаг, и я прихожу к клиенту с новым предложением.</p>
           </li>
-        </ol>
+          </ol>
+        </div>
       </div>
     </section>
 
@@ -636,6 +714,7 @@
         </div>
 
         <article class="backlabel" aria-label="Контрэтикетка с контактами">
+          <svg class="stain stain--label" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#stain-edge)"><circle class="stain__ring" cx="100" cy="100" r="72" pathLength="1"/><circle class="stain__ring stain__ring--inner" cx="104" cy="97" r="66" pathLength="1"/></g></svg>
           <p class="backlabel__kicker">Контрэтикетка</p>
           <p class="backlabel__name">Ксения Савкина</p>
           <p class="backlabel__desc">Менеджер по развитию бизнеса. Сухое, выдержанное, с долгим послевкусием.</p>

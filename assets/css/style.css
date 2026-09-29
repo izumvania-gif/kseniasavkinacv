@@ -74,6 +74,11 @@
   --band-accent: #e3a1ac;
   --band-line: #3b2f33;
   --scrim: rgba(29, 21, 23, 0.45);
+  --wine-a: #5a1630;
+  --wine-b: #7c1c2d;
+  --wine-c: #c2465e;
+  --pour-stream: #8b1e32;
+  --stain: #8b1e32;
   --shadow: 0 1px 0 rgba(29, 21, 23, 0.04), 0 22px 44px -26px rgba(29, 21, 23, 0.45);
 
   --display: "Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -112,6 +117,11 @@
     --band-accent: #e8a9b4;
     --band-line: #4a2b33;
     --scrim: rgba(0, 0, 0, 0.6);
+    --wine-a: #b86b7a;
+    --wine-b: #df98a6;
+    --wine-c: #f6d2d9;
+    --pour-stream: #a8283f;
+    --stain: #e3a1ac;
     --shadow: 0 22px 44px -26px rgba(0, 0, 0, 0.9);
   }
 }
@@ -139,6 +149,10 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  overflow-x: clip;
 }
 
 img {
@@ -311,6 +325,9 @@ em {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--display);
   font-size: 24px;
   font-style: italic;
@@ -389,11 +406,34 @@ em {
   letter-spacing: -0.03em;
 }
 
+.hero__first,
+.hero__last {
+  display: block;
+  overflow: hidden;
+  padding-right: 0.12em;
+  margin-right: -0.12em;
+}
+
+.hero__line {
+  display: inline-block;
+}
+
 .hero__last {
   padding-left: 0.72em;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.1em;
   font-style: italic;
   color: var(--accent);
+}
+
+/* «Савкина» переливается, как вино на свету. */
+.hero__last .hero__line {
+  padding-right: 0.08em;
+  background-image: linear-gradient(100deg, var(--wine-a) 0%, var(--wine-b) 22%, var(--wine-c) 36%, var(--wine-b) 50%, var(--wine-a) 66%, var(--wine-b) 82%, var(--wine-a) 100%);
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero__intro {
@@ -642,7 +682,7 @@ em {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-.figure__value span {
+.figure__value .unit {
   font-size: 0.5em;
   font-style: italic;
   letter-spacing: 0;
@@ -811,6 +851,8 @@ em {
 
 /* Дегустационная подложка: бумажный лист с кругами под бокалы. */
 .mat {
+  position: relative;
+  overflow: hidden;
   padding: clamp(20px, 3vw, 40px);
   background: var(--card) var(--grain);
   border: 1px solid var(--line);
@@ -910,8 +952,8 @@ em {
 }
 
 .glass__wine {
-  transform: translateY(16px);
-  transition: transform 1s var(--ease);
+  transform: translateY(40px);
+  transition: transform 1.2s var(--ease) 0.2s;
 }
 
 .glass__wine rect {
@@ -1882,6 +1924,8 @@ html:not(.js) .tasting {
 }
 
 .backlabel {
+  position: relative;
+  overflow: hidden;
   grid-column: 8 / 13;
   padding: clamp(24px, 3vw, 36px);
   background: var(--card) var(--grain);
@@ -2069,6 +2113,474 @@ html:not(.js) .tasting {
   color: var(--ink);
 }
 
+/* ---------- Моушен ---------- */
+
+/* Бокал в шапке наполняется по мере прокрутки страницы. */
+.brand__glass {
+  width: 13px;
+  height: 23px;
+  flex: none;
+  overflow: visible;
+}
+
+.brand__outline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 8;
+}
+
+.brand__stem,
+.brand__foot {
+  fill: currentColor;
+}
+
+.brand__wine {
+  fill: var(--accent);
+  transform: translateY(calc((1 - var(--scroll, 0)) * 116px));
+}
+
+/* Интро первого экрана. */
+@keyframes rise {
+  from { transform: translateY(108%); }
+  to { transform: none; }
+}
+
+@keyframes shimmer {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+@keyframes photo-pour {
+  from {
+    clip-path: inset(100% 0 0 0 round 999px 999px 6px 6px);
+    transform: scale(1.08);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 999px 999px 6px 6px);
+    transform: none;
+  }
+}
+
+@keyframes label-drop {
+  from { opacity: 0; transform: translateY(-36px) rotate(-10deg); }
+  to { opacity: 1; transform: rotate(-2deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.motion .hero__first .hero__line {
+  animation: rise 1.1s var(--ease) 0.1s both;
+}
+
+.motion .hero__last .hero__line {
+  animation: rise 1.1s var(--ease) 0.24s both, shimmer 16s ease-in-out 1.4s infinite alternate;
+}
+
+.motion .hero__photo img {
+  animation: photo-pour 1.5s var(--ease) 0.05s both;
+}
+
+.motion .hero__label {
+  animation: label-drop 1.1s var(--ease) 1s both;
+}
+
+.motion .hero__intro > * {
+  animation: fade-up 0.9s var(--ease) both;
+}
+
+.motion .hero__intro > :nth-child(1) { animation-delay: 0.5s; }
+.motion .hero__intro > :nth-child(2) { animation-delay: 0.6s; }
+.motion .hero__intro > :nth-child(3) { animation-delay: 0.72s; }
+
+/* Появление блоков при прокрутке: только то, что было ниже первого экрана. */
+.motion .reveal {
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+
+.motion .reveal.is-pending {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.motion .sample.reveal.is-pending {
+  transform: translateY(14px);
+}
+
+.motion .backlabel.reveal {
+  transition: opacity 0.7s var(--ease), transform 1.1s cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+.motion .backlabel.reveal.is-pending {
+  transform: translateY(-48px) rotate(-10deg) scale(1.04);
+}
+
+.motion .hero__label.reveal,
+.motion .hero__label.reveal.is-pending {
+  opacity: 1;
+  transform: rotate(-2deg);
+}
+
+/* Пунктир винной карты «дорисовывается». */
+.wine-item__dots {
+  transform-origin: left center;
+}
+
+.motion .wine-item .wine-item__dots {
+  transition: transform 1.2s var(--ease) 0.25s;
+}
+
+.motion .wine-item.is-pending .wine-item__dots {
+  transform: translateY(-0.4em) scaleX(0);
+}
+
+/* Винные следы от бокала. */
+.stain {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.stain__ring {
+  fill: none;
+  stroke: var(--stain);
+  stroke-width: 2.4;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  opacity: 0.2;
+}
+
+.stain__ring--inner {
+  stroke-width: 6;
+  opacity: 0.07;
+}
+
+.stain--mat {
+  top: -52px;
+  right: -48px;
+  transform: rotate(24deg);
+}
+
+.stain--label {
+  bottom: -64px;
+  left: -58px;
+  width: 170px;
+  height: 170px;
+  transform: rotate(-36deg);
+}
+
+.motion .stain__ring {
+  transition: stroke-dashoffset 2s var(--ease) 0.6s;
+}
+
+.motion .is-pending .stain__ring {
+  stroke-dashoffset: 1;
+}
+
+/* Бокалы проектов: струйка, подъём вина и мягкий плеск. */
+.glass__stream {
+  fill: none;
+  stroke: var(--w);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+}
+
+.sample.is-active .glass__stream {
+  animation: glass-pour 1.25s cubic-bezier(0.45, 0, 0.25, 1) both;
+}
+
+@keyframes glass-pour {
+  0% { stroke-dashoffset: 130; }
+  35% { stroke-dashoffset: 0; }
+  65% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -130; }
+}
+
+.glass__slosh {
+  transform-box: view-box;
+  transform-origin: 60px 96px;
+}
+
+.sample.is-active .glass__slosh {
+  animation: slosh 3.4s ease-in-out 1.3s infinite alternate;
+}
+
+@keyframes slosh {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg); }
+}
+
+.sample.is-active .glass__tint {
+  transition-delay: 0.1s;
+}
+
+/* Сцена «Налив»: по прокрутке в бокал льётся вино. */
+.pour {
+  position: relative;
+  background: var(--band);
+  color: var(--band-ink);
+}
+
+.motion .pour {
+  height: 300vh;
+}
+
+.pour__sticky {
+  display: grid;
+  align-items: center;
+  padding-block: clamp(72px, 10vw, 120px);
+  overflow: hidden;
+}
+
+.motion .pour__sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: calc(var(--header-h) + 24px) 32px;
+}
+
+.pour__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: 24px;
+  align-items: center;
+}
+
+.pour__text {
+  grid-column: 1 / 7;
+}
+
+.pour__kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--band-muted);
+}
+
+.pour__title {
+  margin-top: 24px;
+  font-family: var(--display);
+  font-size: clamp(40px, 5.2vw, 80px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.pour__line {
+  display: block;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.pour__line:nth-child(2) {
+  font-style: italic;
+  color: var(--band-accent);
+}
+
+.motion .pour__line {
+  opacity: 0.2;
+  transform: translateX(-10px);
+}
+
+.motion .pour__line.is-past {
+  opacity: 0.5;
+  transform: none;
+}
+
+.motion .pour__line.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.pour__stage {
+  grid-column: 7 / 13;
+  display: grid;
+  place-items: center;
+}
+
+.pour__glass {
+  width: min(100%, 460px);
+  height: auto;
+  max-height: 80vh;
+  max-height: 80svh;
+  overflow: visible;
+}
+
+.pour__glow {
+  fill: url(#pour-glow);
+}
+
+.pour__spot {
+  fill: none;
+  stroke: var(--band-line);
+  stroke-width: 1;
+  stroke-dasharray: 2 3;
+}
+
+.pour__stream {
+  fill: none;
+  stroke: var(--pour-stream);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+
+.pour__wine {
+  fill: url(#pour-wine);
+}
+
+.pour__surface {
+  fill: none;
+  stroke: #e07a8f;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0.75;
+}
+
+.pour__drops circle {
+  fill: #b8354f;
+  opacity: 0;
+}
+
+.pour__outline {
+  fill: rgba(255, 255, 255, 0.035);
+  stroke: var(--band-ink);
+  stroke-width: 1.1;
+}
+
+.pour__rim {
+  fill: none;
+  stroke: var(--band-ink);
+  stroke-width: 0.9;
+  opacity: 0.55;
+}
+
+.pour__shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.pour__stem {
+  fill: var(--band-ink);
+}
+
+.pour__foot {
+  fill: var(--band);
+  stroke: var(--band-ink);
+  stroke-width: 1.1;
+}
+
+@media (max-width: 899px) {
+  .pour__text,
+  .pour__stage {
+    grid-column: 1 / -1;
+  }
+
+  .pour__glass {
+    max-height: 50vh;
+    max-height: 50svh;
+  }
+
+  .pour__title {
+    font-size: clamp(34px, 8vw, 56px);
+  }
+}
+
+/* Каскад: винная линия стекает по ступеням по мере прокрутки. */
+.steps-wrap {
+  position: relative;
+}
+
+.cascade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.cascade__path {
+  fill: none;
+  stroke: var(--band-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1023px) {
+  .cascade {
+    display: none;
+  }
+}
+
+/* «Живое» вино на плашке. */
+.tile--wine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.liquid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.liquid__base {
+  fill: var(--tile);
+}
+
+.tile--wine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(20, 4, 9, 0.35), transparent 65%);
+}
+
+.figure__value [data-count] {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Контрэтикетка: сканер пробегает по штрихкоду. */
+.backlabel__foot {
+  position: relative;
+}
+
+.backlabel__foot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 44px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  opacity: 0;
+}
+
+.backlabel:hover .backlabel__foot::after {
+  animation: scan 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes scan {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 1; transform: translateX(130px); }
+}
+
 /* ---------- Без анимации ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2116,7 +2628,12 @@ html:not(.js) .tasting {
   .video,
   .marquee,
   .reason,
-  .copy {
+  .copy,
+  .pour,
+  .stain,
+  .cascade,
+  .liquid,
+  .brand__glass {
     display: none !important;
   }
 

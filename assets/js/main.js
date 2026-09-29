@@ -219,3 +219,252 @@
     figure.querySelector('.video__frame').replaceChildren(video);
   });
 })();
+
+// Моушен: бокал прокрутки в шапке, появление блоков, счёт цифр,
+// сцена «Налив» и винный каскад по ступеням. При prefers-reduced-motion
+// всё показывается сразу в финальном состоянии.
+(() => {
+  const root = document.documentElement;
+  const motion = root.classList.contains('motion');
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+  // «Живое» вино на плашке: SMIL-анимацию останавливаем, если движение отключено.
+  if (!motion) {
+    document.querySelectorAll('svg.liquid').forEach((svg) => svg.pauseAnimations && svg.pauseAnimations());
+  }
+
+  // --- Появление блоков ---
+  const revealGroups = [
+    '.section h2', '.projects__aside', '.tile--text p', '.tile--wine', '.about__grid > .figure', '.tile--quote',
+    '.mat', '.sample', '.method__sub', '.step', '.wine-item', '.route li', '.video',
+    '.school', '.skills__group', '.contacts__lead', '.reason', '.contacts__mail', '.backlabel',
+  ];
+  const counters = Array.from(document.querySelectorAll('[data-count]'));
+
+  function countUp(el) {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+    const target = Number(el.dataset.count);
+    if (!motion) {
+      el.textContent = String(target);
+      return;
+    }
+    const start = performance.now();
+    const duration = 1600;
+    const tick = (now) => {
+      const t = clamp((now - start) / duration);
+      el.textContent = String(Math.round(target * easeOut(t)));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  if (motion && 'IntersectionObserver' in window) {
+    const pending = [];
+    revealGroups.forEach((selector) => {
+      document.querySelectorAll(selector).forEach((el) => {
+        if (el.closest('.hero') || el.classList.contains('reveal')) return;
+        el.classList.add('reveal');
+        // Ступенчатая задержка между соседями одной группы.
+        const siblings = Array.from(el.parentElement ? el.parentElement.children : []).filter((c) => c.matches(selector));
+        const index = Math.max(0, siblings.indexOf(el));
+        el.style.setProperty('--d', Math.min(index, 8) * 0.07 + 's');
+        if (el.getBoundingClientRect().top > window.innerHeight * 0.92) {
+          el.classList.add('is-pending');
+          pending.push(el);
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('is-pending');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    pending.forEach((el) => observer.observe(el));
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        countUp(entry.target);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach((el) => {
+      el.textContent = '0';
+      countObserver.observe(el);
+    });
+  } else {
+    counters.forEach(countUp);
+  }
+
+  // --- Сцена «Налив» ---
+  const pour = document.querySelector('.pour');
+  const pourParts = pour && {
+    stream: pour.querySelector('.pour__stream'),
+    wine: pour.querySelector('.pour__wine'),
+    surface: pour.querySelector('.pour__surface'),
+    drops: Array.from(pour.querySelectorAll('.pour__drops circle')),
+    lines: Array.from(pour.querySelectorAll('.pour__line')),
+  };
+  const EMPTY = 128;
+  const FULL = 88;
+  let pourProgress = motion ? 0 : 1;
+  let pourVisible = false;
+  let pourFrame = 0;
+
+  function drawPour(time) {
+    if (!pourParts) return;
+    const p = pourProgress;
+    const t = time / 1000;
+    const streamIn = easeOut(clamp(p / 0.12));
+    const fill = easeInOut(clamp((p - 0.1) / 0.62));
+    const tail = easeInOut(clamp((p - 0.72) / 0.12));
+    const pouring = p > 0.02 && p < 0.84 ? 1 : 0;
+    const level = EMPTY - (EMPTY - FULL) * fill;
+
+    // Струя: сверху до поверхности; в конце хвост падает вниз.
+    if (pouring || (p > 0 && p < 0.84)) {
+      const top = -130 + (level + 130) * tail;
+      const bottom = -130 + (level + 130) * streamIn;
+      const wobble = Math.sin(t * 7) * 0.6;
+      pourParts.stream.setAttribute('d', `M60,${top.toFixed(1)} Q${(60 + wobble).toFixed(2)},${((top + bottom) / 2).toFixed(1)} 60,${bottom.toFixed(1)}`);
+      pourParts.stream.style.opacity = bottom - top > 1 ? '1' : '0';
+    } else {
+      pourParts.stream.style.opacity = '0';
+    }
+
+    // Поверхность: волна сильнее, пока льётся, и успокаивается после.
+    const settle = clamp((p - 0.8) / 0.2);
+    const amp = motion ? (pouring ? 2.2 : 1.1 - 0.7 * settle) : 0;
+    const splash = pouring * (1 - tail) * 3.2;
+    let surface = '';
+    for (let x = 0; x <= 120; x += 4) {
+      const y = level
+        + amp * Math.sin(x * 0.09 + t * 2.3)
+        + amp * 0.5 * Math.sin(x * 0.21 - t * 3.4)
+        - splash * Math.exp(-Math.pow((x - 60) / 7, 2));
+      surface += (x === 0 ? 'M' : ' L') + x + ',' + y.toFixed(2);
+    }
+    pourParts.surface.setAttribute('d', surface);
+    pourParts.wine.setAttribute('d', surface + ' L120,140 L0,140 Z');
+    pourParts.surface.style.opacity = fill > 0.01 ? '0.75' : '0';
+
+    // Брызги у места падения струи.
+    pourParts.drops.forEach((drop, i) => {
+      const phase = (t * (1.4 + i * 0.17) + i * 0.37) % 1;
+      const dir = i % 2 ? 1 : -1;
+      const x = 60 + dir * (3 + i * 1.6) * phase;
+      const y = level - Math.sin(phase * Math.PI) * (6 + (i % 3) * 3);
+      drop.setAttribute('cx', x.toFixed(2));
+      drop.setAttribute('cy', y.toFixed(2));
+      drop.style.opacity = pouring && streamIn >= 1 && tail < 0.5 ? String(0.85 * (1 - phase)) : '0';
+    });
+
+    // Строки текста подсвечиваются по очереди.
+    const current = p < 0.36 ? 0 : p < 0.72 ? 1 : 2;
+    pourParts.lines.forEach((line, i) => {
+      line.classList.toggle('is-on', motion ? i === current : true);
+      line.classList.toggle('is-past', motion && i < current);
+    });
+  }
+
+  function pourLoop(time) {
+    drawPour(time);
+    if (pourVisible && motion) pourFrame = requestAnimationFrame(pourLoop);
+    else pourFrame = 0;
+  }
+
+  if (pourParts) {
+    if (motion && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        pourVisible = entries.some((entry) => entry.isIntersecting);
+        if (pourVisible && !pourFrame) pourFrame = requestAnimationFrame(pourLoop);
+      }).observe(pour);
+    }
+    drawPour(0);
+  }
+
+  // --- Каскад по ступеням ---
+  const cascadeWrap = document.querySelector('.steps-wrap');
+  const cascadePath = cascadeWrap && cascadeWrap.querySelector('.cascade__path');
+  let cascadeLength = 0;
+
+  function buildCascade() {
+    if (!cascadePath) return;
+    const steps = Array.from(cascadeWrap.querySelectorAll('.step'));
+    const box = cascadeWrap.getBoundingClientRect();
+    const rects = steps.map((step) => step.getBoundingClientRect());
+    if (!rects.length || rects[1] && Math.abs(rects[0].top - rects[1].top) < 2 && rects[0].left === rects[1].left) {
+      cascadePath.setAttribute('d', '');
+      return;
+    }
+    let d = '';
+    rects.forEach((r, i) => {
+      const x1 = r.left - box.left;
+      const x2 = r.right - box.left;
+      const y = r.top - box.top;
+      if (i === 0) {
+        d += `M${x1.toFixed(1)},${y.toFixed(1)}`;
+      } else {
+        const prev = rects[i - 1];
+        const px = prev.right - box.left;
+        const py = prev.top - box.top;
+        const mid = (px + x1) / 2;
+        d += ` C${mid.toFixed(1)},${py.toFixed(1)} ${mid.toFixed(1)},${y.toFixed(1)} ${x1.toFixed(1)},${y.toFixed(1)}`;
+      }
+      d += ` L${x2.toFixed(1)},${y.toFixed(1)}`;
+    });
+    cascadePath.setAttribute('d', d);
+    cascadeLength = cascadePath.getTotalLength();
+    cascadePath.style.strokeDasharray = String(cascadeLength);
+  }
+
+  function updateCascade() {
+    if (!cascadePath || !cascadeLength) return;
+    const r = cascadeWrap.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const p = motion ? clamp((vh * 0.85 - r.top) / (r.height + vh * 0.35)) : 1;
+    cascadePath.style.strokeDashoffset = String(cascadeLength * (1 - p));
+  }
+
+  // --- Прокрутка ---
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      root.style.setProperty('--scroll', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
+      if (pour && motion) {
+        const r = pour.getBoundingClientRect();
+        pourProgress = clamp(-r.top / Math.max(1, r.height - window.innerHeight));
+        if (!pourFrame) drawPour(performance.now());
+      }
+      updateCascade();
+    });
+  }
+
+  let resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      buildCascade();
+      onScroll();
+    }, 150);
+  });
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const start = () => {
+    buildCascade();
+    onScroll();
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  else start();
+  window.addEventListener('load', start);
+})();
