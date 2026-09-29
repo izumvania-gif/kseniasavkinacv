@@ -51,10 +51,11 @@
   --muted: #5e5652;
   --on-ink: #f3eee6;
   --on-ink-muted: #a8a09b;
-  --accent: #d8c3a0;
-  --accent-mid: #c8ae86;
-  --accent-pale: #efe3cf;
-  --accent-deep: #7a6344;
+  --accent: #e6d8bf;
+  --accent-mid: #d9c8aa;
+  --accent-pale: #f4ecdf;
+  --accent-deep: #94805e;
+  --accent-text: #7a6344;
   --wine: #5a1320;
   --wine-2: #6b1b2a;
   --wine-3: #7d2433;
@@ -66,7 +67,7 @@
   --serif: "Cormorant Garamond", Georgia, serif;
   --gutter: clamp(16px, 4vw, 48px);
   --header: 64px;
-  --radius: 3px;
+  --radius: 22px;
   --round: 22px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-lid: cubic-bezier(0.7, 0, 0.2, 1);
@@ -136,7 +137,7 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent-deep);
+  outline: 2px solid var(--accent-text);
   outline-offset: 3px;
 }
 
@@ -558,8 +559,8 @@ button {
 }
 
 .bottle__foil {
-  fill: #cdb48e;
-  stroke: #cdb48e;
+  fill: #dccaa8;
+  stroke: #dccaa8;
   stroke-width: 1.6;
 }
 
@@ -577,14 +578,14 @@ button {
 }
 
 .bottle__collar {
-  fill: #f3ece0;
-  stroke: #9c7f58;
+  fill: #f7f2e9;
+  stroke: #b39a76;
   stroke-width: 0.8;
 }
 
 .bottle__collar-line {
   fill: none;
-  stroke: #c2a980;
+  stroke: #d4c2a1;
   stroke-width: 0.6;
 }
 
@@ -597,23 +598,23 @@ button {
 }
 
 .bottle__foil-shade {
-  fill: #b99d74;
+  fill: #cbb593;
 }
 
 .bottle__band {
-  fill: #9c7f58;
+  fill: #b39a76;
 }
 
 .bottle__foil-shine {
   fill: none;
-  stroke: #e6d6ba;
+  stroke: #f0e6d4;
   stroke-width: 2.4;
   stroke-linecap: round;
 }
 
 .bottle__crinkle {
   fill: none;
-  stroke: #ae936b;
+  stroke: #c3ad8a;
   stroke-width: 0.9;
   stroke-linecap: round;
 }
@@ -668,11 +669,11 @@ button {
 }
 
 .bottle__plaque {
-  fill: #cdb48e;
+  fill: #dccaa8;
 }
 
 .bottle__plaque-rim {
-  stroke: #9c7f58;
+  stroke: #b39a76;
   stroke-width: 0.9;
 }
 
@@ -723,7 +724,7 @@ button {
 }
 
 .bottle__label {
-  fill: #f3ece0;
+  fill: #f7f2e9;
 }
 
 .bottle__label-rule {
@@ -826,7 +827,7 @@ button {
   z-index: 40;
   overflow: hidden;
   pointer-events: none;
-  --bubble: #b9a384;
+  --bubble: #c9b99c;
 }
 
 .bubbles.is-dark {
@@ -938,7 +939,7 @@ button {
 }
 
 .fact__value small {
-  color: var(--accent-deep);
+  color: var(--accent-text);
   font-family: var(--font);
   font-size: clamp(15px, 1.3vw, 19px);
   font-weight: 400;
@@ -1089,19 +1090,17 @@ button {
   bottom: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 36px;
-  padding: 0 14px 0 10px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   border: 1px solid currentColor;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 500;
+  border-radius: 50%;
   transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
 }
 
 .card__turn .icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   transition: transform 0.6s var(--ease);
 }
 
@@ -1112,8 +1111,9 @@ button {
 }
 
 .card:hover .card__front .card__turn {
-  border-color: var(--accent-deep);
-  background: var(--accent-deep);
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--ink);
 }
 
 .card:hover .card__turn .icon {
@@ -1176,7 +1176,7 @@ button {
 }
 
 .card__btn:focus-visible {
-  outline: 2px solid var(--accent-deep);
+  outline: 2px solid var(--accent-text);
   outline-offset: 4px;
 }
 
@@ -1340,7 +1340,7 @@ html:not(.js) .card__turn {
 
 .job__when,
 .school__when {
-  color: var(--accent-deep);
+  color: var(--accent-text);
   font-size: 15px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1593,7 +1593,7 @@ html:not(.js) .card__turn {
   left: var(--x);
   width: var(--s);
   height: var(--s);
-  border: 1px solid rgba(205, 184, 138, 0.45);
+  border: 1px solid rgba(230, 216, 191, 0.5);
   border-radius: 50%;
 }
 
