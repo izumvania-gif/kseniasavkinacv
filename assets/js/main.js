@@ -37,7 +37,7 @@
 
     sheet.style.setProperty('--w', sample.style.getPropertyValue('--w'));
     sheetNum.textContent = num;
-    sheetColor.textContent = 'образец №\u00a0' + num + ', ' + (sample.dataset.color || '');
+    sheetColor.textContent = 'Образец №\u00a0' + num + ', ' + (sample.dataset.color || '');
     sheetTitle.textContent = sample.querySelector('.sample__title').textContent.trim();
     sheetFields.forEach((field, i) => {
       const span = document.createElement('span');
@@ -160,6 +160,28 @@
     }
   }
 
+  // Меню на телефоне.
+  const header = document.querySelector('.site-header');
+  const menuBtn = document.querySelector('.menu-btn');
+  function setMenu(open) {
+    if (!header || !menuBtn) return;
+    header.classList.toggle('is-menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => setMenu(!header.classList.contains('is-menu-open')));
+    document.querySelectorAll('#site-nav a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.classList.contains('is-menu-open')) {
+        setMenu(false);
+        menuBtn.focus();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (header.classList.contains('is-menu-open') && !header.contains(event.target)) setMenu(false);
+    });
+  }
+
   // Контрэтикетка: копирование почты и телефона.
   document.querySelectorAll('[data-copy]').forEach((button) => {
     const label = button.querySelector('span');
@@ -220,87 +242,14 @@
   });
 })();
 
-// Моушен: бокал прокрутки в шапке, появление блоков, счёт цифр,
-// сцена «Налив» и винный каскад по ступеням. При prefers-reduced-motion
-// всё показывается сразу в финальном состоянии.
+// Моушен: бокал прокрутки в шапке и сцена «Налив».
+// При prefers-reduced-motion сцена сразу показывает налитый бокал.
 (() => {
   const root = document.documentElement;
   const motion = root.classList.contains('motion');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
   const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-
-  // «Живое» вино на плашке: SMIL-анимацию останавливаем, если движение отключено.
-  if (!motion) {
-    document.querySelectorAll('svg.liquid').forEach((svg) => svg.pauseAnimations && svg.pauseAnimations());
-  }
-
-  // --- Появление блоков ---
-  const revealGroups = [
-    '.section h2', '.projects__aside', '.tile--text p', '.tile--wine', '.about__grid > .figure', '.tile--quote',
-    '.mat', '.sample', '.method__sub', '.step', '.wine-item', '.route li', '.video',
-    '.school', '.skills__group', '.reason', '.contacts__mail', '.backlabel',
-  ];
-  const counters = Array.from(document.querySelectorAll('[data-count]'));
-
-  function countUp(el) {
-    if (el.dataset.counted) return;
-    el.dataset.counted = '1';
-    const target = Number(el.dataset.count);
-    if (!motion) {
-      el.textContent = String(target);
-      return;
-    }
-    const start = performance.now();
-    const duration = 1600;
-    const tick = (now) => {
-      const t = clamp((now - start) / duration);
-      el.textContent = String(Math.round(target * easeOut(t)));
-      if (t < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-
-  if (motion && 'IntersectionObserver' in window) {
-    const pending = [];
-    revealGroups.forEach((selector) => {
-      document.querySelectorAll(selector).forEach((el) => {
-        if (el.closest('.hero') || el.classList.contains('reveal')) return;
-        el.classList.add('reveal');
-        // Ступенчатая задержка между соседями одной группы.
-        const siblings = Array.from(el.parentElement ? el.parentElement.children : []).filter((c) => c.matches(selector));
-        const index = Math.max(0, siblings.indexOf(el));
-        el.style.setProperty('--d', Math.min(index, 8) * 0.07 + 's');
-        if (el.getBoundingClientRect().top > window.innerHeight * 0.92) {
-          el.classList.add('is-pending');
-          pending.push(el);
-        }
-      });
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.remove('is-pending');
-        observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-    pending.forEach((el) => observer.observe(el));
-
-    const countObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        countUp(entry.target);
-        countObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.6 });
-    counters.forEach((el) => {
-      el.textContent = '0';
-      countObserver.observe(el);
-    });
-  } else {
-    counters.forEach(countUp);
-  }
 
   // --- Сцена «Налив» ---
   const pour = document.querySelector('.pour');
@@ -366,7 +315,7 @@
     });
 
     // Строки текста подсвечиваются по очереди.
-    const current = p < 0.36 ? 0 : p < 0.72 ? 1 : 2;
+    const current = p < 0.45 ? 0 : 1;
     pourParts.lines.forEach((line, i) => {
       line.classList.toggle('is-on', motion ? i === current : true);
       line.classList.toggle('is-past', motion && i < current);
@@ -389,48 +338,6 @@
     drawPour(0);
   }
 
-  // --- Каскад по ступеням ---
-  const cascadeWrap = document.querySelector('.steps-wrap');
-  const cascadePath = cascadeWrap && cascadeWrap.querySelector('.cascade__path');
-  let cascadeLength = 0;
-
-  function buildCascade() {
-    if (!cascadePath) return;
-    const steps = Array.from(cascadeWrap.querySelectorAll('.step'));
-    const box = cascadeWrap.getBoundingClientRect();
-    const rects = steps.map((step) => step.getBoundingClientRect());
-    if (!rects.length || rects[1] && Math.abs(rects[0].top - rects[1].top) < 2 && rects[0].left === rects[1].left) {
-      cascadePath.setAttribute('d', '');
-      return;
-    }
-    let d = '';
-    rects.forEach((r, i) => {
-      const x1 = r.left - box.left;
-      const x2 = r.right - box.left;
-      const y = r.top - box.top;
-      if (i === 0) {
-        d += `M${x1.toFixed(1)},${y.toFixed(1)}`;
-      } else {
-        const prev = rects[i - 1];
-        const px = prev.right - box.left;
-        const py = prev.top - box.top;
-        const mid = (px + x1) / 2;
-        d += ` C${mid.toFixed(1)},${py.toFixed(1)} ${mid.toFixed(1)},${y.toFixed(1)} ${x1.toFixed(1)},${y.toFixed(1)}`;
-      }
-      d += ` L${x2.toFixed(1)},${y.toFixed(1)}`;
-    });
-    cascadePath.setAttribute('d', d);
-    cascadeLength = cascadePath.getTotalLength();
-    cascadePath.style.strokeDasharray = String(cascadeLength);
-  }
-
-  function updateCascade() {
-    if (!cascadePath || !cascadeLength) return;
-    const r = cascadeWrap.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const p = motion ? clamp((vh * 0.85 - r.top) / (r.height + vh * 0.35)) : 1;
-    cascadePath.style.strokeDashoffset = String(cascadeLength * (1 - p));
-  }
 
   // --- Прокрутка ---
   let ticking = false;
@@ -446,25 +353,16 @@
         pourProgress = clamp(-r.top / Math.max(1, r.height - window.innerHeight));
         if (!pourFrame) drawPour(performance.now());
       }
-      updateCascade();
     });
   }
 
   let resizeTimer = 0;
   window.addEventListener('resize', () => {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      buildCascade();
-      onScroll();
-    }, 150);
+    resizeTimer = window.setTimeout(onScroll, 150);
   });
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  const start = () => {
-    buildCascade();
-    onScroll();
-  };
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
-  else start();
-  window.addEventListener('load', start);
+  onScroll();
+  window.addEventListener('load', onScroll);
 })();
