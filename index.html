@@ -34,7 +34,6 @@
       <a class="brand" href="#top">Ксения Савкина</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
       <nav class="nav" id="site-nav" aria-label="Разделы">
-        <a href="#game">Игра</a>
         <a href="#projects">Проекты</a>
         <a href="#method">Как продаю</a>
         <a href="#experience">Опыт</a>
@@ -63,24 +62,39 @@
           </div>
           <div class="hero__bottle">
           <svg class="bottle" viewBox="0 0 200 640" aria-hidden="true" focusable="false">
+            <defs>
+              <clipPath id="bottle-body" clipPathUnits="userSpaceOnUse"><path d="M84,60 L79,150 C79,230 26,258 26,352 L26,602 Q26,624 48,624 L152,624 Q174,624 174,602 L174,352 C174,258 121,230 121,150 L116,60 Z"/></clipPath>
+              <clipPath id="foil-cut" clipPathUnits="userSpaceOnUse"><path d="M0,97 L82,98 L85.6,95.4 L89.2,98.8 L92.8,95 L96.4,98.4 L100,94.8 L103.6,98.6 L107.2,95.2 L110.8,99 L114.4,95.6 L118.1,98 L200,97 L200,254 L100,280 L0,254 Z"/></clipPath>
+            </defs>
             <g class="bottle__glass">
-              <path class="bottle__body" d="M84,60 L79,206 C79,262 28,282 28,344 L28,606 Q28,624 46,624 L154,624 Q172,624 172,606 L172,344 C172,282 121,262 121,206 L116,60 Z"/>
-              <path class="bottle__shine" d="M47,376 L47,592"/>
+              <path class="bottle__body" d="M84,60 L79,150 C79,230 26,258 26,352 L26,602 Q26,624 48,624 L152,624 Q174,624 174,602 L174,352 C174,258 121,230 121,150 L116,60 Z"/>
+              <g clip-path="url(#bottle-body)">
+                <path class="bottle__shine" d="M44,380 L44,596"/>
+                <path class="bottle__shoulder-shine" d="M60,262 C50,282 44,304 42,336"/>
+                <path class="bottle__edge-light" d="M170,360 L170,600"/>
+              </g>
               <path class="bottle__neck-shine" d="M89,66 L88,95"/>
               <ellipse class="bottle__mouth" cx="100" cy="60.5" rx="15.6" ry="2.8"/>
-              <path class="bottle__foil" d="M82.0,98.0 L85.6,95.4 L89.2,98.8 L92.8,95.0 L96.4,98.4 L100.0,94.8 L103.6,98.6 L107.2,95.2 L110.8,99.0 L114.4,95.6 L118.1,98.0 L121.8,206 C121.8,226 134,244 142,256 L100,282 L58,256 C66,244 78.2,226 78.2,206 Z"/>
-              <path class="bottle__foil-shade" d="M113.5,104 L117.6,206 C118.5,226 129,242 137,253 L128,258 C121,246 114.5,228 113.5,206 Z"/>
-              <path class="bottle__band" d="M80.1,150 L119.9,150 L120.2,159 L79.8,159 Z"/>
-              <path class="bottle__foil-shine" d="M88.5,103 L86.5,206 C86.5,222 80,238 70,250"/>
-              <path class="bottle__crinkle" d="M91,100 L93.5,113 M100.5,99 L99,111 M109,100 L111,114 M84.5,112 L87,126 M114,118 L112,132"/>
-              <rect class="bottle__label" x="44" y="398" width="112" height="136"/>
-              <path class="bottle__label-rule" d="M58,422 L142,422 M58,510 L142,510"/>
-              <text class="bottle__label-name" x="100" y="452" text-anchor="middle">КСЕНИЯ</text>
-              <text class="bottle__label-name" x="100" y="468" text-anchor="middle">САВКИНА</text>
-              <text class="bottle__label-sub" x="100" y="492" text-anchor="middle">Brut Rosé</text>
-              <text class="bottle__label-small" x="100" y="526" text-anchor="middle">Москва</text>
+              <g clip-path="url(#foil-cut)">
+                <path class="bottle__foil" d="M84,60 L79,150 C79,230 26,258 26,352 L26,602 Q26,624 48,624 L152,624 Q174,624 174,602 L174,352 C174,258 121,230 121,150 L116,60 Z"/>
+                <g clip-path="url(#bottle-body)">
+                  <path class="bottle__foil-shade" d="M112,60 L115,150 C115,212 150,240 166,290 L200,290 L200,60 Z"/>
+                  <path class="bottle__band" d="M0,176 L200,176 L200,184 L0,184 Z"/>
+                </g>
+                <path class="bottle__foil-shine" d="M88.5,102 L86.5,150 C86.5,196 74,226 58,252"/>
+                <path class="bottle__crinkle" d="M91,100 L93.5,113 M100.5,99 L99,111 M109,100 L111,114 M84.5,112 L87,126 M114,118 L112,132"/>
+              </g>
+              <path class="bottle__collar" d="M86,204 L114,204 L114,226 Q100,242 86,226 Z"/>
+              <path class="bottle__collar-line" d="M89,207 L111,207 L111,225 Q100,237 89,225 Z"/>
+              <text class="bottle__collar-text" x="100" y="224" text-anchor="middle">КС</text>
+              <path class="bottle__label" d="M40,420 Q100,396 160,420 L160,540 L40,540 Z"/>
+              <path class="bottle__label-rule" d="M56,440 Q100,424 144,440 M56,520 L144,520"/>
+              <text class="bottle__label-name" x="100" y="466" text-anchor="middle">КСЕНИЯ</text>
+              <text class="bottle__label-name" x="100" y="482" text-anchor="middle">САВКИНА</text>
+              <text class="bottle__label-sub" x="100" y="504" text-anchor="middle">Brut Rosé</text>
+              <text class="bottle__label-small" x="100" y="533" text-anchor="middle">Москва</text>
             </g>
-            <g class="bottle__sabre" transform="translate(124 214) rotate(-28) scale(1.5)">
+            <g class="bottle__sabre" transform="translate(134 214) rotate(-15) scale(1.5)">
               <path class="sabre__blade" d="M0,0 C1.8,22 3.3,72 3.3,146 L-3.3,146 C-3.5,90 -2.6,36 0,0 Z"/>
               <path class="sabre__fuller" d="M-0.6,10 L-1.2,142"/>
               <path class="sabre__edge" d="M1.6,24 L2.7,140"/>
@@ -95,8 +109,9 @@
               <path class="bottle__lip-groove" d="M81,50.5 L119,50.5"/>
               <path class="bottle__lip-shine" d="M85.2,45.5 L85.2,58"/>
               <path class="bottle__cork-head" d="M87.4,42.5 L86.2,19 C86.2,12.5 91.5,9.5 100,9.5 C108.5,9.5 113.8,12.5 113.8,19 L112.6,42.5 Z"/>
-              <path class="bottle__cork-shade" d="M106.5,10 C111.5,11.2 113.8,14 113.8,19 L112.6,42.5 L107,42.5 L107.6,19 C107.6,15 107.3,12 106.5,10 Z"/><path class="bottle__cork-line" d="M86.6,27 C92,28.6 108,28.6 113.4,27"/>
-              <g class="bottle__cork-speck"><circle cx="92" cy="16" r="0.9"/><circle cx="97" cy="24" r="1.1"/><circle cx="104" cy="14" r="0.8"/><circle cx="108" cy="29" r="1"/><circle cx="91" cy="33" r="0.8"/><circle cx="101" cy="37" r="1.2"/><circle cx="95" cy="40" r="0.7"/><circle cx="110" cy="20" r="0.8"/><circle cx="99" cy="30" r="0.7"/><circle cx="105" cy="38" r="0.8"/></g>
+              <path class="bottle__cork-shade" d="M106.5,10 C111.5,11.2 113.8,14 113.8,19 L112.6,42.5 L107,42.5 L107.6,19 C107.6,15 107.3,12 106.5,10 Z"/>
+              <path class="bottle__cork-line" d="M86.6,27 C92,28.6 108,28.6 113.4,27"/>
+              <g class="bottle__cork-speck"><circle cx="92" cy="16" r="0.9"/><circle cx="97" cy="24" r="1.1"/><circle cx="104" cy="14" r="0.8"/><circle cx="108" cy="33" r="1"/><circle cx="91" cy="36" r="0.8"/><circle cx="101" cy="38" r="1.2"/><circle cx="110" cy="21" r="0.8"/><circle cx="99" cy="31" r="0.7"/></g>
             </g>
           </svg>
           </div>
@@ -128,69 +143,6 @@
           <li class="fact"><span class="fact__value">~40<small>млн ₽</small></span><span class="fact__label">из них гонорар агентства</span></li>
           <li class="fact"><span class="fact__value"><small>до</small>50+<small>млн ₽</small></span><span class="fact__label">чек одной сделки</span></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="section section--dark game" id="game" aria-labelledby="game-title" data-dark>
-      <div class="wrap">
-        <header class="game__head">
-          <div>
-            <h2 class="h2" id="game-title">Слепая дегустация</h2>
-            <p class="game__intro">Три истории из моих переговоров. Угадайте, к какому бренду относится каждая.</p>
-          </div>
-          <p class="game__score" aria-live="polite"><span data-score>0</span><span class="game__of">из 3</span></p>
-        </header>
-        <ol class="quiz">
-          <li class="quiz__card">
-            <p class="quiz__num">01</p>
-            <blockquote class="quiz__story"><p>Полгода назад мы не сошлись по бюджету. Я поддерживала контакт, и клиент вернулся сам, с бюджетом больше прежнего.</p></blockquote>
-            <ul class="quiz__options" aria-label="Варианты ответа к истории 1">
-                <li><button class="quiz__option" type="button" data-right="false" disabled>Orimi</button></li>
-                <li><button class="quiz__option" type="button" data-right="true" disabled>Plan B</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>«Звук»</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>Tangl</button></li>
-            </ul>
-            <details class="quiz__answer">
-              <summary>Ответ</summary>
-              <p>Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
-            </details>
-            <p class="quiz__explain" data-explain="Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал." aria-live="polite"></p>
-          </li>
-          <li class="quiz__card">
-            <p class="quiz__num">02</p>
-            <blockquote class="quiz__story"><p>Закупки пришли за видеопродакшеном, а это не наш профиль. Я рассказала, что умеет агентство, и нас позвали делать интерфейс для каждого пятого смартфона в России.</p></blockquote>
-            <ul class="quiz__options" aria-label="Варианты ответа к истории 2">
-                <li><button class="quiz__option" type="button" data-right="false" disabled>Tangl</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>Альфа-Банк Беларусь</button></li>
-                <li><button class="quiz__option" type="button" data-right="true" disabled>Transsion</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>«Звук»</button></li>
-            </ul>
-            <details class="quiz__answer">
-              <summary>Ответ</summary>
-              <p>Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском.</p>
-            </details>
-            <p class="quiz__explain" data-explain="Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском." aria-live="polite"></p>
-          </li>
-          <li class="quiz__card">
-            <p class="quiz__num">03</p>
-            <blockquote class="quiz__story"><p>Клиент собирался провести тендер с бесплатным творческим заданием. Я отговорила его, и агентство сразу зашло в комплексный проект.</p></blockquote>
-            <ul class="quiz__options" aria-label="Варианты ответа к истории 3">
-                <li><button class="quiz__option" type="button" data-right="false" disabled>АльфаСтрахование</button></li>
-                <li><button class="quiz__option" type="button" data-right="true" disabled>СберСити</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>«Мистраль»</button></li>
-                <li><button class="quiz__option" type="button" data-right="false" disabled>Orimi</button></li>
-            </ul>
-            <details class="quiz__answer">
-              <summary>Ответ</summary>
-              <p>Это СберСити, моя первая сделка в «Восходе».</p>
-            </details>
-            <p class="quiz__explain" data-explain="Это СберСити, моя первая сделка в «Восходе»." aria-live="polite"></p>
-          </li>
-        </ol>
-        <div class="game__end" hidden>
-          <p class="game__verdict" data-verdict></p>
-          <button class="btn btn--light game__again" type="button">Сыграть ещё раз</button>
-        </div>
       </div>
     </section>
 
@@ -469,46 +421,45 @@
     </section>
 
     <section class="section section--stone wine" id="wine" aria-labelledby="wine-title">
-      <div class="wrap">
-        <div class="split wine__head">
+      <div class="wrap wine__grid">
+        <div class="wine__text">
           <h2 class="h2" id="wine-title">Вино</h2>
-          <ol class="route">
-            <li><h3>Astra Wine</h3><p>Окончила курс: регионы, сорта, стили, дегустационный анализ. Хожу на тематические дегустации.</p></li>
-            <li><h3>Эльзас</h3><p>Проехала Винную дорогу.</p></li>
-            <li><h3>Испания</h3><p>Была на многих винодельнях.</p></li>
-            <li><h3>Приорат</h3><p>Говорила с виноделами о терруаре.</p></li>
-          </ol>
+          <p class="wine__lead">Была в Шампани, Эльзасе, Напе, Приорате, Пенедесе, <span class="nowrap">Утьель-Рекене</span> и на российских винодельнях.</p>
+          <p class="wine__note">Окончила курс Astra Wine: регионы, сорта, стили, дегустационный анализ. Хожу на тематические дегустации.</p>
         </div>
         <div class="vblocks">
-        <article class="vblock vblock--wide" data-src="" data-poster="" aria-labelledby="video-grapes">
+        <article class="vblock vblock--grapes has-video" aria-labelledby="video-grapes">
           <div class="vblock__media">
-            <div class="vblock__fizz" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <video poster="assets/img/grapes-poster.jpg" width="720" height="1280" controls muted loop playsinline preload="metadata" aria-label="Видео: Ксения рассказывает о сортах винограда">
+              <source src="media/grapes.webm" type='video/webm; codecs="vp9, opus"'>
+              <source src="media/grapes.mp4" type="video/mp4">
+            </video>
+            <div class="vblock__controls" hidden>
+              <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
+              <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
+            </div>
           </div>
           <div class="vblock__content">
             <h3 class="vblock__title" id="video-grapes">Сорта винограда</h3>
             <p class="vblock__text">Рассказываю, чем отличаются сорта.</p>
             <p class="vblock__soon">Видео скоро появится</p>
           </div>
-          <div class="vblock__controls" hidden>
-            <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
-            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
-          </div>
         </article>
-        <article class="vblock vblock--tall has-video" aria-labelledby="video-priorat">
+        <article class="vblock vblock--priorat has-video" aria-labelledby="video-priorat">
           <div class="vblock__media">
             <video poster="assets/img/priorat-poster.jpg" width="720" height="1216" controls muted loop playsinline preload="metadata" aria-label="Видео: Ксения рассказывает о Приорате">
               <source src="media/priorat.webm" type='video/webm; codecs="vp9, opus"'>
               <source src="media/priorat.mp4" type="video/mp4">
             </video>
+            <div class="vblock__controls" hidden>
+              <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
+              <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
+            </div>
           </div>
           <div class="vblock__content">
             <h3 class="vblock__title" id="video-priorat">Приорат</h3>
             <p class="vblock__text">Терруар и виноделы.</p>
             <p class="vblock__soon">Видео скоро появится</p>
-          </div>
-          <div class="vblock__controls" hidden>
-            <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
-            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
           </div>
         </article>
         </div>

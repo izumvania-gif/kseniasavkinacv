@@ -558,6 +558,40 @@ button {
 
 .bottle__foil {
   fill: #d9a595;
+  stroke: #d9a595;
+  stroke-width: 1.6;
+}
+
+.bottle__shoulder-shine {
+  fill: none;
+  stroke: #33423a;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.bottle__edge-light {
+  fill: none;
+  stroke: #2d3a32;
+  stroke-width: 2;
+}
+
+.bottle__collar {
+  fill: #f3e6e0;
+  stroke: #a86f60;
+  stroke-width: 0.8;
+}
+
+.bottle__collar-line {
+  fill: none;
+  stroke: #c9978a;
+  stroke-width: 0.6;
+}
+
+.bottle__collar-text {
+  fill: var(--rose-deep);
+  font-family: var(--serif);
+  font-size: 10px;
+  font-weight: 600;
 }
 
 .bottle__foil-shade {
@@ -658,6 +692,7 @@ button {
 }
 
 .bottle__label-rule {
+  fill: none;
   stroke: var(--rose-deep);
   stroke-width: 0.8;
 }
@@ -799,10 +834,8 @@ button {
 .about__media {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 720 / 1280;
-  max-height: min(820px, calc(100vh - var(--header) - 48px));
-  max-height: min(820px, calc(100svh - var(--header) - 48px));
-  border-radius: var(--radius);
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
   background: var(--ink);
 }
 
@@ -810,17 +843,11 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 38%;
 }
 
 .about__media :focus-visible {
   outline-color: var(--rose);
-}
-
-@media (min-width: 900px) {
-  .about__media {
-    position: sticky;
-    top: calc(var(--header) + 24px);
-  }
 }
 
 .about__text > * + * {
@@ -911,252 +938,6 @@ button {
 
   .fact + .fact {
     border-top: 1px solid var(--line);
-  }
-}
-
-/* ---------- Игра: слепая дегустация, все три истории сразу ---------- */
-
-.game__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px 48px;
-  margin-bottom: clamp(40px, 5vw, 64px);
-}
-
-.game__intro {
-  max-width: 26em;
-  margin-top: clamp(20px, 2.4vw, 28px);
-  color: var(--on-ink-muted);
-}
-
-.game__score {
-  display: none;
-}
-
-.js .game__score {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  color: var(--rose);
-  font-family: var(--serif);
-  font-size: clamp(72px, 9vw, 136px);
-  font-weight: 300;
-  line-height: 0.8;
-  font-variant-numeric: lining-nums;
-}
-
-.game__score [data-score] {
-  display: inline-block;
-}
-
-.game__score.is-bump [data-score] {
-  animation: score-bump 0.6s var(--ease);
-}
-
-@keyframes score-bump {
-  0% { transform: translateY(0); }
-  35% { transform: translateY(-14px); }
-  100% { transform: translateY(0); }
-}
-
-.game__of {
-  color: var(--on-ink-muted);
-  font-family: var(--font);
-  font-size: 17px;
-  font-weight: 350;
-}
-
-.quiz {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-/* Карточка «наливается» розе, если угадали, и красным вином, если нет */
-.quiz__card {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  padding: clamp(20px, 2vw, 28px);
-  border: 1px solid var(--line-ink);
-  border-radius: var(--radius);
-  transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
-}
-
-.quiz__card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--pour, var(--rose));
-  transform: scaleY(0);
-  transform-origin: 50% 100%;
-  transition: transform 0.9s var(--ease-lid);
-}
-
-.quiz__card.is-right {
-  --pour: var(--rose);
-  border-color: var(--rose);
-  color: var(--ink);
-}
-
-.quiz__card.is-wrong {
-  --pour: var(--wine-2);
-  border-color: var(--wine-2);
-}
-
-.quiz__card.is-right::before,
-.quiz__card.is-wrong::before {
-  transform: scaleY(1);
-}
-
-.quiz__num {
-  color: var(--on-ink-muted);
-  font-size: 13px;
-  font-variant-numeric: tabular-nums;
-  transition: color 0.5s;
-}
-
-.quiz__card.is-right .quiz__num {
-  color: rgba(20, 18, 18, 0.6);
-}
-
-.quiz__story {
-  margin: 14px 0 28px;
-  font-family: var(--serif);
-  font-size: clamp(22px, 1.9vw, 28px);
-  font-weight: 400;
-  line-height: 1.18;
-  text-wrap: pretty;
-}
-
-.quiz__options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: auto;
-}
-
-.quiz__option {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid rgba(243, 236, 232, 0.32);
-  border-radius: var(--radius);
-  background: transparent;
-  color: inherit;
-  font-size: 15px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), opacity 0.4s;
-}
-
-.quiz__option:disabled {
-  cursor: default;
-}
-
-.quiz__option:not(:disabled):hover {
-  border-color: var(--on-ink);
-  background: var(--on-ink);
-  color: var(--ink);
-}
-
-.quiz__option .icon {
-  width: 16px;
-  height: 16px;
-}
-
-.quiz__card.is-answered .quiz__option {
-  opacity: 0.45;
-}
-
-.quiz__card.is-right .quiz__option {
-  border-color: rgba(20, 18, 18, 0.3);
-}
-
-.quiz__card.is-answered .quiz__option.is-picked,
-.quiz__card.is-answered .quiz__option.is-correct {
-  opacity: 1;
-}
-
-.quiz__card.is-right .quiz__option.is-correct {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--on-ink);
-}
-
-.quiz__card.is-wrong .quiz__option.is-picked {
-  text-decoration: line-through;
-}
-
-.quiz__card.is-wrong .quiz__option.is-correct {
-  border-color: var(--rose);
-  background: var(--rose);
-  color: var(--ink);
-}
-
-.quiz__explain {
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-.quiz__explain:not(:empty) {
-  margin-top: 18px;
-}
-
-.quiz__answer {
-  margin-top: 16px;
-  color: var(--on-ink-muted);
-}
-
-.quiz__answer summary {
-  color: var(--on-ink);
-  cursor: pointer;
-}
-
-.js .quiz__answer {
-  display: none;
-}
-
-html:not(.js) .quiz__option {
-  opacity: 0.8;
-}
-
-.game__end {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px 32px;
-  margin-top: clamp(28px, 3vw, 40px);
-  animation: game-in 0.6s var(--ease) both;
-}
-
-.game__end[hidden] {
-  display: none;
-}
-
-@keyframes game-in {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
-}
-
-.game__verdict {
-  font-family: var(--serif);
-  font-size: clamp(26px, 2.4vw, 36px);
-  font-weight: 300;
-  line-height: 1.15;
-}
-
-@media (max-width: 959px) {
-  .quiz {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -1583,58 +1364,50 @@ html:not(.js) .card__turn {
 
 /* ---------- Вино и видео (видео на фоне блока, как на tastycoffee.ru) ---------- */
 
-.wine__head {
-  margin-bottom: clamp(40px, 6vw, 88px);
-}
-
-.route {
+.wine__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 32px;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: 40px clamp(32px, 5vw, 88px);
+  align-items: start;
 }
 
-.route li {
-  padding-block: 16px;
-  border-top: 1px solid var(--line);
-}
-
-.route h3 {
+.wine__lead {
+  margin-top: clamp(28px, 3.4vw, 48px);
   font-family: var(--serif);
-  font-size: 26px;
-  font-weight: 500;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 400;
   line-height: 1.2;
+  text-wrap: pretty;
 }
 
-.route p {
+.wine__note {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 15.5px;
 }
 
 .vblocks {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  gap: 12px;
-  height: min(88vh, 800px);
-  height: min(88svh, 800px);
-  min-height: 520px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .vblock {
-  position: relative;
-  isolation: isolate;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  overflow: hidden;
-  border-radius: var(--radius);
-  background: var(--ink);
-  color: var(--on-ink);
+  gap: 16px;
 }
 
+/* Видео со скруглёнными краями, подпись под ним: у видео свои субтитры */
 .vblock__media {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--ink);
 }
 
 .vblock__media video {
@@ -1643,44 +1416,31 @@ html:not(.js) .card__turn {
   object-fit: cover;
 }
 
-.vblock.has-video .vblock__media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 10, 9, 0.3);
-}
-
-.vblock__content {
-  padding: clamp(22px, 3vw, 40px);
-  padding-right: 140px;
-  pointer-events: none;
+.vblock :focus-visible {
+  outline-color: var(--rose);
 }
 
 .vblock__title {
   font-family: var(--serif);
-  font-size: clamp(46px, 5.6vw, 88px);
-  font-weight: 300;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-size: clamp(30px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
 }
 
 .vblock__text {
-  margin-top: 12px;
-  color: var(--on-ink-muted);
-  font-size: clamp(17px, 1.4vw, 20px);
-}
-
-.vblock.has-video .vblock__text {
-  color: var(--on-ink);
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15.5px;
 }
 
 .vblock__soon {
   display: inline-flex;
-  margin-top: 20px;
-  padding: 8px 14px;
-  border: 1px solid var(--line-ink);
+  margin-top: 12px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  color: var(--on-ink-muted);
+  color: var(--muted);
   font-size: 14px;
 }
 
@@ -1690,14 +1450,25 @@ html:not(.js) .card__turn {
 
 .vblock__controls {
   position: absolute;
-  right: clamp(16px, 2vw, 28px);
-  bottom: clamp(16px, 2vw, 28px);
+  right: clamp(14px, 1.6vw, 22px);
+  bottom: clamp(14px, 1.6vw, 22px);
   display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
 .vblock__controls[hidden] {
   display: none;
+}
+
+/* У видео в «Вине» субтитры внизу кадра, поэтому кнопки наверху */
+.vblock__media .vblock__controls {
+  top: clamp(14px, 1.6vw, 22px);
+  bottom: auto;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 .vbtn {
@@ -1773,32 +1544,16 @@ html:not(.js) .card__turn {
   to { transform: translate3d(-4px, -100vh, 0); }
 }
 
-@media (max-width: 859px) {
-  .vblocks {
+@media (max-width: 959px) {
+  .wine__grid {
     grid-template-columns: 1fr;
-    height: auto;
-    min-height: 0;
-  }
-
-  .vblock--wide {
-    min-height: 64vh;
-    min-height: 64svh;
-  }
-
-  .vblock--tall {
-    min-height: 82vh;
-    min-height: 82svh;
   }
 }
 
-@media (max-width: 479px) {
-  .route {
+@media (max-width: 559px) {
+  .vblocks {
     grid-template-columns: 1fr;
-  }
-
-  .vblock__content {
-    padding-right: 22px;
-    padding-bottom: 92px;
+    gap: 16px;
   }
 }
 

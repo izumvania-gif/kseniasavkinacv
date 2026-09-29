@@ -1,5 +1,5 @@
-// Меню, шапка, игра «Слепая дегустация», карточки проектов, копирование контактов и видео на фоне блоков.
-// Без JS у карточек видны обе стороны, в игре видны ответы, бокалы налиты, контакты видны.
+// Меню, шапка, карточки проектов, копирование контактов и видео.
+// Без JS у карточек видны обе стороны, бокалы налиты, контакты видны.
 
 (() => {
   const root = document.documentElement;
@@ -88,96 +88,6 @@
       });
     }
   });
-
-  // Игра: три истории на экране сразу. Нажали на бренд, и карточка наливается:
-  // розе, если угадали, красным вином, если нет.
-  (() => {
-    const game = document.querySelector('.game');
-    if (!game) return;
-    const cards = Array.from(game.querySelectorAll('.quiz__card'));
-    const scoreBox = game.querySelector('.game__score');
-    const scoreEl = game.querySelector('[data-score]');
-    const end = game.querySelector('.game__end');
-    const verdict = game.querySelector('[data-verdict]');
-    const again = game.querySelector('.game__again');
-    const icon = (d) => `<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="${d}"/></svg>`;
-    const check = icon('M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z');
-    const cross = icon('M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z');
-    let score = 0;
-    let answered = 0;
-
-    function shuffle(list) {
-      const items = Array.from(list.children);
-      for (let i = items.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [items[i], items[j]] = [items[j], items[i]];
-      }
-      items.forEach((li) => list.appendChild(li));
-    }
-
-    function setScore(value) {
-      score = value;
-      scoreEl.textContent = String(score);
-      scoreBox.classList.remove('is-bump');
-      void scoreBox.offsetWidth;
-      if (score) scoreBox.classList.add('is-bump');
-    }
-
-    function reset() {
-      answered = 0;
-      setScore(0);
-      end.hidden = true;
-      cards.forEach((card) => {
-        card.classList.remove('is-answered', 'is-right', 'is-wrong');
-        card.querySelector('.quiz__explain').textContent = '';
-        shuffle(card.querySelector('.quiz__options'));
-        card.querySelectorAll('.quiz__option').forEach((btn) => {
-          btn.disabled = false;
-          btn.classList.remove('is-picked', 'is-correct');
-          btn.removeAttribute('aria-pressed');
-          btn.querySelectorAll('.icon').forEach((el) => el.remove());
-        });
-      });
-    }
-
-    cards.forEach((card) => {
-      const explain = card.querySelector('.quiz__explain');
-      card.querySelectorAll('.quiz__option').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          if (card.classList.contains('is-answered')) return;
-          const right = btn.dataset.right === 'true';
-          card.classList.add('is-answered', right ? 'is-right' : 'is-wrong');
-          btn.classList.add('is-picked');
-          btn.setAttribute('aria-pressed', 'true');
-          card.querySelectorAll('.quiz__option').forEach((option) => {
-            option.disabled = true;
-            if (option.dataset.right === 'true') {
-              option.classList.add('is-correct');
-              option.insertAdjacentHTML('beforeend', check);
-            }
-          });
-          if (!right) btn.insertAdjacentHTML('beforeend', cross);
-          explain.textContent = (right ? 'Верно. ' : 'Не угадали. ') + explain.dataset.explain;
-          answered++;
-          if (right) setScore(score + 1);
-          if (answered === cards.length) {
-            verdict.textContent = score === cards.length
-              ? 'Все три верно. Остальные истории на карточках ниже.'
-              : `Угадано ${score} из ${cards.length}. Остальные истории на карточках ниже.`;
-            end.hidden = false;
-          }
-        });
-      });
-    });
-
-    again.addEventListener('click', () => {
-      reset();
-      const first = cards[0].querySelector('.quiz__option');
-      if (first) first.focus();
-    });
-
-    reset();
-  })();
 
   // Копирование почты и телефона.
   document.querySelectorAll('[data-copy]').forEach((button) => {
@@ -512,11 +422,11 @@
 
     // Сабраж. Координаты в системе бутылки (viewBox 200×640): остриё сабли лежит у плеча,
     // отходит назад для замаха, скользит по горлышку до венчика и уходит дальше по инерции.
-    const REST = [124, 214];
-    const BACK = [124.4, 232];
+    const REST = [134, 214];
+    const BACK = [135.5, 232];
     const HIT = [120, 49];
-    const PAST = [117, -71];
-    const placeSabre = (x, y) => sabre.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(-28) scale(1.5)`);
+    const PAST = [110, -71];
+    const placeSabre = (x, y) => sabre.setAttribute('transform', `translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(-15) scale(1.5)`);
 
     function draw(p) {
       // Бутылка чуть наклоняется под удар и после удара возвращается.
