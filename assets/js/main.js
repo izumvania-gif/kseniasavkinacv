@@ -1,5 +1,5 @@
-// Меню, шапка, проекты, игра «Слепая дегустация», копирование контактов и видео на фоне блоков.
-// Без JS проекты открыты, в игре видны ответы, бокалы налиты, контакты видны.
+// Меню, шапка, игра «Слепая дегустация», карточки проектов, копирование контактов и видео на фоне блоков.
+// Без JS у карточек видны обе стороны, в игре видны ответы, бокалы налиты, контакты видны.
 
 (() => {
   const root = document.documentElement;
@@ -51,127 +51,129 @@
     update();
   }
 
-  // Проекты: плашка на всю ширину заливается тёмным, под ней открывается главное о проекте.
-  document.querySelectorAll('.work__btn').forEach((btn) => {
-    const work = btn.closest('.work');
-    const panel = document.getElementById(btn.getAttribute('aria-controls'));
-    panel.setAttribute('aria-hidden', 'true');
-    btn.addEventListener('click', () => {
-      const open = !work.classList.contains('is-open');
-      work.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', String(open));
-      panel.setAttribute('aria-hidden', String(!open));
+  // Проекты: карточка переворачивается в ту сторону, где на неё нажали.
+  // На обороте история и итог. С анимацией карточка ещё и наклоняется за курсором.
+  document.querySelectorAll('.card__btn').forEach((btn) => {
+    const card = btn.closest('.card');
+    const back = document.getElementById(btn.getAttribute('aria-controls'));
+    back.setAttribute('aria-hidden', 'true');
+    let timer = 0;
+    btn.addEventListener('click', (event) => {
+      const flipped = !card.classList.contains('is-flipped');
+      const rect = card.getBoundingClientRect();
+      const fromLeft = event.clientX ? event.clientX < rect.left + rect.width / 2 : false;
+      if (flipped) card.style.setProperty('--flip', fromLeft ? '-180deg' : '180deg');
+      card.classList.toggle('is-flipped', flipped);
+      btn.setAttribute('aria-expanded', String(flipped));
+      back.setAttribute('aria-hidden', String(!flipped));
+      if (motion) {
+        card.classList.add('is-turning');
+        clearTimeout(timer);
+        timer = setTimeout(() => card.classList.remove('is-turning'), 450);
+      }
     });
+    if (motion && window.matchMedia('(hover: hover)').matches) {
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.classList.add('is-tilting');
+        card.style.setProperty('--rx', (-y * 10).toFixed(2) + 'deg');
+        card.style.setProperty('--ry', (x * 12).toFixed(2) + 'deg');
+      });
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('is-tilting');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+    }
   });
 
-  // Игра: три истории, для каждой надо выбрать бренд.
+  // Игра: три истории на экране сразу. Нажали на бренд, и карточка наливается:
+  // розе, если угадали, красным вином, если нет.
   (() => {
     const game = document.querySelector('.game');
     if (!game) return;
-    const questions = Array.from(game.querySelectorAll('.game__q'));
-    const bars = Array.from(game.querySelectorAll('.game__progress li'));
-    const next = game.querySelector('.game__next');
-    const result = game.querySelector('.game__result');
+    const cards = Array.from(game.querySelectorAll('.quiz__card'));
+    const scoreBox = game.querySelector('.game__score');
     const scoreEl = game.querySelector('[data-score]');
+    const end = game.querySelector('.game__end');
     const verdict = game.querySelector('[data-verdict]');
     const again = game.querySelector('.game__again');
-    const check = '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>';
-    const cross = '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>';
-    let current = 0;
+    const icon = (d) => `<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="${d}"/></svg>`;
+    const check = icon('M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z');
+    const cross = icon('M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z');
     let score = 0;
+    let answered = 0;
 
     function shuffle(list) {
-      const ul = list;
-      const items = Array.from(ul.children);
+      const items = Array.from(list.children);
       for (let i = items.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [items[i], items[j]] = [items[j], items[i]];
       }
-      items.forEach((li) => ul.appendChild(li));
+      items.forEach((li) => list.appendChild(li));
     }
 
-    function show(i) {
-      current = i;
-      questions.forEach((q, k) => q.classList.toggle('is-current', k === i));
-      bars.forEach((bar, k) => bar.classList.toggle('is-current', k === i));
-      next.hidden = true;
+    function setScore(value) {
+      score = value;
+      scoreEl.textContent = String(score);
+      scoreBox.classList.remove('is-bump');
+      void scoreBox.offsetWidth;
+      if (score) scoreBox.classList.add('is-bump');
     }
 
     function reset() {
-      score = 0;
-      questions.forEach((q) => {
-        q.classList.remove('is-answered');
-        q.querySelector('.game__explain').textContent = '';
-        shuffle(q.querySelector('.game__options'));
-        q.querySelectorAll('.game__option').forEach((btn) => {
+      answered = 0;
+      setScore(0);
+      end.hidden = true;
+      cards.forEach((card) => {
+        card.classList.remove('is-answered', 'is-right', 'is-wrong');
+        card.querySelector('.quiz__explain').textContent = '';
+        shuffle(card.querySelector('.quiz__options'));
+        card.querySelectorAll('.quiz__option').forEach((btn) => {
           btn.disabled = false;
-          btn.classList.remove('is-right', 'is-wrong');
+          btn.classList.remove('is-picked', 'is-correct');
           btn.removeAttribute('aria-pressed');
-          const icon = btn.querySelector('.icon');
-          if (icon) icon.remove();
+          btn.querySelectorAll('.icon').forEach((el) => el.remove());
         });
       });
-      bars.forEach((bar) => bar.classList.remove('is-right', 'is-wrong', 'is-current'));
-      result.hidden = true;
-      game.querySelector('.game__list').hidden = false;
-      show(0);
     }
 
-    questions.forEach((q, i) => {
-      const explain = q.querySelector('.game__explain');
-      q.querySelectorAll('.game__option').forEach((btn) => {
+    cards.forEach((card) => {
+      const explain = card.querySelector('.quiz__explain');
+      card.querySelectorAll('.quiz__option').forEach((btn) => {
         btn.addEventListener('click', () => {
-          if (q.classList.contains('is-answered')) return;
+          if (card.classList.contains('is-answered')) return;
           const right = btn.dataset.right === 'true';
-          q.classList.add('is-answered');
-          q.querySelectorAll('.game__option').forEach((option) => {
+          card.classList.add('is-answered', right ? 'is-right' : 'is-wrong');
+          btn.classList.add('is-picked');
+          btn.setAttribute('aria-pressed', 'true');
+          card.querySelectorAll('.quiz__option').forEach((option) => {
             option.disabled = true;
             if (option.dataset.right === 'true') {
-              option.classList.add('is-right');
+              option.classList.add('is-correct');
               option.insertAdjacentHTML('beforeend', check);
             }
           });
-          btn.setAttribute('aria-pressed', 'true');
-          if (!right) {
-            btn.classList.add('is-wrong');
-            btn.insertAdjacentHTML('beforeend', cross);
-          } else {
-            score++;
-          }
-          bars[i].classList.add(right ? 'is-right' : 'is-wrong');
+          if (!right) btn.insertAdjacentHTML('beforeend', cross);
           explain.textContent = (right ? 'Верно. ' : 'Не угадали. ') + explain.dataset.explain;
-          next.textContent = '';
-          next.append(i < questions.length - 1 ? 'Следующая история' : 'Узнать результат');
-          next.insertAdjacentHTML('beforeend', '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>');
-          next.hidden = false;
-          next.focus({ preventScroll: true });
+          answered++;
+          if (right) setScore(score + 1);
+          if (answered === cards.length) {
+            verdict.textContent = score === cards.length
+              ? 'Все три верно. Остальные истории на карточках ниже.'
+              : `Угадано ${score} из ${cards.length}. Остальные истории на карточках ниже.`;
+            end.hidden = false;
+          }
         });
       });
-    });
-
-    next.addEventListener('click', () => {
-      if (current < questions.length - 1) {
-        show(current + 1);
-        const first = questions[current].querySelector('.game__option');
-        if (first) first.focus({ preventScroll: true });
-        return;
-      }
-      questions.forEach((q) => q.classList.remove('is-current'));
-      bars.forEach((bar) => bar.classList.remove('is-current'));
-      game.querySelector('.game__list').hidden = true;
-      next.hidden = true;
-      scoreEl.textContent = String(score);
-      verdict.textContent = score === questions.length
-        ? 'Все три верно. Остальные проекты открываются в списке выше.'
-        : 'Ответы и остальные проекты есть в списке выше.';
-      result.hidden = false;
-      result.focus({ preventScroll: true });
     });
 
     again.addEventListener('click', () => {
       reset();
-      const first = questions[0].querySelector('.game__option');
-      if (first) first.focus({ preventScroll: true });
+      const first = cards[0].querySelector('.quiz__option');
+      if (first) first.focus();
     });
 
     reset();
@@ -291,9 +293,9 @@
   const css = getComputedStyle(root);
   const color = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
   const C = {
-    paper: color('--paper', '#f2f0eb'),
-    champ: color('--champ', '#cdb88a'),
-    pale: color('--champ-pale', '#e3d7bb'),
+    paper: color('--paper', '#f4efeb'),
+    rose: color('--rose', '#e7b8ab'),
+    pale: color('--rose-pale', '#f4dcd4'),
   };
 
   // Детерминированный генератор: брызги одинаковые при прокрутке вперёд и назад.
@@ -423,7 +425,7 @@
     let lastP = -1;
 
     const rnd = random(20260929);
-    const palette = [C.champ, C.pale, C.champ, C.paper];
+    const palette = [C.rose, C.pale, C.rose, C.paper];
     const jet = Array.from({ length: phone ? 46 : 80 }, () => ({
       birth: POP + rnd() * 0.22,
       life: 0.14 + rnd() * 0.2,
@@ -443,7 +445,7 @@
       reach: 1.15 + rnd() * 0.8,
       size: 0.005 + rnd() * 0.018,
       stretch: 1.6 + rnd() * 2,
-      color: rnd() < 0.6 ? C.champ : C.pale,
+      color: rnd() < 0.6 ? C.rose : C.pale,
     }));
 
     function resize() {
@@ -543,7 +545,7 @@
       if (ring > 0 && ring < 1) {
         ctx.beginPath();
         ctx.arc(mx, my, 12 + ring * Math.max(W, H) * 0.32, 0, Math.PI * 2);
-        ctx.strokeStyle = C.champ;
+        ctx.strokeStyle = C.rose;
         ctx.globalAlpha = 1 - ring;
         ctx.lineWidth = 1 + 2 * (1 - ring);
         ctx.stroke();
@@ -586,7 +588,7 @@
         ctx.fill();
       });
 
-      ctx.fillStyle = C.champ;
+      ctx.fillStyle = C.rose;
       splat(cx, cy, R, axis, bias, turn);
       ctx.fillStyle = C.pale;
       splat(cx, cy, R * 0.88, axis, bias, turn + 0.13);

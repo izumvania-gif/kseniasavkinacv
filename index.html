@@ -34,8 +34,8 @@
       <a class="brand" href="#top">Ксения Савкина</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Меню</button>
       <nav class="nav" id="site-nav" aria-label="Разделы">
-        <a href="#projects">Проекты</a>
         <a href="#game">Игра</a>
+        <a href="#projects">Проекты</a>
         <a href="#method">Как продаю</a>
         <a href="#experience">Опыт</a>
         <a href="#wine">Вино</a>
@@ -73,7 +73,7 @@
               <path class="bottle__label-rule" d="M58,422 L142,422 M58,510 L142,510"/>
               <text class="bottle__label-name" x="100" y="452" text-anchor="middle">КСЕНИЯ</text>
               <text class="bottle__label-name" x="100" y="468" text-anchor="middle">САВКИНА</text>
-              <text class="bottle__label-sub" x="100" y="492" text-anchor="middle">Brut Nature</text>
+              <text class="bottle__label-sub" x="100" y="492" text-anchor="middle">Brut Rosé</text>
               <text class="bottle__label-small" x="100" y="526" text-anchor="middle">Москва</text>
             </g>
             <g class="bottle__cork">
@@ -110,290 +110,266 @@
       </div>
     </section>
 
+    <section class="section section--dark game" id="game" aria-labelledby="game-title" data-dark>
+      <div class="wrap">
+        <header class="game__head">
+          <div>
+            <h2 class="h2" id="game-title">Слепая дегустация</h2>
+            <p class="game__intro">Три истории из моих переговоров. Угадайте, к какому бренду относится каждая.</p>
+          </div>
+          <p class="game__score" aria-live="polite"><span data-score>0</span><span class="game__of">из 3</span></p>
+        </header>
+        <ol class="quiz">
+          <li class="quiz__card">
+            <p class="quiz__num">01</p>
+            <blockquote class="quiz__story"><p>Полгода назад мы не сошлись по бюджету. Я поддерживала контакт, и клиент вернулся сам, с бюджетом больше прежнего.</p></blockquote>
+            <ul class="quiz__options" aria-label="Варианты ответа к истории 1">
+                <li><button class="quiz__option" type="button" data-right="false" disabled>Orimi</button></li>
+                <li><button class="quiz__option" type="button" data-right="true" disabled>Plan B</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>«Звук»</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>Tangl</button></li>
+            </ul>
+            <details class="quiz__answer">
+              <summary>Ответ</summary>
+              <p>Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
+            </details>
+            <p class="quiz__explain" data-explain="Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал." aria-live="polite"></p>
+          </li>
+          <li class="quiz__card">
+            <p class="quiz__num">02</p>
+            <blockquote class="quiz__story"><p>Закупки пришли за видеопродакшеном, а это не наш профиль. Я рассказала, что умеет агентство, и нас позвали делать интерфейс для каждого пятого смартфона в России.</p></blockquote>
+            <ul class="quiz__options" aria-label="Варианты ответа к истории 2">
+                <li><button class="quiz__option" type="button" data-right="false" disabled>Tangl</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>Альфа-Банк Беларусь</button></li>
+                <li><button class="quiz__option" type="button" data-right="true" disabled>Transsion</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>«Звук»</button></li>
+            </ul>
+            <details class="quiz__answer">
+              <summary>Ответ</summary>
+              <p>Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском.</p>
+            </details>
+            <p class="quiz__explain" data-explain="Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском." aria-live="polite"></p>
+          </li>
+          <li class="quiz__card">
+            <p class="quiz__num">03</p>
+            <blockquote class="quiz__story"><p>Клиент собирался провести тендер с бесплатным творческим заданием. Я отговорила его, и агентство сразу зашло в комплексный проект.</p></blockquote>
+            <ul class="quiz__options" aria-label="Варианты ответа к истории 3">
+                <li><button class="quiz__option" type="button" data-right="false" disabled>АльфаСтрахование</button></li>
+                <li><button class="quiz__option" type="button" data-right="true" disabled>СберСити</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>«Мистраль»</button></li>
+                <li><button class="quiz__option" type="button" data-right="false" disabled>Orimi</button></li>
+            </ul>
+            <details class="quiz__answer">
+              <summary>Ответ</summary>
+              <p>Это СберСити, моя первая сделка в «Восходе».</p>
+            </details>
+            <p class="quiz__explain" data-explain="Это СберСити, моя первая сделка в «Восходе»." aria-live="polite"></p>
+          </li>
+        </ol>
+        <div class="game__end" hidden>
+          <p class="game__verdict" data-verdict></p>
+          <button class="btn btn--light game__again" type="button">Сыграть ещё раз</button>
+        </div>
+      </div>
+    </section>
+
     <section class="section projects" id="projects" aria-labelledby="projects-title">
       <div class="wrap">
         <header class="section-head">
           <h2 class="h2" id="projects-title">Проекты</h2>
-          <p class="section-head__note">10 клиентов по отраслям. Нажмите на название, чтобы открыть, что было в проекте.</p>
+          <p class="section-head__note">10 клиентов, FMCG первыми. Нажмите на карточку, и она перевернётся: на обороте история и итог.</p>
         </header>
-        <div class="works">
-        <section class="works__group" aria-label="FMCG">
-          <h3 class="works__group-title">FMCG<span>4</span></h3>
-          <ol class="works__list">
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-1">
-                  <span class="work__num">01</span>
-                  <span class="work__client">Plan B</span>
-                  <span class="work__field">Кампания, которая дождалась бюджета</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-1">
-                <div class="work__body">
-                  <p class="work__title">Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
-                  <div class="work__text">
-                    <p>За полгода до сделки мы не сошлись по бюджету: сначала говорили о креативе, потом об упаковке. Я поддерживала контакт, и клиент вернулся с бюджетом больше прежнего.</p>
-                  </div>
+        <ol class="cards">
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">01</span><span>FMCG</span></p>
+                  <h3 class="card__client">Plan B</h3>
+                  <p class="card__teaser">Кампания, которая дождалась бюджета</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-1">
+                  <p class="card__result">Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
+                  <p class="card__story">За полгода до сделки мы не сошлись по бюджету: сначала говорили о креативе, потом об упаковке. Я поддерживала контакт, и клиент вернулся с бюджетом больше прежнего.</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
                 </div>
               </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-2">
-                  <span class="work__num">02</span>
-                  <span class="work__client">«Мистраль»</span>
-                  <span class="work__field">Бюджета не было, симпатия осталась</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-2">
-                <div class="work__body">
-                  <p class="work__title">Через несколько месяцев клиент пришёл с проектом под нас и подтвердил его день в день.</p>
-                  <div class="work__text">
-                    <p>На первом проекте клиенту не хватило бюджета на агентство, но мы понравились команде.</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-3">
-                  <span class="work__num">03</span>
-                  <span class="work__client">Orimi</span>
-                  <span class="work__field">Год переговоров</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-3">
-                <div class="work__body">
-                  <p class="work__title">Сделка подписана, проект в работе.</p>
-                  <div class="work__text">
-                    <p>Проект то начинался, то отменялся. Я вела переговоры с несколькими командами клиента.</p>
-                    <p class="work__meta">Чай и кофе, бренд Jardin</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-4">
-                  <span class="work__num">04</span>
-                  <span class="work__client">«Моё вино» и другие</span>
-                  <span class="work__field">Напитки и федеральные сети</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-4">
-                <div class="work__body">
-                  <p class="work__title">Сейчас прорабатываю маркетинг запуска винного бренда для федеральной сети.</p>
-                  <div class="work__text">
-                    <p>Готовила предложения и вела переговоры с «Моё вино», Московской пивоваренной компанией, «Трёхсосенским», X5 Group, «ВкусВиллом», «Магнитом», «Белой Дачей» и Lucky Group. Для винных клиентов писала записки по исследованиям Plan B.</p>
-                    <p class="work__meta">Вино, пиво, напитки, сети</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </section>
-        <section class="works__group" aria-label="Технологии и медиа">
-          <h3 class="works__group-title">Технологии и медиа<span>3</span></h3>
-          <ol class="works__list">
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-5">
-                  <span class="work__num">05</span>
-                  <span class="work__client">Transsion</span>
-                  <span class="work__field">Интерфейс для каждого пятого смартфона</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-5">
-                <div class="work__body">
-                  <p class="work__title">Когда проект выйдет полностью, интерфейс каждого пятого телефона в России будет сделан «Восходом».</p>
-                  <div class="work__text">
-                    <p>Закупки пришли за видеопродакшеном, это не наш профиль. Я рассказала, что умеет «Восход», и нас порекомендовали на разработку цифрового интерфейса. Переговоры шли на русском, английском и китайском.</p>
-                    <p class="work__meta">Смартфоны Tecno, Infinix, itel</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-6">
-                  <span class="work__num">06</span>
-                  <span class="work__client">Tangl</span>
-                  <span class="work__field">Спринт вместо типового пакета</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-6">
-                <div class="work__body">
-                  <p class="work__title">Клиент купил другой состав работ. Проект в работе.</p>
-                  <div class="work__text">
-                    <p>Клиент пришёл за услугой, которая ему не была нужна. Я сжала этапы агентской работы в спринт под MVP, как привыкли в IT, и добавила продукт digital first, тогда ещё в разработке.</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-7">
-                  <span class="work__num">07</span>
-                  <span class="work__client">«Звук»</span>
-                  <span class="work__field">Подпись поздно вечером</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-7">
-                <div class="work__body">
-                  <p class="work__title">Кампания вышла.</p>
-                  <div class="work__text">
-                    <p>Креативная кампания через продакшен, без прямого контакта с клиентом и с горящими сроками. Документ подписывали поздно вечером, когда все, кто мог утвердить проект в агентстве, ушли домой.</p>
-                    <p class="work__meta">Музыкальный стриминг</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </section>
-        <section class="works__group" aria-label="Финансы">
-          <h3 class="works__group-title">Финансы<span>2</span></h3>
-          <ol class="works__list">
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-8">
-                  <span class="work__num">08</span>
-                  <span class="work__client">АльфаСтрахование</span>
-                  <span class="work__field">Авторский состав работ</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-8">
-                <div class="work__body">
-                  <p class="work__title">Сделка закрыта.</p>
-                  <div class="work__text">
-                    <p>Клиенту нужна была нестандартная услуга без типового пакета. Я собрала авторский состав работ и согласовала необычный подход и с клиентом, и с коллегами.</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-9">
-                  <span class="work__num">09</span>
-                  <span class="work__client">Альфа-Банк Беларусь</span>
-                  <span class="work__field">Этапы под процессы банка</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-9">
-                <div class="work__body">
-                  <p class="work__title">После сдачи клиент сразу вернулся в переговоры.</p>
-                  <div class="work__text">
-                    <p>Разовая услуга. Мы подстроили состав и этапы работ под процессы банка.</p>
-                    <p class="work__meta">Зарубежный банк</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </section>
-        <section class="works__group" aria-label="Девелопмент">
-          <h3 class="works__group-title">Девелопмент<span>1</span></h3>
-          <ol class="works__list">
-            <li class="work">
-              <h4 class="work__head">
-                <button class="work__btn" type="button" aria-expanded="false" aria-controls="work-10">
-                  <span class="work__num">10</span>
-                  <span class="work__client">СберСити</span>
-                  <span class="work__field">Проект без бесплатного тендера</span>
-                  <span class="work__toggle" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"/></svg></span>
-                </button>
-              </h4>
-              <div class="work__panel" id="work-10">
-                <div class="work__body">
-                  <p class="work__title">«Восход» сразу зашёл в комплексный проект. Это моя первая сделка в агентстве.</p>
-                  <div class="work__text">
-                    <p>Клиент планировал тендер с бесплатным творческим заданием. Я отговорила от тендера.</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </section>
-        </div>
-        <p class="works__more"><span>Ещё в портфеле</span> Hochland, AV Development, Т&nbsp;Плюс, LUWO (Кыргызстан)</p>
-      </div>
-    </section>
-
-    <section class="section section--dark game" id="game" aria-labelledby="game-title" data-dark>
-      <div class="wrap game__grid">
-        <header class="game__head">
-          <h2 class="h2" id="game-title">Слепая дегустация</h2>
-          <p class="game__intro">Три истории из моих переговоров. Угадайте, к какому бренду относится каждая.</p>
-          <ol class="game__progress" aria-hidden="true"><li></li><li></li><li></li></ol>
-        </header>
-        <div class="game__stage">
-          <ol class="game__list">
-          <li class="game__q" data-q="0">
-            <p class="game__count">История 1 из 3</p>
-            <blockquote class="game__story"><p>Полгода назад мы не сошлись по бюджету. Я поддерживала контакт, и клиент вернулся сам, с бюджетом больше прежнего.</p></blockquote>
-            <ul class="game__options" aria-label="Варианты ответа">
-                <li><button class="game__option" type="button" data-right="false" disabled>Orimi</button></li>
-                <li><button class="game__option" type="button" data-right="true" disabled>Plan B</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>«Звук»</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>Tangl</button></li>
-            </ul>
-            <details class="game__answer">
-              <summary>Ответ</summary>
-              <p>Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал.</p>
-            </details>
-            <p class="game__explain" data-explain="Это Plan B. Рекламная кампания выйдет в следующем году, у неё фестивальный потенциал." aria-live="polite"></p>
-          </li>
-          <li class="game__q" data-q="1">
-            <p class="game__count">История 2 из 3</p>
-            <blockquote class="game__story"><p>Закупки пришли за видеопродакшеном, а это не наш профиль. Я рассказала, что умеет агентство, и нас позвали делать интерфейс для каждого пятого смартфона в России.</p></blockquote>
-            <ul class="game__options" aria-label="Варианты ответа">
-                <li><button class="game__option" type="button" data-right="false" disabled>Tangl</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>Альфа-Банк Беларусь</button></li>
-                <li><button class="game__option" type="button" data-right="true" disabled>Transsion</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>«Звук»</button></li>
-            </ul>
-            <details class="game__answer">
-              <summary>Ответ</summary>
-              <p>Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском.</p>
-            </details>
-            <p class="game__explain" data-explain="Это Transsion: Tecno, Infinix и itel. Переговоры шли на русском, английском и китайском." aria-live="polite"></p>
-          </li>
-          <li class="game__q" data-q="2">
-            <p class="game__count">История 3 из 3</p>
-            <blockquote class="game__story"><p>Клиент собирался провести тендер с бесплатным творческим заданием. Я отговорила его, и агентство сразу зашло в комплексный проект.</p></blockquote>
-            <ul class="game__options" aria-label="Варианты ответа">
-                <li><button class="game__option" type="button" data-right="false" disabled>АльфаСтрахование</button></li>
-                <li><button class="game__option" type="button" data-right="true" disabled>СберСити</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>«Мистраль»</button></li>
-                <li><button class="game__option" type="button" data-right="false" disabled>Orimi</button></li>
-            </ul>
-            <details class="game__answer">
-              <summary>Ответ</summary>
-              <p>Это СберСити, моя первая сделка в «Восходе».</p>
-            </details>
-            <p class="game__explain" data-explain="Это СберСити, моя первая сделка в «Восходе»." aria-live="polite"></p>
-          </li>
-          </ol>
-          <div class="game__nav">
-            <button class="btn btn--light game__next" type="button" hidden>Следующая история<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></button>
-          </div>
-          <div class="game__result" hidden tabindex="-1">
-            <p class="game__score"><span data-score>0</span> из 3</p>
-            <p class="game__verdict" data-verdict></p>
-            <div class="game__actions">
-              <button class="btn btn--light game__again" type="button">Сыграть ещё раз</button>
-              <a class="btn btn--ghost" href="#projects">Все проекты</a>
             </div>
-          </div>
-        </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-1"><span class="sr">Plan B: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">02</span><span>FMCG</span></p>
+                  <h3 class="card__client">«Мистраль»</h3>
+                  <p class="card__teaser">Бюджета не было, симпатия осталась</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-2">
+                  <p class="card__result">Через несколько месяцев клиент пришёл с проектом под нас и подтвердил его день в день.</p>
+                  <p class="card__story">На первом проекте клиенту не хватило бюджета на агентство, но мы понравились команде.</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-2"><span class="sr">«Мистраль»: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">03</span><span>FMCG</span></p>
+                  <h3 class="card__client">Orimi</h3>
+                  <p class="card__teaser">Год переговоров</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-3">
+                  <p class="card__result">Сделка подписана, проект в работе.</p>
+                  <p class="card__story">Проект то начинался, то отменялся. Я вела переговоры с несколькими командами клиента.</p>
+                    <p class="card__meta">Чай и кофе, бренд Jardin</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-3"><span class="sr">Orimi: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">04</span><span>FMCG</span></p>
+                  <h3 class="card__client">«Моё вино» и другие</h3>
+                  <p class="card__teaser">Напитки и федеральные сети</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-4">
+                  <p class="card__result">Сейчас прорабатываю маркетинг запуска винного бренда для федеральной сети.</p>
+                  <p class="card__story">Готовила предложения и вела переговоры с «Моё вино», Московской пивоваренной компанией, «Трёхсосенским», X5 Group, «ВкусВиллом», «Магнитом», «Белой Дачей» и Lucky Group. Для винных клиентов писала записки по исследованиям Plan B.</p>
+                    <p class="card__meta">Вино, пиво, напитки, сети</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-4"><span class="sr">«Моё вино» и другие: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">05</span><span>Технологии и медиа</span></p>
+                  <h3 class="card__client">Transsion</h3>
+                  <p class="card__teaser">Интерфейс для каждого пятого смартфона</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-5">
+                  <p class="card__result">Когда проект выйдет полностью, интерфейс каждого пятого телефона в России будет сделан «Восходом».</p>
+                  <p class="card__story">Закупки пришли за видеопродакшеном, это не наш профиль. Я рассказала, что умеет «Восход», и нас порекомендовали на разработку цифрового интерфейса. Переговоры шли на русском, английском и китайском.</p>
+                    <p class="card__meta">Смартфоны Tecno, Infinix, itel</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-5"><span class="sr">Transsion: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">06</span><span>Технологии и медиа</span></p>
+                  <h3 class="card__client">Tangl</h3>
+                  <p class="card__teaser">Спринт вместо типового пакета</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-6">
+                  <p class="card__result">Клиент купил другой состав работ. Проект в работе.</p>
+                  <p class="card__story">Клиент пришёл за услугой, которая ему не была нужна. Я сжала этапы агентской работы в спринт под MVP, как привыкли в IT, и добавила продукт digital first, тогда ещё в разработке.</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-6"><span class="sr">Tangl: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">07</span><span>Технологии и медиа</span></p>
+                  <h3 class="card__client">«Звук»</h3>
+                  <p class="card__teaser">Подпись поздно вечером</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-7">
+                  <p class="card__result">Кампания вышла.</p>
+                  <p class="card__story">Креативная кампания через продакшен, без прямого контакта с клиентом и с горящими сроками. Документ подписывали поздно вечером, когда все, кто мог утвердить проект в агентстве, ушли домой.</p>
+                    <p class="card__meta">Музыкальный стриминг</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-7"><span class="sr">«Звук»: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">08</span><span>Финансы</span></p>
+                  <h3 class="card__client">АльфаСтрахование</h3>
+                  <p class="card__teaser">Авторский состав работ</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-8">
+                  <p class="card__result">Сделка закрыта.</p>
+                  <p class="card__story">Клиенту нужна была нестандартная услуга без типового пакета. Я собрала авторский состав работ и согласовала необычный подход и с клиентом, и с коллегами.</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-8"><span class="sr">АльфаСтрахование: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">09</span><span>Финансы</span></p>
+                  <h3 class="card__client">Альфа-Банк Беларусь</h3>
+                  <p class="card__teaser">Этапы под процессы банка</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-9">
+                  <p class="card__result">После сдачи клиент сразу вернулся в переговоры.</p>
+                  <p class="card__story">Разовая услуга. Мы подстроили состав и этапы работ под процессы банка.</p>
+                    <p class="card__meta">Зарубежный банк</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-9"><span class="sr">Альфа-Банк Беларусь: история проекта</span></button>
+          </li>
+          <li class="card">
+            <div class="card__tilt">
+              <div class="card__inner">
+                <div class="card__face card__front">
+                  <p class="card__top"><span class="card__num">10</span><span>Девелопмент</span></p>
+                  <h3 class="card__client">СберСити</h3>
+                  <p class="card__teaser">Проект без бесплатного тендера</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+                <div class="card__face card__back" id="card-10">
+                  <p class="card__result">«Восход» сразу зашёл в комплексный проект. Это моя первая сделка в агентстве.</p>
+                  <p class="card__story">Клиент планировал тендер с бесплатным творческим заданием. Я отговорила от тендера.</p>
+                  <span class="card__turn" aria-hidden="true"><svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M240,56v48a8,8,0,0,1-8,8H184a8,8,0,0,1,0-16H211.4L184.81,71.64l-.25-.24a80,80,0,1,0-1.67,114.78,8,8,0,0,1,11,11.63A95.44,95.44,0,0,1,128,224h-1.32A96,96,0,1,1,195.75,60L224,85.8V56a8,8,0,1,1,16,0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <button class="card__btn" type="button" aria-expanded="false" aria-controls="card-10"><span class="sr">СберСити: история проекта</span></button>
+          </li>
+          <li class="card card--more">
+            <p class="card__more-title">Ещё в портфеле</p>
+            <p class="card__more-list">Hochland, AV Development, Т&nbsp;Плюс, LUWO (Кыргызстан)</p>
+          </li>
+        </ol>
       </div>
     </section>
 

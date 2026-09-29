@@ -1,5 +1,22 @@
-/* Ксения Савкина. Строгая версия: почти чёрный, тёплый белый, акцент цвета шампанского
-   и глубокое красное вино. Один шрифт, тонкие линии, без градиентов. */
+/* Ксения Савкина. Строгая версия в цветах розового шампанского: почти чёрный, тёплый белый
+   с розовым оттенком, розе и глубокое красное вино. Заголовки тонкой антиквой Cormorant Garamond,
+   текст лёгким Onest. Тонкие линии, без градиентов. */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-cyrillic.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-latin.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @font-face {
   font-family: "Onest";
@@ -26,25 +43,27 @@
 }
 
 :root {
-  --ink: #121110;
-  --ink-2: #1d1c1a;
-  --paper: #f2f0eb;
-  --stone: #e6e2d9;
-  --text: #121110;
-  --muted: #5b5750;
-  --on-ink: #efece6;
-  --on-ink-muted: #a19d95;
-  --champ: #cdb88a;
-  --champ-pale: #e3d7bb;
-  --champ-deep: #7a6636;
+  --ink: #141212;
+  --ink-2: #1f1b1b;
+  --paper: #f4efeb;
+  --stone: #ebe3de;
+  --text: #141212;
+  --muted: #5e5652;
+  --on-ink: #f3ece8;
+  --on-ink-muted: #a8a09b;
+  --rose: #e7b8ab;
+  --rose-mid: #d99c8e;
+  --rose-pale: #f4dcd4;
+  --rose-deep: #9a5243;
   --wine: #5a1320;
   --wine-2: #6b1b2a;
   --wine-3: #7d2433;
-  --line: rgba(18, 17, 16, 0.14);
-  --line-strong: rgba(18, 17, 16, 0.9);
-  --line-ink: rgba(239, 236, 230, 0.16);
+  --line: rgba(20, 18, 18, 0.14);
+  --line-strong: rgba(20, 18, 18, 0.85);
+  --line-ink: rgba(243, 236, 232, 0.16);
 
   --font: "Onest", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Cormorant Garamond", Georgia, serif;
   --gutter: clamp(16px, 4vw, 48px);
   --header: 64px;
   --radius: 3px;
@@ -70,7 +89,8 @@ body {
   color: var(--text);
   font-family: var(--font);
   font-size: 17px;
-  line-height: 1.55;
+  font-weight: 350;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -115,15 +135,14 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--champ-deep);
+  outline: 2px solid var(--rose-deep);
   outline-offset: 3px;
 }
 
 [data-dark] :focus-visible,
 .vblock :focus-visible,
-.work.is-open :focus-visible,
 .site-header.is-dark :focus-visible {
-  outline-color: var(--champ);
+  outline-color: var(--rose);
 }
 
 .defs {
@@ -219,8 +238,8 @@ button {
 }
 
 .btn--light:hover {
-  border-color: var(--champ);
-  background: var(--champ);
+  border-color: var(--rose);
+  background: var(--rose);
 }
 
 .btn--ghost {
@@ -261,9 +280,10 @@ button {
 }
 
 .brand {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   text-decoration: none;
 }
@@ -356,10 +376,10 @@ button {
     padding-block: 12px;
     border-bottom: 1px solid currentColor;
     border-bottom-color: color-mix(in srgb, currentColor 16%, transparent);
-    font-size: 30px;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1.05;
     opacity: 1;
   }
 
@@ -399,10 +419,11 @@ button {
 }
 
 .h2 {
-  font-size: clamp(44px, 6.2vw, 96px);
-  font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: -0.05em;
+  font-family: var(--serif);
+  font-size: clamp(50px, 7vw, 112px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
@@ -470,10 +491,11 @@ button {
 }
 
 .hero__title {
-  font-size: clamp(56px, 10.4vw, 164px);
-  font-weight: 500;
-  line-height: 0.86;
-  letter-spacing: -0.06em;
+  font-family: var(--serif);
+  font-size: clamp(64px, 11.6vw, 188px);
+  font-weight: 300;
+  line-height: 0.84;
+  letter-spacing: -0.03em;
 }
 
 .hero__title span {
@@ -528,17 +550,17 @@ button {
 
 .bottle__foil,
 .bottle__hood {
-  fill: #b8a06a;
+  fill: #d9a595;
 }
 
 .bottle__band,
 .bottle__wire {
-  fill: #8d784a;
+  fill: #a86f60;
 }
 
 .bottle__wire {
   fill: none;
-  stroke: #8d784a;
+  stroke: #a86f60;
   stroke-width: 1.5;
 }
 
@@ -547,11 +569,11 @@ button {
 }
 
 .bottle__label {
-  fill: #ebe5d7;
+  fill: #f3e6e0;
 }
 
 .bottle__label-rule {
-  stroke: var(--champ-deep);
+  stroke: var(--rose-deep);
   stroke-width: 0.8;
 }
 
@@ -571,7 +593,7 @@ button {
 }
 
 .bottle__label-small {
-  fill: var(--champ-deep);
+  fill: var(--rose-deep);
   font-family: var(--font);
   font-size: 8px;
   letter-spacing: 0.08em;
@@ -649,11 +671,11 @@ button {
   z-index: 40;
   overflow: hidden;
   pointer-events: none;
-  --bubble: #b3a075;
+  --bubble: #c9938a;
 }
 
 .bubbles.is-dark {
-  --bubble: var(--champ);
+  --bubble: var(--rose);
 }
 
 .bubble {
@@ -716,9 +738,10 @@ button {
 
 .about__text .about__lead {
   color: var(--text);
-  font-size: clamp(20px, 1.9vw, 26px);
-  line-height: 1.35;
-  letter-spacing: -0.015em;
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.3vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
 }
 
 .facts {
@@ -743,16 +766,19 @@ button {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  font-size: clamp(48px, 6vw, 88px);
-  font-weight: 400;
+  font-family: var(--serif);
+  font-size: clamp(56px, 7vw, 104px);
+  font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
+  font-variant-numeric: lining-nums;
 }
 
 .fact__value small {
-  color: var(--champ-deep);
+  color: var(--rose-deep);
+  font-family: var(--font);
   font-size: clamp(15px, 1.3vw, 19px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0;
 }
 
@@ -787,516 +813,483 @@ button {
   }
 }
 
-/* ---------- Проекты: список по отраслям ---------- */
+/* ---------- Игра: слепая дегустация, все три истории сразу ---------- */
 
-.works__group + .works__group {
-  margin-top: clamp(48px, 6vw, 88px);
-}
-
-.works__group-title {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line-strong);
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.works__group-title span {
-  color: var(--muted);
-  font-weight: 400;
-}
-
-.work {
-  position: relative;
-  isolation: isolate;
-  border-bottom: 1px solid var(--line);
-}
-
-.work__head {
-  font: inherit;
-}
-
-.work__btn {
-  position: relative;
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr) minmax(0, 280px) 44px;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-  padding: clamp(18px, 2vw, 26px) 0;
-  border: 0;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  transition: color 0.35s var(--ease);
-}
-
-/* Плашка на всю ширину экрана: заливается снизу при наведении и остаётся открытой */
-.work__btn::before,
-.work__panel::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: -1px;
-  left: calc(50% - 50vw);
-  right: calc(50% - 50vw);
-  z-index: -1;
-  background: var(--ink);
-}
-
-.work__btn::before {
-  transform: scaleY(0);
-  transform-origin: 50% 100%;
-  transition: transform 0.45s var(--ease-lid);
-}
-
-.work__btn:hover,
-.work.is-open .work__btn {
-  color: var(--on-ink);
-}
-
-.work__btn:hover::before,
-.work.is-open .work__btn::before {
-  transform: scaleY(1);
-}
-
-.work__num {
-  color: var(--muted);
-  font-size: 15px;
-  font-variant-numeric: tabular-nums;
-  transition: color 0.35s var(--ease);
-}
-
-.work__client {
-  font-size: clamp(34px, 5vw, 76px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.05em;
-  transition: transform 0.5s var(--ease);
-}
-
-.work__field {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.35;
-  text-wrap: balance;
-  transition: color 0.35s var(--ease);
-}
-
-.work__btn:hover .work__num,
-.work__btn:hover .work__field,
-.work.is-open .work__num,
-.work.is-open .work__field {
-  color: var(--on-ink-muted);
-}
-
-.work__btn:hover .work__client {
-  transform: translateX(14px);
-}
-
-.work__toggle {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  transition: transform 0.5s var(--ease-lid), background-color 0.3s, color 0.3s;
-}
-
-.work__toggle .icon {
-  width: 16px;
-  height: 16px;
-}
-
-.work.is-open .work__toggle {
-  transform: rotate(45deg);
-  border-color: var(--champ);
-  background: var(--champ);
-  color: var(--ink);
-}
-
-.work__panel {
-  position: relative;
-  display: grid;
-  grid-template-rows: 1fr;
-  color: var(--on-ink);
-}
-
-.js .work__panel {
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.6s var(--ease-lid);
-}
-
-.js .work.is-open .work__panel {
-  grid-template-rows: 1fr;
-}
-
-.work__panel::before {
-  top: -1px;
-}
-
-.js .work__panel::before {
-  transform: scaleY(0);
-  transform-origin: 50% 0;
-  transition: transform 0.6s var(--ease-lid);
-}
-
-.js .work.is-open .work__panel::before {
-  transform: scaleY(1);
-}
-
-.work__body {
-  min-height: 0;
-  overflow: hidden;
-}
-
-.work__body > * {
-  opacity: 1;
-}
-
-.work__title,
-.work__text {
-  transition: opacity 0.4s var(--ease), transform 0.6s var(--ease);
-}
-
-.js .work:not(.is-open) .work__title,
-.js .work:not(.is-open) .work__text {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-.work__body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px clamp(32px, 5vw, 80px);
-  padding-left: 80px;
-}
-
-.work__title {
-  padding-bottom: clamp(32px, 4vw, 56px);
-  color: var(--champ);
-  font-size: clamp(24px, 2.6vw, 40px);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
-}
-
-.work__text {
-  display: grid;
-  gap: 16px;
-  padding-bottom: clamp(32px, 4vw, 56px);
-  color: var(--on-ink-muted);
-  text-wrap: pretty;
-}
-
-.work__meta {
-  color: var(--on-ink);
-  font-size: 15px;
-}
-
-html:not(.js) .work__btn {
-  cursor: default;
-}
-
-html:not(.js) .work__btn::before {
-  transform: scaleY(1);
-}
-
-html:not(.js) .work__btn {
-  color: var(--on-ink);
-}
-
-html:not(.js) .work__toggle {
-  display: none;
-}
-
-html:not(.js) .work__num,
-html:not(.js) .work__field {
-  color: var(--on-ink-muted);
-}
-
-.works__more {
+.game__head {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 16px;
-  margin-top: 28px;
-  color: var(--muted);
-}
-
-.works__more span {
-  color: var(--text);
-  font-weight: 500;
-}
-
-@media (max-width: 859px) {
-  .work__btn {
-    grid-template-columns: 32px minmax(0, 1fr) 40px;
-    gap: 4px 12px;
-  }
-
-  .work__num {
-    grid-row: 1;
-    align-self: start;
-    padding-top: 0.5em;
-  }
-
-  .work__client {
-    grid-column: 2;
-  }
-
-  .work__field {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
-  .work__toggle {
-    grid-column: 3;
-    grid-row: 1 / span 2;
-    width: 40px;
-    height: 40px;
-  }
-
-  .work__btn:hover .work__client {
-    transform: none;
-  }
-
-  .work__body {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding-left: 44px;
-  }
-
-  .work__title {
-    padding-bottom: 0;
-  }
-}
-
-/* ---------- Игра: слепая дегустация ---------- */
-
-.game__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 40px clamp(32px, 6vw, 112px);
-  align-items: start;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 48px;
+  margin-bottom: clamp(40px, 5vw, 64px);
 }
 
 .game__intro {
-  max-width: 22em;
-  margin-top: clamp(20px, 2.4vw, 32px);
+  max-width: 26em;
+  margin-top: clamp(20px, 2.4vw, 28px);
   color: var(--on-ink-muted);
 }
 
-.game__progress {
+.game__score {
   display: none;
 }
 
-.js .game__progress {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  max-width: 280px;
-  margin-top: 32px;
+.js .game__score {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  color: var(--rose);
+  font-family: var(--serif);
+  font-size: clamp(72px, 9vw, 136px);
+  font-weight: 300;
+  line-height: 0.8;
+  font-variant-numeric: lining-nums;
 }
 
-.game__progress li {
-  height: 3px;
-  background: var(--line-ink);
-  transition: background-color 0.4s var(--ease);
+.game__score [data-score] {
+  display: inline-block;
 }
 
-.game__progress li.is-current {
-  background: var(--on-ink);
+.game__score.is-bump [data-score] {
+  animation: score-bump 0.6s var(--ease);
 }
 
-.game__progress li.is-right {
-  background: var(--champ);
+@keyframes score-bump {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
 }
 
-.game__progress li.is-wrong {
-  background: var(--wine-3);
-}
-
-.game__list {
-  display: grid;
-  gap: 64px;
-}
-
-.js .game__list {
-  display: block;
-}
-
-.js .game__q {
-  display: none;
-}
-
-.js .game__q.is-current {
-  display: block;
-  animation: game-in 0.6s var(--ease) both;
-}
-
-@keyframes game-in {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
-}
-
-.game__count {
+.game__of {
   color: var(--on-ink-muted);
-  font-size: 15px;
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 350;
 }
 
-.game__story {
-  margin: 16px 0 32px;
-  padding-left: clamp(16px, 2vw, 28px);
-  border-left: 2px solid var(--champ);
-  font-size: clamp(22px, 2.4vw, 36px);
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+.quiz {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Карточка «наливается» розе, если угадали, и красным вином, если нет */
+.quiz__card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: clamp(20px, 2vw, 28px);
+  border: 1px solid var(--line-ink);
+  border-radius: var(--radius);
+  transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+
+.quiz__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--pour, var(--rose));
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  transition: transform 0.9s var(--ease-lid);
+}
+
+.quiz__card.is-right {
+  --pour: var(--rose);
+  border-color: var(--rose);
+  color: var(--ink);
+}
+
+.quiz__card.is-wrong {
+  --pour: var(--wine-2);
+  border-color: var(--wine-2);
+}
+
+.quiz__card.is-right::before,
+.quiz__card.is-wrong::before {
+  transform: scaleY(1);
+}
+
+.quiz__num {
+  color: var(--on-ink-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.5s;
+}
+
+.quiz__card.is-right .quiz__num {
+  color: rgba(20, 18, 18, 0.6);
+}
+
+.quiz__story {
+  margin: 14px 0 28px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 1.9vw, 28px);
+  font-weight: 400;
+  line-height: 1.18;
   text-wrap: pretty;
 }
 
-.game__options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+.quiz__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
 }
 
-.game__option {
-  display: flex;
+.quiz__option {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  min-height: 64px;
-  padding: 12px 20px;
-  border: 1px solid rgba(239, 236, 230, 0.28);
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(243, 236, 232, 0.32);
   border-radius: var(--radius);
   background: transparent;
-  color: var(--on-ink);
-  font-size: 18px;
-  font-weight: 500;
-  text-align: left;
+  color: inherit;
+  font-size: 15px;
+  font-weight: 400;
   cursor: pointer;
-  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), opacity 0.3s;
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), opacity 0.4s;
 }
 
-.game__option:disabled {
+.quiz__option:disabled {
   cursor: default;
 }
 
-html:not(.js) .game__option {
-  opacity: 0.8;
-}
-
-.game__option:not(:disabled):hover {
+.quiz__option:not(:disabled):hover {
   border-color: var(--on-ink);
   background: var(--on-ink);
   color: var(--ink);
 }
 
-.game__option .icon {
-  width: 20px;
-  height: 20px;
+.quiz__option .icon {
+  width: 16px;
+  height: 16px;
 }
 
-.game__q.is-answered .game__option {
-  opacity: 0.4;
+.quiz__card.is-answered .quiz__option {
+  opacity: 0.45;
 }
 
-.game__q.is-answered .game__option.is-right {
-  border-color: var(--champ);
-  background: var(--champ);
-  color: var(--ink);
+.quiz__card.is-right .quiz__option {
+  border-color: rgba(20, 18, 18, 0.3);
+}
+
+.quiz__card.is-answered .quiz__option.is-picked,
+.quiz__card.is-answered .quiz__option.is-correct {
   opacity: 1;
 }
 
-.game__q.is-answered .game__option.is-wrong {
-  border-color: var(--wine-3);
-  background: var(--wine-3);
+.quiz__card.is-right .quiz__option.is-correct {
+  border-color: var(--ink);
+  background: var(--ink);
   color: var(--on-ink);
+}
+
+.quiz__card.is-wrong .quiz__option.is-picked {
   text-decoration: line-through;
-  opacity: 1;
 }
 
-.game__explain {
-  min-height: 1.55em;
-  margin-top: 20px;
-  color: var(--on-ink);
+.quiz__card.is-wrong .quiz__option.is-correct {
+  border-color: var(--rose);
+  background: var(--rose);
+  color: var(--ink);
 }
 
-.game__explain b {
-  color: var(--champ);
-  font-weight: 500;
+.quiz__explain {
+  font-size: 15px;
+  line-height: 1.45;
 }
 
-.game__answer {
+.quiz__explain:not(:empty) {
+  margin-top: 18px;
+}
+
+.quiz__answer {
   margin-top: 16px;
   color: var(--on-ink-muted);
 }
 
-.game__answer summary {
+.quiz__answer summary {
   color: var(--on-ink);
   cursor: pointer;
 }
 
-.js .game__answer {
+.js .quiz__answer {
   display: none;
 }
 
-.game__nav {
-  margin-top: 28px;
+html:not(.js) .quiz__option {
+  opacity: 0.8;
 }
 
-.game__nav .btn[hidden],
-.game__result[hidden] {
-  display: none;
-}
-
-.game__result {
+.game__end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-top: clamp(28px, 3vw, 40px);
   animation: game-in 0.6s var(--ease) both;
 }
 
-.game__result:focus {
-  outline: none;
+.game__end[hidden] {
+  display: none;
 }
 
-.game__score {
-  color: var(--champ);
-  font-size: clamp(88px, 13vw, 200px);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.07em;
+@keyframes game-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 }
 
 .game__verdict {
-  max-width: 26em;
-  margin-top: 20px;
-  font-size: clamp(18px, 1.6vw, 22px);
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 300;
+  line-height: 1.15;
 }
 
-.game__actions {
+@media (max-width: 959px) {
+  .quiz {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Проекты: карточки переворачиваются ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  perspective: 1400px;
+}
+
+.card.is-turning {
+  z-index: 3;
+}
+
+.card__tilt {
+  height: 100%;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease);
+}
+
+.card.is-tilting .card__tilt {
+  transition-duration: 0.15s;
+}
+
+.card.is-turning .card__tilt {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(70px);
+  transition-duration: 0.45s;
+}
+
+/* Переворот с лёгким перелётом за 180 градусов, в сторону, куда нажали */
+.card__inner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.3, 1.3, 0.45, 1);
+}
+
+.card.is-flipped .card__inner {
+  transform: rotateY(var(--flip, 180deg));
+}
+
+.card__face {
+  position: relative;
+  grid-area: 1 / 1;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 400px;
+  padding: 22px 22px 24px;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card__front {
+  border: 1px solid var(--line);
+  background: #faf6f3;
+}
+
+.card__back {
+  background: var(--ink);
+  color: var(--on-ink);
+  transform: rotateY(180deg);
+}
+
+.card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  margin-top: 32px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
-@media (max-width: 899px) {
-  .game__grid {
-    grid-template-columns: 1fr;
-  }
+.card__num {
+  color: var(--rose-deep);
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  line-height: 0.8;
+  font-variant-numeric: lining-nums;
 }
 
-@media (max-width: 519px) {
-  .game__options {
-    grid-template-columns: 1fr;
-  }
+.card__client {
+  margin-top: auto;
+  font-family: var(--serif);
+  font-size: clamp(40px, 3.4vw, 54px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
 
-  .game__option {
-    min-height: 56px;
+.card__teaser {
+  max-width: 17em;
+  margin-top: 14px;
+  padding-right: 48px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.card__turn {
+  position: absolute;
+  right: 20px;
+  bottom: 22px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.55;
+  transition: transform 0.6s var(--ease), opacity 0.3s;
+}
+
+.card__turn .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.card:hover .card__front .card__turn {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+
+.card__result {
+  color: var(--rose);
+  font-family: var(--serif);
+  font-size: clamp(24px, 2vw, 30px);
+  font-weight: 400;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.card__story {
+  margin-top: 16px;
+  color: var(--on-ink-muted);
+  font-size: 15px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.card__meta {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-right: 48px;
+  font-size: 13px;
+}
+
+.card__btn {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+}
+
+.card__btn:focus-visible {
+  outline: 2px solid var(--rose-deep);
+  outline-offset: 4px;
+}
+
+.card--more {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 200px;
+  padding: 22px 22px 24px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+}
+
+.card__more-title {
+  margin-bottom: 8px;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.card__more-list {
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Без JS обе стороны видны одна под другой */
+html:not(.js) .card__inner {
+  display: flex;
+  flex-direction: column;
+}
+
+html:not(.js) .card__face {
+  min-height: 0;
+}
+
+html:not(.js) .card__front {
+  min-height: 220px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+html:not(.js) .card__back {
+  transform: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+html:not(.js) .card__btn,
+html:not(.js) .card__turn {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  .card__face {
+    min-height: 340px;
   }
 }
 
@@ -1320,11 +1313,12 @@ html:not(.js) .game__option {
 
 .step__num {
   margin-bottom: clamp(28px, 4vw, 64px);
-  color: var(--champ-deep);
-  font-size: clamp(40px, 4vw, 60px);
+  color: var(--rose-deep);
+  font-family: var(--serif);
+  font-size: clamp(48px, 4.6vw, 72px);
   font-weight: 300;
   line-height: 1;
-  letter-spacing: -0.05em;
+  font-variant-numeric: lining-nums;
 }
 
 .step h3 {
@@ -1387,15 +1381,16 @@ html:not(.js) .game__option {
 
 .job__line h3,
 .school h3 {
-  font-size: clamp(26px, 2.8vw, 40px);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.2vw, 46px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
 }
 
 .job__when,
 .school__when {
-  color: var(--champ-deep);
+  color: var(--rose-deep);
   font-size: 15px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -1426,7 +1421,7 @@ html:not(.js) .game__option {
   top: 0.75em;
   width: 8px;
   height: 1px;
-  background: var(--champ-deep);
+  background: var(--rose-deep);
 }
 
 .school {
@@ -1503,9 +1498,10 @@ html:not(.js) .game__option {
 }
 
 .route h3 {
-  font-size: 20px;
+  font-family: var(--serif);
+  font-size: 26px;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .route p {
@@ -1559,10 +1555,11 @@ html:not(.js) .game__option {
 }
 
 .vblock__title {
-  font-size: clamp(40px, 5vw, 76px);
-  font-weight: 500;
-  line-height: 0.92;
-  letter-spacing: -0.05em;
+  font-family: var(--serif);
+  font-size: clamp(46px, 5.6vw, 88px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
 }
 
 .vblock__text {
@@ -1618,7 +1615,7 @@ html:not(.js) .game__option {
 }
 
 .vbtn:hover {
-  background: var(--champ);
+  background: var(--rose);
 }
 
 .vbtn span {
@@ -1766,7 +1763,7 @@ html:not(.js) .game__option {
 }
 
 .glass__label {
-  fill: var(--champ);
+  fill: var(--rose);
   font-family: var(--font);
   font-size: 11.5px;
   font-weight: 400;
@@ -1903,36 +1900,22 @@ a.copy {
     color: #000;
   }
 
-  .work__panel {
-    grid-template-rows: 1fr !important;
-    color: #000;
-  }
-
-  .work__btn,
-  .work__title,
-  .work__text,
-  .work__result {
-    color: #000 !important;
-    opacity: 1 !important;
+  .card__inner {
+    display: block !important;
     transform: none !important;
   }
 
-  .work__btn::before,
-  .work__panel::before {
+  .card__face {
+    min-height: 0;
+    backface-visibility: visible;
+    background: none !important;
+    color: #000 !important;
+    transform: none !important;
+  }
+
+  .card__btn,
+  .card__turn {
     display: none;
   }
 }
 
-.game__stage {
-  min-height: 560px;
-}
-
-@media (max-width: 899px) {
-  .game__stage {
-    min-height: 0;
-  }
-}
-
-.game__list[hidden] {
-  display: none !important;
-}
