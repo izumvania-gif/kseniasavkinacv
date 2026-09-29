@@ -239,7 +239,7 @@
   const revealGroups = [
     '.section h2', '.projects__aside', '.tile--text p', '.tile--wine', '.about__grid > .figure', '.tile--quote',
     '.mat', '.sample', '.method__sub', '.step', '.wine-item', '.route li', '.video',
-    '.school', '.skills__group', '.contacts__lead', '.reason', '.contacts__mail', '.backlabel',
+    '.school', '.skills__group', '.reason', '.contacts__mail', '.backlabel',
   ];
   const counters = Array.from(document.querySelectorAll('[data-count]'));
 

@@ -1440,14 +1440,6 @@ html:not(.js) .tasting {
   top: calc(var(--header-h) + 32px);
 }
 
-.experience__sub {
-  margin-top: 16px;
-  max-width: 16em;
-  font-family: var(--display);
-  font-size: 24px;
-  line-height: 1.2;
-  color: var(--muted);
-}
 
 .winelist {
   grid-column: 5 / 13;
@@ -1788,11 +1780,6 @@ html:not(.js) .tasting {
   font-size: clamp(64px, 10vw, 152px);
 }
 
-.contacts__lead {
-  max-width: 28em;
-  font-size: 19px;
-  color: var(--muted);
-}
 
 .reason {
   display: flex;
@@ -2330,13 +2317,6 @@ html:not(.js) .tasting {
   grid-column: 1 / 7;
 }
 
-.pour__kicker {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--band-muted);
-}
 
 .pour__title {
   margin-top: 24px;
