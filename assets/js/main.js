@@ -265,12 +265,14 @@
     }
   }
 
-  // Видео в «Обо мне» уже стоит в разметке, без JS у него обычные кнопки плеера.
-  const aboutVideo = document.querySelector('.about__video');
-  if (aboutVideo) wire(aboutVideo.closest('.about__media'), aboutVideo);
-
-  // Видео на фоне блока «Вино»: достаточно вписать путь к файлу в data-src у <article class="vblock">.
+  // Видео на фоне блоков «Вино». Видео про Приорат уже стоит в разметке (без JS у него обычные
+  // кнопки плеера). Для второго блока достаточно вписать путь к файлу в data-src у <article class="vblock">.
   document.querySelectorAll('.vblock').forEach((block) => {
+    const ready = block.querySelector('.vblock__media video');
+    if (ready) {
+      wire(block, ready);
+      return;
+    }
     const src = (block.dataset.src || '').trim();
     if (!src) return;
     const video = document.createElement('video');

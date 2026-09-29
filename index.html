@@ -107,15 +107,11 @@
 
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="wrap about__grid">
-        <figure class="about__media">
-          <video class="about__video" poster="assets/img/ksenia-video.jpg" width="720" height="1216" controls muted loop playsinline preload="metadata" aria-label="Видео: Ксения на винодельне">
-            <source src="media/ksenia.webm" type='video/webm; codecs="vp9, opus"'>
-            <source src="media/ksenia.mp4" type="video/mp4">
-          </video>
-          <div class="vblock__controls" hidden>
-            <button class="vbtn" type="button" data-v-sound aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36ZM245.66,146.34a8,8,0,0,1-11.32,11.32L216,139.31l-18.34,18.35a8,8,0,0,1-11.32-11.32L204.69,128l-18.35-18.34a8,8,0,0,1,11.32-11.32L216,116.69l18.34-18.35a8,8,0,0,1,11.32,11.32L227.31,128Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25,80H32A16,16,0,0,0,16,96v64a16,16,0,0,0,16,16H77.25l69.84,54.31A8,8,0,0,0,160,224V32A8,8,0,0,0,155.51,24.81ZM144,207.64,84.91,161.69A7.94,7.94,0,0,0,80,160H32V96H80a7.94,7.94,0,0,0,4.91-1.69L144,48.36Zm54-106.08a40,40,0,0,1,0,52.88,8,8,0,0,1-12-10.58,24,24,0,0,0,0-31.72,8,8,0,0,1,12-10.58ZM248,128a79.9,79.9,0,0,1-20.37,53.34,8,8,0,0,1-11.92-10.67,64,64,0,0,0,0-85.33,8,8,0,1,1,11.92-10.67A79.83,79.83,0,0,1,248,128Z"/></svg><span>Звук</span></button>
-            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
-          </div>
+        <figure class="about__photo">
+          <picture>
+            <source srcset="assets/img/ksenia.webp" type="image/webp">
+            <img src="assets/img/ksenia.jpg" width="720" height="785" alt="Ксения Савкина с бокалом белого вина в винном баре" loading="lazy">
+          </picture>
         </figure>
         <div class="about__text">
           <h2 class="h2" id="about-title">Привет, я Ксения</h2>
@@ -495,9 +491,12 @@
             <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
           </div>
         </article>
-        <article class="vblock vblock--tall" data-src="" data-poster="" aria-labelledby="video-priorat">
+        <article class="vblock vblock--tall has-video" aria-labelledby="video-priorat">
           <div class="vblock__media">
-            <div class="vblock__fizz" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <video poster="assets/img/priorat-poster.jpg" width="720" height="1216" controls muted loop playsinline preload="metadata" aria-label="Видео: Ксения рассказывает о Приорате">
+              <source src="media/priorat.webm" type='video/webm; codecs="vp9, opus"'>
+              <source src="media/priorat.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="vblock__content">
             <h3 class="vblock__title" id="video-priorat">Приорат</h3>
