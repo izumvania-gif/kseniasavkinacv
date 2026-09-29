@@ -107,11 +107,14 @@
 
     <section class="section about" id="about" aria-labelledby="about-title">
       <div class="wrap about__grid">
-        <figure class="about__photo">
-          <picture>
-            <source srcset="assets/img/ksenia.webp" type="image/webp">
-            <img src="assets/img/ksenia.jpg" width="720" height="785" alt="Ксения Савкина с бокалом белого вина в винном баре" loading="lazy">
-          </picture>
+        <figure class="about__media">
+          <video class="about__video" poster="assets/img/ksenia-poster.jpg" width="720" height="1280" controls muted loop playsinline preload="metadata" aria-label="Видео: Ксения на дегустациях">
+            <source src="media/ksenia.webm" type='video/webm; codecs="vp9"'>
+            <source src="media/ksenia.mp4" type="video/mp4">
+          </video>
+          <div class="vblock__controls" hidden>
+            <button class="vbtn" type="button" data-v-pause aria-pressed="false"><svg class="icon icon--off" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z"/></svg><svg class="icon icon--on" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z"/></svg><span>Пауза</span></button>
+          </div>
         </figure>
         <div class="about__text">
           <h2 class="h2" id="about-title">Привет, я Ксения</h2>

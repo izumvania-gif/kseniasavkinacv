@@ -24,9 +24,10 @@
   `<article class="vblock vblock--wide" data-src="" ...>` впиши `data-src="media/grapes.mp4"`.
   Обложку можно указать в `data-poster`.
 
-## Как заменить фото или резюме
+## Как заменить видео в «Обо мне» или резюме
 
-- Фото: `assets/img/ksenia.jpg` и `assets/img/ksenia.webp` (замени оба файла).
+- Видео в «Обо мне»: `media/ksenia.webm` и `media/ksenia.mp4` (одно видео в двух форматах, без звука),
+  обложка `assets/img/ksenia-poster.jpg`. Видео играет по кругу, пока блок на экране, кнопкой ставится пауза.
 - Резюме: `files/Kseniia_Savkina_CV.pdf`.
 
 ## Как устроен сайт

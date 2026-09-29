@@ -204,7 +204,8 @@
     });
   });
 
-  // Видео играет без звука по кругу, пока блок на экране. Кнопки включают звук и ставят паузу.
+  // Видео играет без звука по кругу, пока блок на экране. Кнопки включают звук и ставят паузу
+  // (у видео без звука кнопка только одна, пауза).
   // Звук может быть включён только у одного видео. При «Уменьшить движение» видео само не запускается.
   const videos = [];
   function wire(box, video) {
@@ -231,10 +232,10 @@
       }
     };
 
-    soundBtn.addEventListener('click', () => {
+    if (soundBtn) soundBtn.addEventListener('click', () => {
       const on = video.muted;
       videos.forEach((other) => {
-        if (other === item) return;
+        if (other === item || !other.soundBtn) return;
         other.video.muted = true;
         other.soundBtn.setAttribute('aria-pressed', 'false');
       });
@@ -264,6 +265,10 @@
       sync();
     }
   }
+
+  // Видео в «Обо мне» стоит в разметке, без JS у него обычные кнопки плеера.
+  const aboutVideo = document.querySelector('.about__video');
+  if (aboutVideo) wire(aboutVideo.closest('.about__media'), aboutVideo);
 
   // Видео на фоне блоков «Вино». Видео про Приорат уже стоит в разметке (без JS у него обычные
   // кнопки плеера). Для второго блока достаточно вписать путь к файлу в data-src у <article class="vblock">.
