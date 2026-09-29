@@ -59,6 +59,7 @@
     back.setAttribute('aria-hidden', 'true');
     let timer = 0;
     btn.addEventListener('click', (event) => {
+      card.classList.remove('is-peek');
       const flipped = !card.classList.contains('is-flipped');
       const rect = card.getBoundingClientRect();
       const fromLeft = event.clientX ? event.clientX < rect.left + rect.width / 2 : false;
@@ -88,6 +89,22 @@
       });
     }
   });
+
+  // Подсказка, что карточки переворачиваются: при первом показе они по очереди приоткрываются.
+  const cardGrid = document.querySelector('.cards');
+  if (cardGrid && motion && 'IntersectionObserver' in window) {
+    const peekObserver = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      peekObserver.disconnect();
+      cardGrid.querySelectorAll('.card:not(.card--more)').forEach((card, i) => {
+        if (card.classList.contains('is-flipped')) return;
+        card.style.setProperty('--peek-delay', (i * 0.12).toFixed(2) + 's');
+        card.classList.add('is-peek');
+        card.addEventListener('animationend', () => card.classList.remove('is-peek'), { once: true });
+      });
+    }, { threshold: 0.3 });
+    peekObserver.observe(cardGrid);
+  }
 
   // Копирование почты и телефона.
   document.querySelectorAll('[data-copy]').forEach((button) => {
