@@ -37,7 +37,7 @@
 
     sheet.style.setProperty('--w', sample.style.getPropertyValue('--w'));
     sheetNum.textContent = num;
-    sheetColor.textContent = 'Образец №\u00a0' + num + ', ' + (sample.dataset.color || '');
+    sheetColor.textContent = 'Образец №\u00a0' + num + (sample.dataset.color ? ', ' + sample.dataset.color : '');
     sheetTitle.textContent = sample.querySelector('.sample__title').textContent.trim();
     sheetFields.forEach((field, i) => {
       const span = document.createElement('span');
@@ -340,6 +340,7 @@
 
 
   // --- Прокрутка ---
+  const hero = document.querySelector('.hero');
   let ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -348,6 +349,8 @@
       ticking = false;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       root.style.setProperty('--scroll', max > 0 ? (window.scrollY / max).toFixed(4) : '0');
+      // Большой бокал на первом экране «отпивает» по мере прокрутки.
+      if (hero && motion) hero.style.setProperty('--hero-p', clamp(window.scrollY / hero.offsetHeight).toFixed(4));
       if (pour && motion) {
         const r = pour.getBoundingClientRect();
         pourProgress = clamp(-r.top / Math.max(1, r.height - window.innerHeight));

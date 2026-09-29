@@ -47,5 +47,5 @@
 
 ## Шрифты и иконки
 
-- Шрифты Cormorant, Geist и Geist Mono (SIL Open Font License, `assets/fonts/OFL.txt`), подключены локально.
+- Шрифты Playfair Display, Rubik и Caveat (SIL Open Font License, `assets/fonts/OFL.txt`), подключены локально.
 - Иконки — [Phosphor Icons](https://phosphoricons.com) (MIT).
