@@ -1,5 +1,5 @@
-// Меню, плашки проектов, копирование контактов и видео на фоне блоков.
-// Без JS плашки открыты, бокалы налиты, контакты видны.
+// Меню, шапка, проекты, игра «Слепая дегустация», копирование контактов и видео на фоне блоков.
+// Без JS проекты открыты, в игре видны ответы, бокалы налиты, контакты видны.
 
 (() => {
   const root = document.documentElement;
@@ -27,33 +27,155 @@
     });
   }
 
-  // Плашки проектов: по нажатию плашка уезжает вверх, под ней текст,
-  // а наверху остаётся полоска с названием клиента.
-  const plates = Array.from(document.querySelectorAll('.plate__cover')).map((cover) => ({
-    cover,
-    plate: cover.closest('.plate'),
-    bottom: cover.querySelector('.plate__bottom'),
-    inside: document.getElementById(cover.getAttribute('aria-controls')),
-  }));
-  const measurePlates = () => {
-    plates.forEach(({ plate, bottom }) => plate.style.setProperty('--band', bottom.offsetHeight + 'px'));
-  };
-  plates.forEach(({ cover, plate, inside }) => {
-    inside.setAttribute('aria-hidden', 'true');
-    cover.addEventListener('click', () => {
-      const open = !plate.classList.contains('is-open');
-      plate.classList.toggle('is-open', open);
-      cover.setAttribute('aria-expanded', String(open));
-      inside.setAttribute('aria-hidden', String(!open));
+  // Шапка тёмная над тёмными блоками. Первый экран сам решает, когда посветлеть:
+  // после того как брызги закрыли его светлым (data-dark="off").
+  if (header) {
+    const darkBlocks = Array.from(document.querySelectorAll('[data-dark]'));
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = header.offsetHeight / 2;
+      const dark = darkBlocks.some((el) => {
+        if (el.dataset.dark === 'off') return false;
+        const rect = el.getBoundingClientRect();
+        return rect.top <= y && rect.bottom >= y;
+      });
+      header.classList.toggle('is-dark', dark);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    document.addEventListener('headerupdate', schedule);
+    update();
+  }
+
+  // Проекты: плашка на всю ширину заливается тёмным, под ней открывается главное о проекте.
+  document.querySelectorAll('.work__btn').forEach((btn) => {
+    const work = btn.closest('.work');
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    panel.setAttribute('aria-hidden', 'true');
+    btn.addEventListener('click', () => {
+      const open = !work.classList.contains('is-open');
+      work.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      panel.setAttribute('aria-hidden', String(!open));
     });
   });
-  measurePlates();
-  let measureFrame = 0;
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(measureFrame);
-    measureFrame = requestAnimationFrame(measurePlates);
-  });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measurePlates);
+
+  // Игра: три истории, для каждой надо выбрать бренд.
+  (() => {
+    const game = document.querySelector('.game');
+    if (!game) return;
+    const questions = Array.from(game.querySelectorAll('.game__q'));
+    const bars = Array.from(game.querySelectorAll('.game__progress li'));
+    const next = game.querySelector('.game__next');
+    const result = game.querySelector('.game__result');
+    const scoreEl = game.querySelector('[data-score]');
+    const verdict = game.querySelector('[data-verdict]');
+    const again = game.querySelector('.game__again');
+    const check = '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>';
+    const cross = '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>';
+    let current = 0;
+    let score = 0;
+
+    function shuffle(list) {
+      const ul = list;
+      const items = Array.from(ul.children);
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      items.forEach((li) => ul.appendChild(li));
+    }
+
+    function show(i) {
+      current = i;
+      questions.forEach((q, k) => q.classList.toggle('is-current', k === i));
+      bars.forEach((bar, k) => bar.classList.toggle('is-current', k === i));
+      next.hidden = true;
+    }
+
+    function reset() {
+      score = 0;
+      questions.forEach((q) => {
+        q.classList.remove('is-answered');
+        q.querySelector('.game__explain').textContent = '';
+        shuffle(q.querySelector('.game__options'));
+        q.querySelectorAll('.game__option').forEach((btn) => {
+          btn.disabled = false;
+          btn.classList.remove('is-right', 'is-wrong');
+          btn.removeAttribute('aria-pressed');
+          const icon = btn.querySelector('.icon');
+          if (icon) icon.remove();
+        });
+      });
+      bars.forEach((bar) => bar.classList.remove('is-right', 'is-wrong', 'is-current'));
+      result.hidden = true;
+      game.querySelector('.game__list').hidden = false;
+      show(0);
+    }
+
+    questions.forEach((q, i) => {
+      const explain = q.querySelector('.game__explain');
+      q.querySelectorAll('.game__option').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (q.classList.contains('is-answered')) return;
+          const right = btn.dataset.right === 'true';
+          q.classList.add('is-answered');
+          q.querySelectorAll('.game__option').forEach((option) => {
+            option.disabled = true;
+            if (option.dataset.right === 'true') {
+              option.classList.add('is-right');
+              option.insertAdjacentHTML('beforeend', check);
+            }
+          });
+          btn.setAttribute('aria-pressed', 'true');
+          if (!right) {
+            btn.classList.add('is-wrong');
+            btn.insertAdjacentHTML('beforeend', cross);
+          } else {
+            score++;
+          }
+          bars[i].classList.add(right ? 'is-right' : 'is-wrong');
+          explain.textContent = (right ? 'Верно. ' : 'Не угадали. ') + explain.dataset.explain;
+          next.textContent = '';
+          next.append(i < questions.length - 1 ? 'Следующая история' : 'Узнать результат');
+          next.insertAdjacentHTML('beforeend', '<svg class="icon" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>');
+          next.hidden = false;
+          next.focus({ preventScroll: true });
+        });
+      });
+    });
+
+    next.addEventListener('click', () => {
+      if (current < questions.length - 1) {
+        show(current + 1);
+        const first = questions[current].querySelector('.game__option');
+        if (first) first.focus({ preventScroll: true });
+        return;
+      }
+      questions.forEach((q) => q.classList.remove('is-current'));
+      bars.forEach((bar) => bar.classList.remove('is-current'));
+      game.querySelector('.game__list').hidden = true;
+      next.hidden = true;
+      scoreEl.textContent = String(score);
+      verdict.textContent = score === questions.length
+        ? 'Все три верно. Остальные проекты открываются в списке выше.'
+        : 'Ответы и остальные проекты есть в списке выше.';
+      result.hidden = false;
+      result.focus({ preventScroll: true });
+    });
+
+    again.addEventListener('click', () => {
+      reset();
+      const first = questions[0].querySelector('.game__option');
+      if (first) first.focus({ preventScroll: true });
+    });
+
+    reset();
+  })();
 
   // Копирование почты и телефона.
   document.querySelectorAll('[data-copy]').forEach((button) => {
@@ -69,20 +191,13 @@
           if (label) label.textContent = initial;
         }, 2000);
       };
-      const selectFallback = () => {
-        const target = button.parentElement.querySelector('[data-copy-text]');
-        if (!target) return;
-        const range = document.createRange();
-        range.selectNodeContents(target);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        if (label) label.textContent = 'Выделено';
+      const fallback = () => {
+        if (label) label.textContent = text;
       };
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, selectFallback);
+        navigator.clipboard.writeText(text).then(done, fallback);
       } else {
-        selectFallback();
+        fallback();
       }
     });
   });
@@ -124,7 +239,6 @@
         video.pause();
       }
     };
-    item.sync = sync;
 
     soundBtn.addEventListener('click', () => {
       const on = video.muted;
@@ -161,7 +275,7 @@
   });
 })();
 
-// Моушен: бутылка взрывается брызгами, пузырьки, бокалы наполняются.
+// Моушен: бутылка взрывается брызгами, редкие пузырьки, вино наливается в бокалы с контактами.
 // При prefers-reduced-motion ничего из этого не запускается: бутылка стоит закрытой,
 // бокалы налиты, контакты видны сразу.
 (() => {
@@ -175,13 +289,11 @@
   const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   const phone = window.matchMedia('(max-width: 759px)').matches;
   const css = getComputedStyle(root);
-  const color = (name) => css.getPropertyValue(name).trim();
+  const color = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
   const C = {
-    cream: color('--cream') || '#fbf7ee',
-    champ: color('--champ') || '#f2e6cb',
-    champ2: color('--champ-2') || '#e8d7b0',
-    gold: color('--gold') || '#c8a15a',
-    goldDeep: color('--gold-deep') || '#8c6a2e',
+    paper: color('--paper', '#f2f0eb'),
+    champ: color('--champ', '#cdb88a'),
+    pale: color('--champ-pale', '#e3d7bb'),
   };
 
   // Детерминированный генератор: брызги одинаковые при прокрутке вперёд и назад.
@@ -195,15 +307,13 @@
     };
   }
 
-  // --- Пузырьки, как на larevoltosa.es ---
-  // Поднимаются от нижнего края, чаще у левого и правого краёв, тают к верху.
-  // Прокрутка вниз добавляет пузырьков и ускоряет те, что уже летят.
+  // --- Пузырьки по мотивам larevoltosa.es, но редкие и мелкие ---
   const bubbles = (() => {
     const layer = document.querySelector('.bubbles');
     if (!layer || !layer.animate) return { burst() {} };
     const NS = 'http://www.w3.org/2000/svg';
     const pool = [];
-    const size = phone ? 14 : 30;
+    const size = phone ? 4 : 7;
     for (let i = 0; i < size; i++) {
       const el = document.createElement('div');
       el.className = 'bubble';
@@ -211,104 +321,79 @@
       svg.setAttribute('viewBox', '0 0 66 66');
       const use = document.createElementNS(NS, 'use');
       use.setAttribute('href', '#bubble');
-      use.setAttribute('filter', 'url(#bubble-wobble)');
       svg.appendChild(use);
       el.appendChild(svg);
       layer.appendChild(el);
-      pool.push({ el, active: false, anims: [], factor: 0.5 + Math.random() * 1.5 });
+      pool.push({ el, active: false });
     }
 
     function spawn(middle) {
       const b = pool.find((item) => !item.active);
       if (!b) return;
       b.active = true;
-      const s = phone ? 36 + Math.random() * 34 : 56 + Math.random() * 74;
+      const s = phone ? 10 + Math.random() * 12 : 12 + Math.random() * 18;
       const r = Math.random();
       let x;
-      if (middle) x = 20 + Math.random() * 60;
-      else x = r < 0.45 ? Math.random() * 25 : r < 0.9 ? 75 + Math.random() * 25 : 25 + Math.random() * 50;
+      if (middle) x = 30 + Math.random() * 40;
+      else x = r < 0.5 ? 2 + Math.random() * 14 : 84 + Math.random() * 14;
       const px = (x / 100) * window.innerWidth - s / 2;
-      const drift = (Math.random() - 0.5) * 200;
-      const duration = 2000 + Math.random() * 1000;
-      const rise = -1.3 * window.innerHeight;
+      const drift = (Math.random() - 0.5) * 60;
+      const duration = 3200 + Math.random() * 1600;
+      const rise = -(0.7 + Math.random() * 0.4) * window.innerHeight;
       b.el.style.width = s + 'px';
       b.el.style.height = s + 'px';
       const move = b.el.animate([
         { transform: `translate3d(${px}px, 0, 0) scale(1)` },
-        { transform: `translate3d(${px + drift}px, ${rise}px, 0) scale(0)` },
+        { transform: `translate3d(${px + drift}px, ${rise}px, 0) scale(0.4)` },
       ], { duration, easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)', fill: 'forwards' });
       const fade = b.el.animate([
-        { opacity: 1, offset: 0 },
-        { opacity: 1, offset: 1 - 300 / duration },
+        { opacity: 0, offset: 0 },
+        { opacity: 0.85, offset: 0.12 },
+        { opacity: 0.85, offset: 0.7 },
         { opacity: 0, offset: 1 },
       ], { duration, fill: 'forwards' });
-      b.anims = [move, fade];
       move.onfinish = () => {
         b.active = false;
-        b.anims.forEach((a) => a.cancel());
-        b.anims = [];
+        move.cancel();
+        fade.cancel();
       };
     }
 
     let last = performance.now();
     let acc = 0;
     let burstUntil = 0;
-    let velocity = 0;
-    let lastY = window.scrollY;
-    let scrollAcc = 0;
-    const interval = phone ? 1.2 : 0.8;
+    const interval = phone ? 4.5 : 2.8;
 
     function tick(now) {
       const dt = Math.min(0.1, (now - last) / 1000);
       last = now;
       acc += dt;
       const bursting = now < burstUntil;
-      const step = bursting ? 0.06 : interval;
-      let spawned = 0;
-      while (acc >= step && spawned < 5) {
+      const step = bursting ? 0.18 : interval;
+      if (acc >= step) {
         spawn(bursting);
-        acc -= step;
-        spawned++;
+        acc = 0;
       }
-      if (acc > step) acc = 0;
-      if (velocity !== 0) {
-        velocity *= 0.88;
-        if (Math.abs(velocity) < 0.5) velocity = 0;
-      }
-      pool.forEach((b) => {
-        if (!b.active) return;
-        const rate = velocity ? 1 + Math.min(0.015 * velocity * b.factor, 2.5) : 1;
-        b.anims.forEach((a) => {
-          if (a.playbackRate !== rate) a.playbackRate = rate;
-        });
-      });
       requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
 
+    // На тёмных блоках пузырьки светлее.
+    const dark = Array.from(document.querySelectorAll('[data-dark]'));
+    let frame = 0;
+    const recolor = () => {
+      frame = 0;
+      const y = window.innerHeight * 0.6;
+      layer.classList.toggle('is-dark', dark.some((el) => {
+        if (el.dataset.dark === 'off') return false;
+        const rect = el.getBoundingClientRect();
+        return rect.top <= y && rect.bottom >= y;
+      }));
+    };
     window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-      lastY = y;
-      if (delta <= 0) return;
-      scrollAcc += delta;
-      const n = Math.floor(scrollAcc / 300);
-      if (n > 0) {
-        scrollAcc -= n * 300;
-        for (let i = 0; i < n && i < 4; i++) spawn(false);
-      }
-      velocity = Math.min(160, 10 * delta);
+      if (!frame) frame = requestAnimationFrame(recolor);
     }, { passive: true });
-
-    // На тёмных блоках пузырьки светлые, на светлых золотые.
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) layer.classList.toggle('is-cream', entry.target.dataset.bubbles === 'cream');
-        });
-      }, { rootMargin: '-50% 0px -50% 0px' });
-      document.querySelectorAll('[data-bubbles]').forEach((el) => io.observe(el));
-    }
+    recolor();
 
     return {
       burst(ms) {
@@ -318,8 +403,8 @@
   })();
 
   // --- Бутылка: пробка вылетает, брызги заполняют экран ---
-  // Переход сделан по мотивам Cumulus: всплеск растёт, пока не закроет весь экран,
-  // а следующий блок уже того же цвета, что и брызги.
+  // Переход по мотивам Cumulus: тёмная сцена, всплеск растёт, пока не закроет весь экран светлым,
+  // а следующий блок уже того же цвета.
   (() => {
     const hero = document.querySelector('.hero');
     const sticky = hero && hero.querySelector('.hero__sticky');
@@ -338,34 +423,27 @@
     let lastP = -1;
 
     const rnd = random(20260929);
-    const palette = [C.gold, C.champ2, C.gold, C.champ, C.cream, C.gold];
-    // Капли, которые вылетают из горлышка вместе с пеной.
-    const jet = Array.from({ length: phone ? 50 : 90 }, () => ({
+    const palette = [C.champ, C.pale, C.champ, C.paper];
+    const jet = Array.from({ length: phone ? 46 : 80 }, () => ({
       birth: POP + rnd() * 0.22,
       life: 0.14 + rnd() * 0.2,
       spread: (rnd() - 0.5) * 1.1,
       speed: 0.6 + rnd() * 1,
-      size: 1.8 + rnd() * 4.6,
+      size: 1.6 + rnd() * 4,
       color: palette[Math.floor(rnd() * palette.length)],
     }));
-    // «Пальцы» всплеска с каплей на конце.
     const fingers = Array.from({ length: 24 }, (_, k) => ({
       angle: (k / 24) * Math.PI * 2 + (rnd() - 0.5) * 0.2,
       len: 0.85 + rnd() * 0.6,
-      width: 0.12 + rnd() * 0.12,
+      width: 0.11 + rnd() * 0.11,
       tip: rnd() < 0.75,
     }));
-    const drops = Array.from({ length: phone ? 60 : 120 }, () => ({
+    const drops = Array.from({ length: phone ? 50 : 100 }, () => ({
       angle: rnd() * Math.PI * 2,
       reach: 1.15 + rnd() * 0.8,
-      size: 0.006 + rnd() * 0.02,
-      stretch: 1.5 + rnd() * 2,
-      color: rnd() < 0.6 ? C.gold : C.champ2,
-    }));
-    const foam = Array.from({ length: phone ? 26 : 50 }, () => ({
-      angle: rnd() * Math.PI * 2,
-      dist: Math.sqrt(rnd()) * 0.8,
-      size: 2 + rnd() * 7,
+      size: 0.005 + rnd() * 0.018,
+      stretch: 1.6 + rnd() * 2,
+      color: rnd() < 0.6 ? C.champ : C.pale,
     }));
 
     function resize() {
@@ -411,11 +489,12 @@
     }
 
     let popped = false;
+    let lightHeader = false;
 
     function draw(p, now) {
       // Бутылка: чем ближе хлопок, тем сильнее дрожит; после хлопка отдача.
       const before = clamp(p / POP);
-      const shake = p < POP ? Math.sin(now * 0.05) * 3.2 * before * before : 0;
+      const shake = p < POP ? Math.sin(now * 0.05) * 3 * before * before : 0;
       const tilt = p < POP ? -6 - 8 * before : -14 + 4 * easeOut(clamp((p - POP) / 0.08));
       bottle.style.transform = `rotate(${(tilt + shake).toFixed(2)}deg)`;
 
@@ -431,15 +510,23 @@
 
       if (p >= POP && !popped) {
         popped = true;
-        bubbles.burst(1400);
+        bubbles.burst(1200);
       } else if (p < POP * 0.5) {
         popped = false;
+      }
+
+      // Когда брызги закрыли экран, шапка светлеет вместе с ним.
+      const light = p > 0.7;
+      if (light !== lightHeader) {
+        lightHeader = light;
+        hero.dataset.dark = light ? 'off' : '';
+        document.dispatchEvent(new Event('headerupdate'));
       }
 
       ctx.clearRect(0, 0, W, H);
       if (p < POP) return;
       if (p >= COVER + 0.05) {
-        ctx.fillStyle = C.champ;
+        ctx.fillStyle = C.paper;
         ctx.fillRect(0, 0, W, H);
         return;
       }
@@ -456,14 +543,14 @@
       if (ring > 0 && ring < 1) {
         ctx.beginPath();
         ctx.arc(mx, my, 12 + ring * Math.max(W, H) * 0.32, 0, Math.PI * 2);
-        ctx.strokeStyle = C.gold;
+        ctx.strokeStyle = C.champ;
         ctx.globalAlpha = 1 - ring;
-        ctx.lineWidth = 1 + 3 * (1 - ring);
+        ctx.lineWidth = 1 + 2 * (1 - ring);
         ctx.stroke();
         ctx.globalAlpha = 1;
       }
 
-      // Капли из горлышка.
+      // Капли из горлышка летят дугой.
       jet.forEach((d) => {
         const age = (p - d.birth) / d.life;
         if (age <= 0 || age >= 1) return;
@@ -499,28 +586,12 @@
         ctx.fill();
       });
 
-      ctx.fillStyle = C.gold;
-      splat(cx, cy, R, axis, bias, turn);
-      ctx.fillStyle = C.champ2;
-      splat(cx, cy, R * 0.88, axis, bias, turn + 0.13);
       ctx.fillStyle = C.champ;
+      splat(cx, cy, R, axis, bias, turn);
+      ctx.fillStyle = C.pale;
+      splat(cx, cy, R * 0.88, axis, bias, turn + 0.13);
+      ctx.fillStyle = C.paper;
       splat(cx, cy, R * 0.76, axis, bias, turn + 0.26);
-
-      // Пузырьки пены внутри всплеска гаснут к концу перехода.
-      const foamAlpha = 0.5 * (1 - clamp((q - 0.55) / 0.35));
-      if (foamAlpha > 0) {
-        ctx.globalAlpha = foamAlpha;
-        ctx.strokeStyle = C.gold;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        foam.forEach((f) => {
-          const x = cx + Math.cos(f.angle) * R * 0.47 * f.dist;
-          const y = cy + Math.sin(f.angle) * R * 0.47 * f.dist;
-          circle(x, y, f.size * (1 + q * 1.5));
-        });
-        ctx.stroke();
-        ctx.globalAlpha = 1;
-      }
     }
 
     let running = false;
@@ -553,77 +624,89 @@
     }
   })();
 
-  // --- Контакты: вино наливается в бокалы, и контакты проявляются ---
-  // Три бокала наполняются тонкими струями с разной скоростью, как стаканы на Cumulus.
+  // --- Контакты: вино наливается в бокал, и контакт проступает прямо в вине ---
+  // Струя тонкая, как на Cumulus. Каждый бокал начинает наливаться, когда появляется на экране.
   (() => {
-    const pour = document.querySelector('.pour');
-    if (!pour) return;
-    const contacts = Array.from(pour.querySelectorAll('.contact'));
-    const glasses = Array.from(pour.querySelectorAll('.glass')).map((svg, i) => ({
+    const glasses = Array.from(document.querySelectorAll('.glass')).map((svg, i) => ({
+      svg,
       wine: svg.querySelector('.glass__wine'),
+      clip: svg.querySelector('.glass__wine-clip'),
       stream: svg.querySelector('.glass__stream'),
       bottom: Number(svg.dataset.bottom),
       level: Number(svg.dataset.level),
-      delay: [0, 0.5, 0.95][i] || 0,
-      duration: [2.6, 3, 2.2][i] || 2.6,
-      contact: contacts[i],
+      duration: [2.6, 2.9, 2.4][i] || 2.6,
+      start: null,
     }));
-    const TOP = -110;
+    if (!glasses.length) return;
+    const TOP = -90;
+    const IN = 0.35;
 
-    function wave(g, y, amp, t) {
+    function shape(g, y, amp, t) {
       let d = `M0,${(y + Math.sin(t * 7) * amp).toFixed(2)}`;
-      for (let x = 10; x <= 200; x += 10) {
-        d += ` L${x},${(y + Math.sin(x * 0.07 + t * 7) * amp).toFixed(2)}`;
+      for (let x = 12; x <= 240; x += 12) {
+        d += ` L${x},${(y + Math.sin(x * 0.06 + t * 7) * amp).toFixed(2)}`;
       }
-      return d + ` L200,${g.bottom + 4} L0,${g.bottom + 4} Z`;
+      return d + ` L240,${g.bottom + 4} L0,${g.bottom + 4} Z`;
     }
 
     function render(g, t) {
-      const local = t - g.delay;
-      const inTime = 0.35;
-      const fillT = clamp((local - inTime * 0.7) / g.duration);
-      const f = easeOut(fillT);
+      const f = easeOut(clamp((t - IN * 0.7) / g.duration));
       const surface = g.bottom + 2 - (g.bottom + 2 - g.level) * f;
-      const settle = clamp((local - inTime - g.duration) / 1.6);
-      const amp = local <= 0 ? 0 : 1.8 * (1 - settle) * (0.4 + 0.6 * (1 - f));
-
-      // Струя: сначала падает сверху до дна, потом её хвост уходит вниз.
+      const settle = clamp((t - IN - g.duration) / 1.6);
+      const amp = t <= 0 ? 0 : 1.8 * (1 - settle) * (0.4 + 0.6 * (1 - f));
       let top = TOP;
       let end = TOP;
-      if (local > 0) {
-        end = lerp(TOP, surface, clamp(local / inTime));
-        const out = clamp((local - inTime - g.duration + 0.25) / 0.4);
-        top = lerp(TOP, surface, easeIn(out));
+      if (t > 0) {
+        end = lerp(TOP, surface, clamp(t / IN));
+        top = lerp(TOP, surface, easeIn(clamp((t - IN - g.duration + 0.25) / 0.4)));
       }
       g.stream.setAttribute('y', top.toFixed(2));
       g.stream.setAttribute('height', Math.max(0, end - top).toFixed(2));
-      g.wine.setAttribute('d', wave(g, surface, amp, t));
-      if (g.contact) g.contact.style.setProperty('--fill', f.toFixed(3));
+      const d = shape(g, surface, amp, t);
+      g.wine.setAttribute('d', d);
+      g.clip.setAttribute('d', d);
       return settle >= 1;
     }
 
     glasses.forEach((g) => render(g, -1));
 
-    let start = 0;
+    let running = false;
     function frame(now) {
-      const t = (now - start) / 1000;
-      const done = glasses.map((g) => render(g, t)).every(Boolean);
-      if (!done) requestAnimationFrame(frame);
+      let busy = false;
+      glasses.forEach((g) => {
+        if (g.start === null || g.done) return;
+        g.done = render(g, (now - g.start) / 1000);
+        if (!g.done) busy = true;
+      });
+      running = busy;
+      if (busy) requestAnimationFrame(frame);
     }
 
-    const begin = () => {
-      start = performance.now();
-      requestAnimationFrame(frame);
+    let lastStart = 0;
+    const begin = (g) => {
+      if (g.start !== null) return;
+      const now = performance.now();
+      // Если бокалы появились одновременно, наливаем по очереди.
+      const delay = now - lastStart < 500 ? 450 : 0;
+      g.start = Math.max(now, lastStart + delay);
+      lastStart = g.start;
+      if (!running) {
+        running = true;
+        requestAnimationFrame(frame);
+      }
     };
+
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
-        if (!entries[0].isIntersecting) return;
-        io.disconnect();
-        begin();
-      }, { threshold: 0.35 });
-      io.observe(pour);
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          begin(glasses.find((g) => g.svg === entry.target));
+        });
+      }, { threshold: 0.55 });
+      glasses.forEach((g) => io.observe(g.svg));
     } else {
-      begin();
+      glasses.forEach(begin);
     }
   })();
 })();

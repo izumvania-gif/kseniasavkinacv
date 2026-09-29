@@ -1,8 +1,4 @@
-Шрифты сайта распространяются по лицензии SIL Open Font License 1.1
-(https://openfontlicense.org):
+Шрифт сайта Onest (The Onest Project Authors) распространяется по лицензии
+SIL Open Font License 1.1 (https://openfontlicense.org).
 
-- Onest, The Onest Project Authors
-- Cormorant, Christian Thalmann (Catharsis Fonts)
-- Forum, Denis Masharov
-
-Файлы взяты из пакетов Fontsource, знак рубля вынесен в отдельный файл.
+Файлы взяты из пакета Fontsource, знак рубля вынесен в отдельный файл.
