@@ -90,20 +90,22 @@
     }
   });
 
-  // Подсказка, что карточки переворачиваются: при первом показе они по очереди приоткрываются.
-  const cardGrid = document.querySelector('.cards');
-  if (cardGrid && motion && 'IntersectionObserver' in window) {
+  // Подсказка, что карточки переворачиваются: каждая приоткрывается, когда впервые появляется на экране.
+  // Следим за каждой карточкой отдельно: на телефоне сетка выше экрана и целиком не видна.
+  const peekCards = document.querySelectorAll('.cards .card:not(.card--more)');
+  if (peekCards.length && motion && 'IntersectionObserver' in window) {
     const peekObserver = new IntersectionObserver((entries) => {
-      if (!entries[0].isIntersecting) return;
-      peekObserver.disconnect();
-      cardGrid.querySelectorAll('.card:not(.card--more)').forEach((card, i) => {
+      entries.filter((entry) => entry.isIntersecting).forEach((entry, i) => {
+        const card = entry.target;
+        peekObserver.unobserve(card);
         if (card.classList.contains('is-flipped')) return;
+        // Карточки одного ряда появляются вместе и поворачиваются по очереди.
         card.style.setProperty('--peek-delay', (i * 0.12).toFixed(2) + 's');
         card.classList.add('is-peek');
         card.addEventListener('animationend', () => card.classList.remove('is-peek'), { once: true });
       });
-    }, { threshold: 0.3 });
-    peekObserver.observe(cardGrid);
+    }, { threshold: 0.6 });
+    peekCards.forEach((card) => peekObserver.observe(card));
   }
 
   // Копирование почты и телефона.

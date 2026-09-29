@@ -1448,12 +1448,24 @@ html:not(.js) .card__turn {
   text-wrap: pretty;
 }
 
-.wine__note {
-  margin-top: 20px;
-  padding-top: 20px;
+.wine__school {
+  margin-top: clamp(28px, 3vw, 40px);
+  padding-top: 24px;
   border-top: 1px solid var(--line);
+}
+
+.wine__school-name {
+  margin-bottom: 10px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.2vw, 46px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.wine__school-text {
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16px;
 }
 
 .vblocks {
