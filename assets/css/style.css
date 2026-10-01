@@ -19,6 +19,14 @@
 }
 
 @font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-approx.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+2248;
+}
+
+@font-face {
   font-family: "Onest";
   src: url("../fonts/onest-cyrillic.woff2") format("woff2");
   font-weight: 100 900;
@@ -46,15 +54,15 @@
   --ink: #141212;
   --ink-2: #1f1b1b;
   --paper: #f4f0e9;
-  --stone: #eae4d9;
+  --stone: #eee9e0;
   --text: #141212;
   --muted: #5e5652;
   --on-ink: #f3eee6;
   --on-ink-muted: #a8a09b;
-  --accent: #e6d8bf;
-  --accent-mid: #d9c8aa;
-  --accent-pale: #f4ecdf;
-  --accent-deep: #94805e;
+  --accent: #ece1cd;
+  --accent-mid: #e2d4ba;
+  --accent-pale: #f7f1e7;
+  --accent-deep: #988463;
   --accent-text: #7a6344;
   --wine: #5a1320;
   --wine-2: #6b1b2a;
@@ -559,8 +567,8 @@ button {
 }
 
 .bottle__foil {
-  fill: #dccaa8;
-  stroke: #dccaa8;
+  fill: #e3d4b6;
+  stroke: #e3d4b6;
   stroke-width: 1.6;
 }
 
@@ -579,13 +587,13 @@ button {
 
 .bottle__collar {
   fill: #f7f2e9;
-  stroke: #b39a76;
+  stroke: #bea783;
   stroke-width: 0.8;
 }
 
 .bottle__collar-line {
   fill: none;
-  stroke: #d4c2a1;
+  stroke: #dccdb0;
   stroke-width: 0.6;
 }
 
@@ -598,23 +606,23 @@ button {
 }
 
 .bottle__foil-shade {
-  fill: #cbb593;
+  fill: #d4c1a2;
 }
 
 .bottle__band {
-  fill: #b39a76;
+  fill: #bea783;
 }
 
 .bottle__foil-shine {
   fill: none;
-  stroke: #f0e6d4;
+  stroke: #f4ece0;
   stroke-width: 2.4;
   stroke-linecap: round;
 }
 
 .bottle__crinkle {
   fill: none;
-  stroke: #c3ad8a;
+  stroke: #cbb898;
   stroke-width: 0.9;
   stroke-linecap: round;
 }
@@ -669,11 +677,11 @@ button {
 }
 
 .bottle__plaque {
-  fill: #dccaa8;
+  fill: #e3d4b6;
 }
 
 .bottle__plaque-rim {
-  stroke: #b39a76;
+  stroke: #bea783;
   stroke-width: 0.9;
 }
 
@@ -827,7 +835,7 @@ button {
   z-index: 40;
   overflow: hidden;
   pointer-events: none;
-  --bubble: #c9b99c;
+  --bubble: #cfc0a4;
 }
 
 .bubbles.is-dark {
@@ -1609,7 +1617,7 @@ html:not(.js) .card__turn {
   left: var(--x);
   width: var(--s);
   height: var(--s);
-  border: 1px solid rgba(230, 216, 191, 0.5);
+  border: 1px solid rgba(236, 225, 205, 0.5);
   border-radius: 50%;
 }
 

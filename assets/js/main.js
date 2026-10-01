@@ -239,8 +239,8 @@
   const color = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
   const C = {
     paper: color('--paper', '#f4f0e9'),
-    accent: color('--accent', '#e6d8bf'),
-    pale: color('--accent-pale', '#f4ecdf'),
+    accent: color('--accent', '#ece1cd'),
+    pale: color('--accent-pale', '#f7f1e7'),
   };
 
   // Детерминированный генератор: брызги одинаковые при прокрутке вперёд и назад.
