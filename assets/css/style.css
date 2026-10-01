@@ -1402,6 +1402,10 @@ html:not(.js) .card__turn {
   border-top: 1px solid var(--line-strong);
 }
 
+.skills__group--wide {
+  grid-column: 1 / -1;
+}
+
 .skills h3 {
   margin-bottom: 6px;
   font-size: 18px;
