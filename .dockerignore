@@ -1,0 +1,6 @@
+.git
+.nojekyll
+.dockerignore
+Dockerfile
+amvera.yml
+README.md
