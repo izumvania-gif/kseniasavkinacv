@@ -916,33 +916,6 @@ button {
   line-height: 1.15;
 }
 
-/* Абзацы «Обо мне» разбиты на строки с подписью слева, чтобы не было сплошного текста */
-.about__text .about__rows {
-  margin-top: clamp(28px, 3vw, 40px);
-  border-top: 1px solid var(--line-strong);
-}
-
-.about__row {
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
-  gap: 6px 28px;
-  padding: 20px 0 22px;
-  border-bottom: 1px solid var(--line);
-}
-
-.about__row dt {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.15;
-}
-
-.about__row dd {
-  margin: 0;
-  color: var(--muted);
-  text-wrap: pretty;
-}
-
 .facts {
   grid-column: 1 / -1;
   display: grid;
@@ -997,11 +970,6 @@ button {
 }
 
 @media (max-width: 639px) {
-  .about__row {
-    grid-template-columns: 1fr;
-    padding: 16px 0 18px;
-  }
-
   .facts {
     grid-template-columns: 1fr;
   }
