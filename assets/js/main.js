@@ -677,8 +677,30 @@
       }
     };
 
+    // На телефоне бокалы стоят друг под другом: наливаем все сразу, как только показался первый,
+    // чтобы, когда долистаешь до остальных, контакты в них уже были видны.
+    const beginAll = () => {
+      const now = performance.now();
+      glasses.forEach((g) => {
+        if (g.start === null) g.start = now;
+      });
+      lastStart = now;
+      if (!running) {
+        running = true;
+        requestAnimationFrame(frame);
+      }
+    };
+    const list = document.querySelector('.glasses');
+    const stacked = () => !!list && getComputedStyle(list).gridTemplateColumns.trim().split(/\s+/).length === 1;
+
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
+        if (stacked()) {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          io.disconnect();
+          beginAll();
+          return;
+        }
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           io.unobserve(entry.target);

@@ -1245,9 +1245,36 @@ html:not(.js) .card__turn {
   display: none;
 }
 
+/* Номер на обороте нужен только на телефоне и планшете: там у чёрной стороны остаётся пустое место */
+.card__num--back {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .card__back {
+    padding-bottom: 112px;
+  }
+
+  .card__num--back {
+    display: block;
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    font-size: 96px;
+  }
+}
+
 @media (max-width: 599px) {
   .card__face {
     min-height: 340px;
+  }
+
+  .card__result {
+    font-size: 29px;
+  }
+
+  .card__story {
+    font-size: 16.5px;
   }
 }
 
