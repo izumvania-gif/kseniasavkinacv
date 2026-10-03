@@ -677,7 +677,8 @@
       }
     };
 
-    // На телефоне три бокала стоят в ряд на одном экране: наливаем их все сразу, без очереди.
+    // На телефоне бокалы стоят друг под другом: наливаем все сразу, как только показался первый,
+    // чтобы, когда долистаешь до остальных, контакты в них уже были видны.
     const beginAll = () => {
       const now = performance.now();
       glasses.forEach((g) => {
@@ -689,11 +690,12 @@
         requestAnimationFrame(frame);
       }
     };
-    const inRow = window.matchMedia('(max-width: 759px)');
+    const list = document.querySelector('.glasses');
+    const stacked = () => !!list && getComputedStyle(list).gridTemplateColumns.trim().split(/\s+/).length === 1;
 
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
-        if (inRow.matches) {
+        if (stacked()) {
           if (!entries.some((entry) => entry.isIntersecting)) return;
           io.disconnect();
           beginAll();
