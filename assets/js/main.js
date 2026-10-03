@@ -199,8 +199,8 @@
   const aboutVideo = document.querySelector('.about__video');
   if (aboutVideo) wire(aboutVideo.closest('.about__media'), aboutVideo);
 
-  // Видео на фоне блоков «Вино». Видео про Приорат уже стоит в разметке (без JS у него обычные
-  // кнопки плеера). Для второго блока достаточно вписать путь к файлу в data-src у <article class="vblock">.
+  // Видео в разделе «Вино». Видео о сортах винограда уже стоит в разметке (без JS у него обычные
+  // кнопки плеера). Для нового блока достаточно вписать путь к файлу в data-src у <article class="vblock">.
   document.querySelectorAll('.vblock').forEach((block) => {
     const ready = block.querySelector('.vblock__media video');
     if (ready) {
