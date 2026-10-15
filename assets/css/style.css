@@ -888,6 +888,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: 50% 38%;
+  cursor: pointer;
 }
 
 .about__media :focus-visible {
@@ -1540,6 +1541,29 @@ html:not(.js) .card__turn {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+}
+
+/* Видео ждёт нажатия (браузер не дал запустить само, «Уменьшить движение» или пауза): крупная кнопка
+   «играть» по центру. Нажатия проходят сквозь неё на само видео. */
+.about__media::after,
+.vblock__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 72px;
+  height: 72px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--on-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%23141212' d='M232.4,114.49,88.32,26.35A16,16,0,0,0,64,39.87V216.13a16,16,0,0,0,24.36,13.52L232.4,141.51a15.81,15.81,0,0,0,0-27Z'/%3E%3C/svg%3E") 56% 50% / 28px no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.about__media.is-waiting::after,
+.vblock__media.is-waiting::after {
+  opacity: 0.94;
 }
 
 .vblock :focus-visible {

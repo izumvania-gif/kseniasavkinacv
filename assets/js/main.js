@@ -134,13 +134,17 @@
   });
 
   // Видео играет без звука по кругу, пока блок на экране. Кнопки включают звук и ставят паузу
-  // (у видео без звука кнопка только одна, пауза).
+  // (у видео без звука кнопка только одна, пауза); нажатие на само видео тоже ставит паузу и запускает.
   // Звук может быть включён только у одного видео. При «Уменьшить движение» видео само не запускается.
+  // Если браузер не дал запустить видео без нажатия (iPhone в режиме энергосбережения, запрет
+  // автовоспроизведения в настройках), на кнопке «играть» и видео ждёт нажатия.
+  // Если файл не открылся, пробуем второй формат, а если и он не открылся, возвращаем обычный плеер.
   const videos = [];
   function wire(box, video) {
     const controls = box.querySelector('.vblock__controls');
     const soundBtn = box.querySelector('[data-v-sound]');
     const pauseBtn = box.querySelector('[data-v-pause]');
+    if (!controls || !pauseBtn) return; // без своих кнопок остаётся обычный плеер
     video.controls = false;
     video.muted = true;
     video.loop = true;
@@ -148,18 +152,58 @@
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     controls.hidden = false;
-    const item = { video, soundBtn, visible: false, paused: !motion };
-    pauseBtn.setAttribute('aria-pressed', String(item.paused));
+    const item = { video, soundBtn, visible: false, paused: !motion, broken: false };
     videos.push(item);
 
-    const sync = () => {
-      if (item.visible && !item.paused) {
-        const playing = video.play();
-        if (playing && playing.catch) playing.catch(() => {});
-      } else {
-        video.pause();
-      }
+    // Кнопка показывает, что видео делает на самом деле, а не что мы просили.
+    // Пока видео ждёт нажатия, по центру крупная кнопка «играть», чтобы было видно, что это видео.
+    const show = () => {
+      pauseBtn.setAttribute('aria-pressed', String(video.paused));
+      video.parentElement.classList.toggle('is-waiting', item.paused && video.paused && !item.broken);
     };
+    video.addEventListener('play', show);
+    video.addEventListener('pause', show);
+    show();
+
+    const start = () => {
+      const playing = video.play();
+      if (playing && playing.catch) playing.catch((err) => {
+        // Запуск без нажатия запрещён: ждём нажатия.
+        if (err && err.name === 'NotAllowedError') item.paused = true;
+        show();
+      });
+    };
+    const sync = () => {
+      if (item.broken) return;
+      if (item.visible && !item.paused) start();
+      else video.pause();
+    };
+    item.sync = sync;
+
+    // Ошибки <source> не всплывают, поэтому слушаем на погружении: и ошибки самого видео, и его <source>.
+    const broken = () => {
+      item.broken = true;
+      controls.hidden = true;
+      video.controls = true;
+      show();
+    };
+    video.addEventListener('error', (event) => {
+      const sources = Array.from(video.querySelectorAll('source'));
+      if (event.target === video) {
+        // Файл открылся, но не играет (например, не декодируется): берём второй формат.
+        const failed = sources.find((source) => source.src === video.currentSrc);
+        if (failed && sources.length > 1) {
+          failed.remove();
+          video.load();
+          show();
+          sync();
+        } else {
+          broken();
+        }
+      } else if (event.target === sources[sources.length - 1]) {
+        broken(); // не подошёл ни один формат
+      }
+    }, true);
 
     if (soundBtn) soundBtn.addEventListener('click', () => {
       const on = video.muted;
@@ -170,17 +214,18 @@
       });
       video.muted = !on;
       soundBtn.setAttribute('aria-pressed', String(on));
-      if (on && item.paused) {
-        item.paused = false;
-        pauseBtn.setAttribute('aria-pressed', 'false');
-      }
+      if (on) item.paused = false;
       sync();
     });
-    pauseBtn.addEventListener('click', () => {
-      item.paused = !item.paused;
-      pauseBtn.setAttribute('aria-pressed', String(item.paused));
-      sync();
-    });
+    const toggle = () => {
+      if (item.broken) return; // обычный плеер управляет сам
+      item.paused = !video.paused;
+      if (item.paused) video.pause();
+      else start();
+      show();
+    };
+    pauseBtn.addEventListener('click', toggle);
+    video.addEventListener('click', toggle);
 
     if ('IntersectionObserver' in window) {
       new IntersectionObserver((entries) => {
@@ -194,6 +239,15 @@
       sync();
     }
   }
+
+  // Вернулись на вкладку или страницу из истории: видео могли остановить без нас.
+  const resync = () => videos.forEach((item) => item.sync());
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) resync();
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) resync();
+  });
 
   // Видео в «Обо мне» стоит в разметке, без JS у него обычные кнопки плеера.
   const aboutVideo = document.querySelector('.about__video');
